@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Bot, Mic, Send, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -16,7 +15,7 @@ const AIAssistant = () => {
     {
       id: '1',
       role: 'assistant',
-      content: 'Hi there! I'm your MoveSync AI assistant. How can I help with your relocation today?',
+      content: "Hi there! I'm your MoveSync AI assistant. How can I help with your relocation today?",
       timestamp: new Date(),
     }
   ]);
