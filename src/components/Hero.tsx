@@ -74,7 +74,7 @@ const Hero = () => {
               <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl">
                 <div className="aspect-[4/3] relative overflow-hidden rounded-xl mb-4">
                   <img 
-                    src="https://images.unsplash.com/photo-1493397212122-2b85dda8106b" 
+                    src="https://images.unsplash.com/photo-1624138784629-9508b5abe02b" 
                     alt="Sydney Opera House - iconic symbol of Sydney" 
                     className="w-full h-full object-cover"
                   />
