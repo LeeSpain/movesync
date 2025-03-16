@@ -15,19 +15,14 @@ type Task = {
 type RelocationProgressProps = {
   progressPercentage: number;
   tasks: Task[];
-  isPremium?: boolean;
 };
 
-const RelocationProgress = ({ progressPercentage, tasks, isPremium = false }: RelocationProgressProps) => {
-  // Calculate completed tasks
-  const completedTasks = tasks.filter(task => task.completed).length;
-  const totalTasks = tasks.length;
-
+const RelocationProgress = ({ progressPercentage, tasks }: RelocationProgressProps) => {
   return (
     <Card>
       <CardHeader className="pb-2">
         <CardTitle className="text-lg font-medium">Relocation Progress</CardTitle>
-        <CardDescription>{completedTasks} of {totalTasks} steps completed</CardDescription>
+        <CardDescription>3 of 10 steps completed</CardDescription>
       </CardHeader>
       <CardContent>
         <Progress value={progressPercentage} className="h-2 mb-4" />
@@ -35,27 +30,25 @@ const RelocationProgress = ({ progressPercentage, tasks, isPremium = false }: Re
           {tasks.map(task => (
             <div key={task.id} className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className={`block h-2 w-2 rounded-full ${task.completed ? 'bg-movesync-blue' : 'bg-gray-300'}`}></span>
+                <span className="block h-2 w-2 rounded-full bg-movesync-blue"></span>
                 <span>{task.title}</span>
               </div>
               <Badge variant="outline">{task.dueDate}</Badge>
             </div>
           ))}
-          {!isPremium && (
-            <div className="flex items-center justify-between opacity-50">
-              <div className="flex items-center gap-2">
-                <span className="block h-2 w-2 rounded-full bg-gray-400"></span>
-                <span>Complete packing checklist</span>
-                <Lock className="h-3 w-3" />
-              </div>
-              <Badge variant="outline">Premium Only</Badge>
+          <div className="flex items-center justify-between opacity-50">
+            <div className="flex items-center gap-2">
+              <span className="block h-2 w-2 rounded-full bg-gray-400"></span>
+              <span>Complete packing checklist</span>
+              <Lock className="h-3 w-3" />
             </div>
-          )}
+            <Badge variant="outline">Premium Only</Badge>
+          </div>
         </div>
       </CardContent>
       <CardFooter className="pt-0">
         <Button variant="outline" size="sm" className="w-full justify-between">
-          View all tasks {!isPremium && <Lock className="ml-2 h-4 w-4" />}
+          View all tasks <Lock className="ml-2 h-4 w-4" />
         </Button>
       </CardFooter>
     </Card>
