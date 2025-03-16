@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import NavItem from './NavItem';
+import { useToast } from '@/components/ui/use-toast';
 
 type NavItem = {
   icon: React.ElementType;
@@ -20,6 +21,14 @@ type SidebarNavigationProps = {
 
 const SidebarNavigation = ({ navItems, isSidebarOpen }: SidebarNavigationProps) => {
   const location = useLocation();
+  const { toast } = useToast();
+
+  const handleLockedFeatureClick = () => {
+    toast({
+      title: "Premium Feature",
+      description: "This feature is only available with the Premium plan.",
+    });
+  };
 
   return (
     <ScrollArea className="flex-grow">
@@ -41,16 +50,21 @@ const SidebarNavigation = ({ navItems, isSidebarOpen }: SidebarNavigationProps) 
               key={item.label}
               variant="ghost"
               size="icon"
-              asChild
+              asChild={!item.isPremiumLocked}
               className={cn(
                 "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 location.pathname === item.href && "bg-sidebar-accent text-sidebar-accent-foreground",
                 item.isPremiumLocked && "opacity-50"
               )}
+              onClick={item.isPremiumLocked ? handleLockedFeatureClick : undefined}
             >
-              <Link to={item.href}>
+              {!item.isPremiumLocked ? (
+                <Link to={item.href}>
+                  <item.icon className="h-5 w-5" />
+                </Link>
+              ) : (
                 <item.icon className="h-5 w-5" />
-              </Link>
+              )}
             </Button>
           ))
         )}

@@ -6,13 +6,20 @@ import UserInfo from './UserInfo';
 import SidebarNavigation from './SidebarNavigation';
 import SidebarActions from './SidebarActions';
 
+type NavItem = {
+  icon: React.ElementType;
+  label: string;
+  href: string;
+  isPremiumLocked?: boolean;
+};
+
 type SidebarProps = {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
   userName: string;
   isPremium: boolean;
   progressPercentage: number;
-  navItems: any[];
+  navItems: NavItem[];
   onLogout: () => void;
 };
 
