@@ -72,13 +72,12 @@ const Hero = () => {
             <div className="relative">
               {/* Main image or illustration */}
               <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-xl bg-movesync-gray-light mb-4">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full h-full bg-gradient-to-br from-movesync-blue-light/20 to-movesync-blue/30 animate-bg-shimmer"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-movesync-blue-dark text-opacity-50">AI Assistant Visualization</span>
-                    </div>
-                  </div>
+                <div className="aspect-[4/3] relative overflow-hidden rounded-xl mb-4">
+                  <img 
+                    src="/lovable-uploads/4cc48339-7626-42d8-a14c-685688d88c57.png" 
+                    alt="AI Assistant Visualization" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 
                 {/* AI Message interface */}
