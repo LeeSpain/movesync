@@ -37,6 +37,21 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
+      
+      {/* Australian background patterns */}
+      <div className="fixed inset-0 -z-50 opacity-5 pointer-events-none">
+        <img 
+          src="https://source.unsplash.com/photo-1465146344425-f00d5f5c8f07"
+          alt=""
+          className="absolute top-0 right-0 w-1/5 h-1/5 object-cover opacity-20"
+        />
+        <img 
+          src="https://source.unsplash.com/photo-1500375592092-40eb2168fd21"
+          alt=""
+          className="absolute bottom-0 left-0 w-1/5 h-1/5 object-cover opacity-20"
+        />
+      </div>
+      
       <main>
         <Hero />
         <Features />

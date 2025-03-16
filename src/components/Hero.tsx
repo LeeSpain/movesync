@@ -22,6 +22,22 @@ const Hero = () => {
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-400/5 rounded-full filter blur-3xl animate-pulse-light animation-delay-1000"></div>
       </div>
       
+      {/* Australian lifestyle background images */}
+      <div className="absolute inset-0 -z-20 opacity-10">
+        <div className="absolute top-0 right-0 w-full h-full">
+          <img 
+            src="https://source.unsplash.com/photo-1500375592092-40eb2168fd21"
+            alt=""
+            className="absolute top-0 right-0 w-1/3 h-1/3 object-cover rounded-bl-3xl"
+          />
+          <img 
+            src="https://source.unsplash.com/photo-1465146344425-f00d5f5c8f07"
+            alt=""
+            className="absolute bottom-0 left-0 w-1/3 h-1/3 object-cover rounded-tr-3xl"
+          />
+        </div>
+      </div>
+      
       <div className="container-content relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Hero Content */}
@@ -44,6 +60,25 @@ const Hero = () => {
             <p className="text-lg md:text-xl text-movesync-gray-dark leading-relaxed">
               MoveSync leverages advanced AI to handle every aspect of your relocation to Australia, from home search in Sydney to cultural integration in Melbourne, making your transition down under effortless.
             </p>
+            
+            {/* Australia imagery */}
+            <div className="grid grid-cols-3 gap-3 mt-6 rounded-xl overflow-hidden">
+              <img 
+                src="https://source.unsplash.com/photo-1469474968028-56623f02e42e"
+                alt="Australian sunshine"
+                className="aspect-video object-cover rounded-lg shadow-md"
+              />
+              <img 
+                src="https://source.unsplash.com/photo-1518495973542-4542c06a5843"
+                alt="Australian nature"
+                className="aspect-video object-cover rounded-lg shadow-md"
+              />
+              <img 
+                src="https://source.unsplash.com/photo-1482881497185-d4a9ddbe4151"
+                alt="Australian landscape"
+                className="aspect-video object-cover rounded-lg shadow-md"
+              />
+            </div>
             
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
