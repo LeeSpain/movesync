@@ -1,6 +1,7 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Check, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 // Define pricing plans
 const pricingPlans = [
@@ -49,6 +50,7 @@ const pricingPlans = [
 const Pricing = () => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { upgradeToPremium } = useAuth();
   
   // Handle intersection observer for entrance animation
   useEffect(() => {
@@ -69,6 +71,10 @@ const Pricing = () => {
       }
     };
   }, []);
+
+  const handlePremiumClick = () => {
+    upgradeToPremium();
+  };
 
   return (
     <section 
@@ -167,17 +173,24 @@ const Pricing = () => {
                 )}
                 
                 {/* CTA Button */}
-                <a 
-                  href="#" 
-                  className={`w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-medium transition-all duration-200 group ${
-                    plan.popular 
-                      ? 'bg-movesync-blue text-white hover:bg-movesync-blue-dark' 
-                      : 'bg-white border border-gray-200 text-movesync-black hover:bg-gray-50'
-                  }`}
-                >
-                  {plan.cta}
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </a>
+                {plan.popular ? (
+                  <Link 
+                    to="/dashboard/premium" 
+                    onClick={handlePremiumClick}
+                    className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-medium transition-all duration-200 group bg-movesync-blue text-white hover:bg-movesync-blue-dark"
+                  >
+                    {plan.cta}
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                ) : (
+                  <Link 
+                    to="/dashboard/free"
+                    className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-medium transition-all duration-200 group bg-white border border-gray-200 text-movesync-black hover:bg-gray-50"
+                  >
+                    {plan.cta}
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
               </div>
             </div>
           ))}

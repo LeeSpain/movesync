@@ -67,10 +67,8 @@ const FreeDashboard = () => {
     // Call the upgrade function
     upgradeToPremium();
     
-    // Redirect after a short delay
-    setTimeout(() => {
-      navigate('/dashboard/premium');
-    }, 1500);
+    // Redirect immediately to the premium dashboard
+    navigate('/dashboard/premium');
   };
 
   // Handle feature button clicks
@@ -238,6 +236,7 @@ const FreeDashboard = () => {
             </Button>
           </div>
         )}
+        
         
         <CardHeader>
           <div className="flex justify-between items-center">
