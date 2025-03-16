@@ -19,13 +19,6 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({ isPremium = false }) 
 
   return (
     <div className="space-y-8">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold mb-2">Australian Relocation Features</h2>
-        <p className="text-muted-foreground">
-          Comprehensive tools designed for your Australian relocation journey
-        </p>
-      </div>
-
       {/* Desktop view: Side-by-side tabs and content */}
       <div className="hidden md:grid grid-cols-3 gap-6">
         {/* Feature category selection */}
