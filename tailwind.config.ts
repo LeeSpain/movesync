@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,16 +62,19 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// MoveSync custom colors
+				// MoveSync custom colors - Updated with warmer Australian-inspired palette
 				movesync: {
-					blue: '#0066FF',
-					'blue-light': '#4D94FF',
-					'blue-dark': '#0052CC',
+					blue: '#E67E22', // Changed from blue to warm orange (outback sunset)
+					'blue-light': '#F39C12', // Brighter orange
+					'blue-dark': '#D35400', // Darker orange/rust (Uluru-inspired)
 					black: '#1D1D1F',
 					'gray-dark': '#333333',
 					gray: '#86868B',
-					'gray-light': '#F5F5F7',
-					white: '#FFFFFF'
+					'gray-light': '#FEF7CD', // Changed to soft yellow (sandy beaches)
+					white: '#FFFFFF',
+					'outback-red': '#C0392B', // Deep red (outback soil)
+					'aussie-green': '#27AE60', // Eucalyptus green
+					'ocean-blue': '#3498DB'  // Great Barrier Reef blue
 				}
 			},
 			borderRadius: {

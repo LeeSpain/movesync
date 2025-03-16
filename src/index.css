@@ -101,9 +101,19 @@
     active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-movesync-blue/30;
   }
 
-  /* Text gradient */
+  /* Text gradient - updated for Australian colors */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-movesync-blue to-blue-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-movesync-blue to-movesync-blue-light;
+  }
+  
+  /* Australian text gradient */
+  .text-gradient-aussie {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-movesync-outback-red to-movesync-blue;
+  }
+  
+  /* Ocean text gradient */
+  .text-gradient-ocean {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-movesync-ocean-blue to-movesync-aussie-green;
   }
   
   /* Container with max width for content */
