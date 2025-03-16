@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import FreeDashboard from "./pages/FreeDashboard";
 import PremiumDashboard from "./pages/PremiumDashboard";
+import PremiumAIAssistant from "./pages/premium-dashboard/AIAssistant";
 
 // Create a placeholder component for feature pages that aren't fully implemented yet
 const FeaturePlaceholder = ({ feature, isPremium = false }: { feature: string; isPremium?: boolean }) => (
@@ -88,7 +89,7 @@ const App = () => (
             } />
             <Route path="/dashboard/premium/assistant" element={
               <RequireAuth>
-                <FeaturePlaceholder feature="AI Assistant" isPremium={true} />
+                <PremiumAIAssistant />
               </RequireAuth>
             } />
             <Route path="/dashboard/premium/property" element={

@@ -6,6 +6,34 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import ChatInterface from '@/components/ai-assistant/ChatInterface';
 import { Message } from '@/components/ai-assistant/types';
 
+const CapabilitiesSection = ({ isIntersecting }: { isIntersecting: boolean }) => {
+  const capabilities = [
+    "Answer questions about Australian visa requirements",
+    "Provide information on cost of living in Australian cities",
+    "Assist with property searches and understanding neighborhoods",
+    "Offer guidance on job markets and employment opportunities",
+    "Help with understanding healthcare, banking, and other essential services"
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Assistant Capabilities</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className="space-y-2">
+          {capabilities.map((capability, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <span className="text-movesync-blue">•</span>
+              <span>{capability}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
+  );
+};
+
 const PremiumAIAssistant = () => {
   const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([
