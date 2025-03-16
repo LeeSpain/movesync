@@ -32,17 +32,17 @@ const Hero = () => {
           >
             {/* Eyebrow text */}
             <div className="inline-flex items-center rounded-full bg-movesync-blue/10 px-3 py-1 text-sm font-medium text-movesync-blue">
-              <span className="animate-pulse-light mr-1">•</span> AI-Powered Relocation
+              <span className="animate-pulse-light mr-1">•</span> AI-Powered Australian Relocation
             </div>
             
             {/* Main headline */}
             <h1 className="heading-xl">
-              Seamless <span className="text-gradient">Relocation</span> with AI Assistance
+              Seamless <span className="text-gradient">Australian</span> Relocation with AI Assistance
             </h1>
             
             {/* Subheading */}
             <p className="text-lg md:text-xl text-movesync-gray-dark leading-relaxed">
-              MoveSync leverages advanced AI to handle every aspect of your relocation, from home search to cultural integration, making your transition effortless.
+              MoveSync leverages advanced AI to handle every aspect of your relocation to Australia, from home search in Sydney to cultural integration in Melbourne, making your transition down under effortless.
             </p>
             
             {/* CTA buttons */}
@@ -87,13 +87,13 @@ const Hero = () => {
                       AI
                     </div>
                     <div className="bg-movesync-gray-light rounded-2xl rounded-tl-none p-4 flex-1">
-                      <p className="text-movesync-black">Welcome to MoveSync! I see you're interested in relocating to Barcelona. Would you like me to help you find housing options within your budget of €1,500/month?</p>
+                      <p className="text-movesync-black">Welcome to MoveSync! I see you're interested in relocating to Sydney. Would you like me to help you find housing options within your budget of A$2,500/month?</p>
                     </div>
                   </div>
                   
                   <div className="flex justify-end">
                     <div className="bg-movesync-blue text-white rounded-2xl rounded-tr-none p-4 max-w-[80%]">
-                      <p>Yes, that would be great. I'm looking for a 2-bedroom apartment close to public transportation.</p>
+                      <p>Yes, that would be great. I'm looking for a 2-bedroom apartment close to public transportation and the beach.</p>
                     </div>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ const Hero = () => {
                     <Home size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-movesync-black">Home Search</p>
+                    <p className="font-medium text-movesync-black">Australian Home Search</p>
                     <p className="text-sm text-movesync-gray">AI-matched properties</p>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ const Hero = () => {
                     <Globe size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-movesync-black">Visa Support</p>
+                    <p className="font-medium text-movesync-black">Australian Visa Support</p>
                     <p className="text-sm text-movesync-gray">100% AI-processed</p>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ const Hero = () => {
                     <Briefcase size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-movesync-black">Job Search</p>
+                    <p className="font-medium text-movesync-black">Australian Job Search</p>
                     <p className="text-sm text-movesync-gray">AI job matching</p>
                   </div>
                 </div>
