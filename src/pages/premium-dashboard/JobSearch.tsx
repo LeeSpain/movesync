@@ -11,7 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Briefcase, Search, MapPin, Building, SortAsc, SortDesc, Star, StarOff, Bookmark, ExternalLink, FileText, Download } from 'lucide-react';
+import { Briefcase, Search, MapPin, Building, SortAsc, SortDesc, Star, StarOff, Bookmark, ExternalLink, FileText, Download, Upload } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 // Sample job listings

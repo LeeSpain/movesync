@@ -1,19 +1,27 @@
 
 import { Globe } from 'lucide-react';
 
-const CapabilitiesSection = ({ isIntersecting }: { isIntersecting: boolean }) => {
+type CapabilitiesSectionProps = {
+  isIntersecting?: boolean;
+  isPremium?: boolean;
+};
+
+const CapabilitiesSection = ({ isIntersecting = true, isPremium = false }: CapabilitiesSectionProps) => {
+  // Use either isIntersecting or always true for premium version
+  const shouldShow = isPremium || isIntersecting;
+  
   return (
     <>
       {/* Section header */}
       <div 
         className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${
-          isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          shouldShow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
         <div className="inline-flex items-center rounded-full bg-movesync-blue/10 px-3 py-1 text-sm font-medium text-movesync-blue mb-4">
           <span className="animate-pulse-light mr-1">•</span> Australia Specialist
         </div>
-        <h2 className="heading-lg mb-4">
+        <h2 className={`${isPremium ? 'text-2xl font-bold' : 'heading-lg'} mb-4`}>
           Meet Your Australian <span className="text-gradient">AI Assistant</span>
         </h2>
         <p className="text-movesync-gray-dark text-lg mb-8">
@@ -29,7 +37,7 @@ const CapabilitiesSection = ({ isIntersecting }: { isIntersecting: boolean }) =>
       {/* Key capabilities */}
       <div 
         className={`grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 transition-all duration-700 delay-500 ${
-          isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          shouldShow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
         <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
@@ -58,4 +66,3 @@ const CapabilitiesSection = ({ isIntersecting }: { isIntersecting: boolean }) =>
 };
 
 export default CapabilitiesSection;
-
