@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { 
   Home, Briefcase, Globe, CreditCard, Map, 
@@ -74,9 +73,9 @@ const featureCategories: FeatureCategory[] = [
     title: 'Australian Job & Career Assistance',
     description: 'Accelerate your career in Australia with AI job matching and professional development tools.',
     icon: Briefcase,
-    australianContext: 'Connect with opportunities in Australia's booming industries, from tech in Sydney to mining in Perth.',
+    australianContext: "Connect with opportunities in Australia's booming industries, from tech in Sydney to mining in Perth.",
     items: [
-      'AI job matching based on Australia's skill shortages',
+      "AI job matching based on Australia's skill shortages",
       'Remote work opportunities within Australian time zones',
       'Resume optimization for Australian employers',
       'Interview preparation with AI coaching for Australian workplaces'
