@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -13,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Switch } from '@/components/ui/switch';
+import { useAuth } from '@/contexts/AuthContext';
 
 // Placeholder data for the premium dashboard
 const upcomingTasks = [
@@ -66,11 +66,12 @@ const jobOpportunities = [
 
 const PremiumDashboard = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [chatMessage, setChatMessage] = useState("");
   const [chatHistory, setChatHistory] = useState<{role: string, content: string}[]>([
     { role: 'assistant', content: "Welcome to your premium AI assistant! I'm here to help with every aspect of your move to Australia. What can I assist you with today?" }
   ]);
-  const [progressPercentage, setProgressPercentage] = useState(65);
+  const [progressPercentage, setProgressPercentage] = useState(user?.progressPercentage || 65);
 
   const handleChatSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,10 +95,15 @@ const PremiumDashboard = () => {
     setProgressPercentage(Math.min(progressPercentage + 5, 100));
   };
 
+  const handleTabNavigation = (tab: string) => {
+    // In a real app, we would navigate to the tab-specific page
+    // Here we'll just log it for demonstration
+    console.log(`Navigating to ${tab} tab`);
+  };
+
   return (
-    <DashboardLayout isPremium={true} userName="Alex Smith" progressPercentage={progressPercentage}>
-      <div className="space-y-8">
-        {/* Welcome Banner */}
+    <DashboardLayout isPremium={true} userName={user?.name || "User"} progressPercentage={progressPercentage}>
+      {/* Welcome Banner */}
         <Card className="bg-gradient-to-r from-movesync-blue to-movesync-blue-light text-white overflow-hidden">
           <CardContent className="p-6 relative">
             <div className="flex flex-col md:flex-row justify-between items-start gap-6">
@@ -234,24 +240,40 @@ const PremiumDashboard = () => {
           </Card>
         </div>
 
-        {/* Feature Tabs */}
-        <Tabs defaultValue="property" className="w-full">
-          <TabsList className="w-full justify-start mb-4 bg-transparent space-x-2 h-auto overflow-x-auto p-0 flex-wrap">
-            <TabsTrigger value="property" className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2">
-              <Home className="h-4 w-4 mr-2" /> Property Search
-            </TabsTrigger>
-            <TabsTrigger value="visa" className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2">
-              <Globe className="h-4 w-4 mr-2" /> Visa Status
-            </TabsTrigger>
-            <TabsTrigger value="jobs" className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2">
-              <Briefcase className="h-4 w-4 mr-2" /> Job Opportunities
-            </TabsTrigger>
-            <TabsTrigger value="costs" className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2">
-              <CreditCard className="h-4 w-4 mr-2" /> Cost of Living
-            </TabsTrigger>
-          </TabsList>
-          
-          {/* Property Search Tab */}
+      {/* Feature Tabs */}
+      <Tabs defaultValue="property" className="w-full">
+        <TabsList className="w-full justify-start mb-4 bg-transparent space-x-2 h-auto overflow-x-auto p-0 flex-wrap">
+          <TabsTrigger 
+            value="property" 
+            className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2"
+            onClick={() => handleTabNavigation('property')}
+          >
+            <Home className="h-4 w-4 mr-2" /> Property Search
+          </TabsTrigger>
+          <TabsTrigger 
+            value="visa" 
+            className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2"
+            onClick={() => handleTabNavigation('visa')}
+          >
+            <Globe className="h-4 w-4 mr-2" /> Visa Status
+          </TabsTrigger>
+          <TabsTrigger 
+            value="jobs" 
+            className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2"
+            onClick={() => handleTabNavigation('jobs')}
+          >
+            <Briefcase className="h-4 w-4 mr-2" /> Job Opportunities
+          </TabsTrigger>
+          <TabsTrigger 
+            value="costs" 
+            className="data-[state=active]:bg-movesync-blue/10 data-[state=active]:text-movesync-blue rounded-lg px-4 py-2"
+            onClick={() => handleTabNavigation('costs')}
+          >
+            <CreditCard className="h-4 w-4 mr-2" /> Cost of Living
+          </TabsTrigger>
+        </TabsList>
+        
+        {/* Property Search Tab */}
           <TabsContent value="property" className="mt-0 space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-semibold">Your Top Property Matches</h3>
@@ -574,7 +596,6 @@ const PremiumDashboard = () => {
             </div>
           </TabsContent>
         </Tabs>
-      </div>
     </DashboardLayout>
   );
 };

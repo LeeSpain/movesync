@@ -1,6 +1,5 @@
-
 import { ReactNode, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   Home, Menu, X, ChevronRight, User, Settings, LogOut, 
   PieChart, Map, CreditCard, Briefcase, Globe, Bot, Lock
@@ -11,6 +10,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
 
 type NavItemProps = {
   icon: React.ElementType;
@@ -52,19 +53,33 @@ const DashboardLayout = ({
 }: DashboardLayoutProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const { toast } = useToast();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logged out successfully",
+      description: "You've been logged out of your MoveSync account.",
+    });
+    navigate('/');
+  };
+
+  const basePath = isPremium ? "/dashboard/premium" : "/dashboard/free";
+
   const navItems = [
-    { icon: Home, label: "Overview", href: isPremium ? "/dashboard/premium" : "/dashboard/free" },
-    { icon: Bot, label: "AI Assistant", href: `${isPremium ? "/dashboard/premium" : "/dashboard/free"}/assistant` },
-    { icon: Map, label: "Property Search", href: `${isPremium ? "/dashboard/premium" : "/dashboard/free"}/property`, isPremiumLocked: !isPremium },
-    { icon: Globe, label: "Visa & Immigration", href: `${isPremium ? "/dashboard/premium" : "/dashboard/free"}/visa`, isPremiumLocked: !isPremium },
-    { icon: CreditCard, label: "Cost of Living", href: `${isPremium ? "/dashboard/premium" : "/dashboard/free"}/cost-living`, isPremiumLocked: !isPremium },
-    { icon: Briefcase, label: "Job Search", href: `${isPremium ? "/dashboard/premium" : "/dashboard/free"}/jobs`, isPremiumLocked: !isPremium },
-    { icon: PieChart, label: "Services Finder", href: `${isPremium ? "/dashboard/premium" : "/dashboard/free"}/services`, isPremiumLocked: !isPremium },
+    { icon: Home, label: "Overview", href: basePath },
+    { icon: Bot, label: "AI Assistant", href: `${basePath}/assistant` },
+    { icon: Map, label: "Property Search", href: `${basePath}/property`, isPremiumLocked: !isPremium },
+    { icon: Globe, label: "Visa & Immigration", href: `${basePath}/visa`, isPremiumLocked: !isPremium },
+    { icon: CreditCard, label: "Cost of Living", href: `${basePath}/cost-living`, isPremiumLocked: !isPremium },
+    { icon: Briefcase, label: "Job Search", href: `${basePath}/jobs`, isPremiumLocked: !isPremium },
+    { icon: PieChart, label: "Services Finder", href: `${basePath}/services`, isPremiumLocked: !isPremium },
   ];
 
   return (
@@ -167,7 +182,13 @@ const DashboardLayout = ({
           {isSidebarOpen ? (
             <>
               <NavItem icon={Settings} label="Settings" href="/settings" />
-              <NavItem icon={LogOut} label="Log Out" href="/" />
+              <div
+                className="flex items-center gap-3 px-3 py-2 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors cursor-pointer"
+                onClick={handleLogout}
+              >
+                <LogOut className="h-5 w-5" />
+                <span>Log Out</span>
+              </div>
             </>
           ) : (
             <div className="flex flex-col items-center space-y-2">
@@ -176,10 +197,13 @@ const DashboardLayout = ({
                   <Settings className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
-                <Link to="/">
-                  <LogOut className="h-5 w-5" />
-                </Link>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                onClick={handleLogout}
+              >
+                <LogOut className="h-5 w-5" />
               </Button>
             </div>
           )}

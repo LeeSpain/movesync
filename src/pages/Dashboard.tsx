@@ -1,33 +1,27 @@
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// This is a placeholder for actual authentication logic
-const useAuthStatus = () => {
-  // In a real app, you would check if the user is authenticated and what plan they have
-  return { 
-    isAuthenticated: true, 
-    userPlan: 'free' // or 'premium'
-  };
-};
+import { useAuth } from '@/contexts/AuthContext';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, userPlan } = useAuthStatus();
+  const { isAuthenticated, user, loading } = useAuth();
 
   useEffect(() => {
+    if (loading) return;
+
     if (!isAuthenticated) {
-      navigate('/');
+      navigate('/login');
       return;
     }
 
     // Redirect to the appropriate dashboard based on user's plan
-    if (userPlan === 'premium') {
+    if (user?.plan === 'premium') {
       navigate('/dashboard/premium');
     } else {
       navigate('/dashboard/free');
     }
-  }, [isAuthenticated, userPlan, navigate]);
+  }, [isAuthenticated, user, loading, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
