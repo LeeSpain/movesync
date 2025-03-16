@@ -1,7 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,12 +53,26 @@ export const Navbar = () => {
             <a href="#about" className="text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200">
               About
             </a>
-            <a 
-              href="#" 
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200 flex items-center gap-1">
+                  Quick Access <ChevronDown size={16} />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link to="/dashboard" className="flex items-center gap-2">
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Link 
+              to="/dashboard" 
               className="btn-primary"
             >
               Get Started
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -96,13 +117,20 @@ export const Navbar = () => {
           >
             About
           </a>
-          <a 
-            href="#" 
+          <Link 
+            to="/dashboard" 
+            className="text-xl text-movesync-black py-2 border-b border-gray-100"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Dashboard
+          </Link>
+          <Link 
+            to="/dashboard" 
             className="btn-primary text-center mt-4"
             onClick={() => setIsMenuOpen(false)}
           >
             Get Started
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
