@@ -35,7 +35,7 @@ const PremiumDashboard = () => {
   const initialMessages = [
     { role: 'assistant', content: 'Welcome back! How can I assist with your Australian relocation today?' },
     { role: 'user', content: 'What documents do I need for my work visa?' },
-    { role: 'assistant', content: 'For your Australian work visa, you'll need: passport, proof of qualifications, employer sponsorship letter, and health insurance. I can help you organize these if you'd like.' }
+    { role: 'assistant', content: 'For your Australian work visa, you\'ll need: passport, proof of qualifications, employer sponsorship letter, and health insurance. I can help you organize these if you\'d like.' }
   ];
 
   // Mock data for tabs
