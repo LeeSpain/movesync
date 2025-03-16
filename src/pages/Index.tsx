@@ -6,6 +6,7 @@ import Features from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import AIAssistant from '@/components/AIAssistant';
 import Footer from '@/components/Footer';
+import FeatureShowcase from '@/components/features/FeatureShowcase';
 
 const Index = () => {
   // Smooth scroll for anchor links
@@ -55,6 +56,9 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
+        <section id="feature-details" className="section-spacing container-content">
+          <FeatureShowcase />
+        </section>
         <AIAssistant />
         <Pricing />
       </main>
