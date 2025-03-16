@@ -27,7 +27,7 @@ const pricingPlans = [
   },
   {
     name: 'Premium',
-    price: '50',
+    price: '99',
     description: 'Full access to all MoveSync features with unlimited AI assistance.',
     features: [
       'Unlimited AI search & chat',
@@ -123,7 +123,7 @@ const Pricing = () => {
                       ${plan.price}
                     </span>
                     {plan.popular ? (
-                      <span className="ml-2 text-movesync-gray">one-time payment</span>
+                      <span className="ml-2 text-movesync-gray">per month</span>
                     ) : (
                       <span className="ml-2 text-movesync-gray">forever</span>
                     )}
