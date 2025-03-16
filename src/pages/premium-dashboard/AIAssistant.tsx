@@ -5,7 +5,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import ChatInterface from '@/components/ai-assistant/ChatInterface';
 import { Message } from '@/components/ai-assistant/types';
-import CapabilitiesSection from '@/components/ai-assistant/CapabilitiesSection';
 
 const PremiumAIAssistant = () => {
   const { user } = useAuth();
