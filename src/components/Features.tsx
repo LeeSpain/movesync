@@ -69,28 +69,28 @@ const Features = () => {
         {/* Section header */}
         <FeatureHeader isIntersecting={isIntersecting} />
         
-        {/* Australian imagery */}
+        {/* Australian iconic city imagery */}
         <div className={`grid grid-cols-4 gap-3 mb-12 transition-all duration-700 ${
           isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <img 
             src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21"
-            alt="Australian beaches"
+            alt="Bondi Beach - Sydney's famous beach culture"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
           <img 
-            src="https://images.unsplash.com/photo-1482881497185-d4a9ddbe4151"
-            alt="Australian outback"
+            src="https://images.unsplash.com/photo-1426604966848-d7adac402bff"
+            alt="Great Ocean Road - Melbourne's scenic coastal drive"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
           <img 
-            src="https://images.unsplash.com/photo-1518495973542-4542c06a5843"
-            alt="Australian sunshine through trees"
+            src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05"
+            alt="Gold Coast - Queensland's iconic skyline and beaches"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
           <img 
-            src="https://images.unsplash.com/photo-1469474968028-56623f02e42e"
-            alt="Australian mountains"
+            src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed"
+            alt="Blue Mountains - Natural wonder near Sydney"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
         </div>
