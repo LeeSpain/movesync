@@ -41,12 +41,12 @@ const Index = () => {
       {/* Australian city background patterns */}
       <div className="fixed inset-0 -z-50 opacity-5 pointer-events-none">
         <img 
-          src="https://images.unsplash.com/photo-1487958449943-2429e8be8625"
+          src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9"
           alt=""
           className="absolute top-0 right-0 w-1/5 h-1/5 object-cover opacity-20"
         />
         <img 
-          src="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb"
+          src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07"
           alt=""
           className="absolute bottom-0 left-0 w-1/5 h-1/5 object-cover opacity-20"
         />

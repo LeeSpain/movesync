@@ -51,14 +51,14 @@ const Features = () => {
       <div className="absolute inset-0 -z-20 opacity-5 overflow-hidden">
         <div className="absolute top-0 left-0 w-1/4 h-1/4">
           <img 
-            src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21" 
+            src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9" 
             alt="" 
             className="w-full h-full object-cover"
           />
         </div>
         <div className="absolute bottom-0 right-0 w-1/4 h-1/4">
           <img 
-            src="https://images.unsplash.com/photo-1472396961693-142e6e269027" 
+            src="https://images.unsplash.com/photo-1548096070-b9e9cbdf5739" 
             alt="" 
             className="w-full h-full object-cover"
           />
@@ -74,22 +74,22 @@ const Features = () => {
           isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <img 
-            src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21"
+            src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9"
             alt="Bondi Beach - Sydney's famous beach culture"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
           <img 
-            src="https://images.unsplash.com/photo-1426604966848-d7adac402bff"
+            src="https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8"
             alt="Great Ocean Road - Melbourne's scenic coastal drive"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
           <img 
-            src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05"
+            src="https://images.unsplash.com/photo-1566734904496-9309bb1798ae"
             alt="Gold Coast - Queensland's iconic skyline and beaches"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
           <img 
-            src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed"
+            src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07"
             alt="Blue Mountains - Natural wonder near Sydney"
             className="aspect-video object-cover rounded-lg shadow-md"
           />
