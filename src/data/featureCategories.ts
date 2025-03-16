@@ -1,25 +1,12 @@
 
 import { 
-  Home, Briefcase, Globe, CreditCard, Map, 
+  Briefcase, Globe, CreditCard, Map, 
   Truck, Languages, Bot, Lock
 } from 'lucide-react';
 import { FeatureCategory } from '@/types/features';
 
 // Feature data with Australian-specific context
 export const featureCategories: FeatureCategory[] = [
-  {
-    id: 'home-search',
-    title: 'AI-Powered Australian Property Finder',
-    description: 'Find your perfect Australian home with personalized AI property matching and market analysis.',
-    icon: Home,
-    australianContext: 'Access real-time insights into Sydney, Melbourne, Brisbane, and other Australian property markets.',
-    items: [
-      'Personalized AI property matching based on Australian lifestyle preferences',
-      'Real-time market analysis of Australian property trends',
-      'Virtual property tours of Australian homes with AR/VR technology',
-      'AI-driven lease negotiation assistance with Australian landlords'
-    ]
-  },
   {
     id: 'visa-support',
     title: 'Australian Visa & Immigration',
