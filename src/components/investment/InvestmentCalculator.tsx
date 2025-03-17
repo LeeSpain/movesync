@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useInvestment } from './InvestmentContext';
 import { calculateEquity, calculateROI, calculateGlobalROI } from './InvestmentUtils';
@@ -28,6 +27,10 @@ const InvestmentCalculator = () => {
   const potentialReturns = viewMode === 'global'
     ? calculateGlobalROI(equityValue, years, globalGrowthRate)
     : calculateROI(equityValue, years, currentGrowthRate);
+  
+  // Calculate total cumulative returns
+  const cumulativeReturn = potentialReturns.reduce((sum, value) => sum + value, 0);
+  const totalReturnPercentage = Math.round((cumulativeReturn / equityValue - 1) * 100);
   
   // Prepare data for charts
   const lineChartData = potentialReturns.map((value, index) => ({
@@ -173,6 +176,15 @@ const InvestmentCalculator = () => {
               </span>
             </div>
           ))}
+          <div className="border-t border-gray-200 pt-3 mt-3">
+            <div className="flex justify-between items-center font-bold">
+              <span>Total Over {years} {years === 1 ? 'Year' : 'Years'}</span>
+              <span className="text-emerald-600">${cumulativeReturn.toLocaleString()}</span>
+              <span className="text-emerald-600 text-sm">
+                +{totalReturnPercentage}%
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

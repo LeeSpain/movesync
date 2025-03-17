@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useInvestment } from './InvestmentContext';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -68,6 +67,10 @@ const FutureVision = () => {
       metric: "New revenue stream worth $1.2M annually"
     }
   ];
+
+  // Calculate cumulative returns over the investment period
+  const cumulativeReturns = projectedReturns.reduce((sum, value) => sum + value, 0);
+  const totalReturnPercentage = Math.round((cumulativeReturns / investmentAmount - 1) * 100);
 
   return (
     <Card className="shadow-md border border-gray-200">
