@@ -33,13 +33,22 @@ const CountryList = ({ countries }: CountryListProps) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-      {countries.map((country, index) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
+      <div className="lg:col-span-2">
+        <CountryCard 
+          key={countries[0].id}
+          country={countries[0]}
+          onSelect={handleSelectCountry}
+          index={0}
+        />
+      </div>
+      
+      {countries.slice(1).map((country, index) => (
         <CountryCard 
           key={country.id}
           country={country}
           onSelect={handleSelectCountry}
-          index={index}
+          index={index + 1}
         />
       ))}
     </div>
