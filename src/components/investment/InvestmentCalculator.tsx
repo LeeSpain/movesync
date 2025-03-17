@@ -5,8 +5,6 @@ import { calculateEquity, calculateROI, calculateGlobalROI } from './InvestmentU
 import { Slider } from '@/components/ui/slider';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
-import { Card } from '@/components/ui/card';
-import { TrendingUp } from 'lucide-react';
 
 const InvestmentCalculator = () => {
   const { 
@@ -42,13 +40,13 @@ const InvestmentCalculator = () => {
   };
 
   return (
-    <Card className="bg-white rounded-xl p-6 shadow-lg border-0">
-      <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">
-        ROI Calculator
+    <div className="bg-white rounded-2xl p-8 shadow-lg">
+      <h2 className="heading-sm mb-6 text-center">
+        Global Investment ROI Calculator
       </h2>
       
       <div className="mb-6">
-        <label className="block text-sm font-medium mb-2 text-gray-700">
+        <label className="block text-sm font-medium mb-2">
           Investment Amount ($)
         </label>
         <Slider
@@ -59,15 +57,15 @@ const InvestmentCalculator = () => {
           onValueChange={handleInvestmentChange}
           className="w-full"
         />
-        <div className="flex justify-between mt-2 text-sm">
-          <span className="text-gray-600">$10,000</span>
-          <span className="font-semibold text-blue-700">${investmentAmount.toLocaleString()}</span>
-          <span className="text-gray-600">$2,000,000</span>
+        <div className="flex justify-between mt-2">
+          <span className="text-sm">$10,000</span>
+          <span className="font-semibold">${investmentAmount.toLocaleString()}</span>
+          <span className="text-sm">$2,000,000</span>
         </div>
       </div>
       
       <div className="mb-8">
-        <label className="block text-sm font-medium mb-2 text-gray-700">
+        <label className="block text-sm font-medium mb-2">
           Projection Years
         </label>
         <div className="flex justify-between gap-2">
@@ -75,10 +73,10 @@ const InvestmentCalculator = () => {
             <button
               key={year}
               onClick={() => setYears(year)}
-              className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`flex-1 py-2 rounded-lg text-sm font-medium transition ${
                 years === year
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                  ? 'bg-movesync-blue text-white'
+                  : 'bg-movesync-gray-light text-movesync-black'
               }`}
             >
               {year} Year{year > 1 ? 's' : ''}
@@ -87,25 +85,24 @@ const InvestmentCalculator = () => {
         </div>
       </div>
       
-      <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl mb-6">
+      <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl mb-6">
         <div className="grid grid-cols-2 gap-4">
-          <div className="text-center">
-            <p className="text-sm text-gray-600">Equity Percentage</p>
-            <p className="text-2xl font-bold text-blue-700">{equityPercentage.toFixed(2)}%</p>
-            <p className="text-xs text-gray-500">of entire global company</p>
+          <div>
+            <p className="text-sm text-movesync-gray">Equity Percentage</p>
+            <p className="text-2xl font-bold">{equityPercentage.toFixed(2)}%</p>
+            <p className="text-xs text-movesync-gray">of entire global company</p>
           </div>
-          <div className="text-center">
-            <p className="text-sm text-gray-600">Equity Value</p>
-            <p className="text-2xl font-bold text-blue-700">${equityValue.toLocaleString()}</p>
-            <p className="text-xs text-gray-500">initial investment</p>
+          <div>
+            <p className="text-sm text-movesync-gray">Equity Value</p>
+            <p className="text-2xl font-bold">${equityValue.toLocaleString()}</p>
+            <p className="text-xs text-movesync-gray">initial investment</p>
           </div>
         </div>
       </div>
       
       {/* ROI Growth Chart */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <TrendingUp className="h-5 w-5 text-green-600" />
+        <h3 className="font-semibold mb-4">
           {viewMode === 'global' 
             ? 'Global Growth Projection (All Countries)'
             : `Growth Projection for ${selectedCountry}`
@@ -156,7 +153,7 @@ const InvestmentCalculator = () => {
       </div>
       
       <div className="border-t border-gray-200 pt-6">
-        <h3 className="text-lg font-semibold mb-4">
+        <h3 className="font-semibold mb-4">
           {viewMode === 'global' 
             ? `Potential Returns (${(globalGrowthRate * 100).toFixed(0)}% Annual Growth)`
             : `Potential Returns (${(currentGrowthRate * 100).toFixed(0)}% Annual Growth)`
@@ -164,17 +161,17 @@ const InvestmentCalculator = () => {
         </h3>
         <div className="space-y-3">
           {potentialReturns.map((value, index) => (
-            <div key={index} className="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50">
-              <span className="font-medium">Year {index + 1}</span>
-              <span className="font-bold text-blue-700">${value.toLocaleString()}</span>
-              <span className="text-green-600 text-sm font-semibold">
+            <div key={index} className="flex justify-between items-center">
+              <span>Year {index + 1}</span>
+              <span className="font-semibold">${value.toLocaleString()}</span>
+              <span className="text-green-600 text-sm">
                 +{Math.round((value / equityValue - 1) * 100)}%
               </span>
             </div>
           ))}
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 

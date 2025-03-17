@@ -1,10 +1,8 @@
 
 import React from 'react';
 import { useInvestment } from './InvestmentContext';
-import { PieChart, Pie, ResponsiveContainer, Cell, Legend } from 'recharts';
+import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
-import { Card } from '@/components/ui/card';
-import { BadgeCheck } from 'lucide-react';
 
 const InvestmentIntro = () => {
   const { 
@@ -25,51 +23,42 @@ const InvestmentIntro = () => {
     value: Math.round(rate * 100), // Convert to percentage for better visualization
   }));
   
-  const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#14B8A6'];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#83a6ed'];
   
   return (
-    <div className="space-y-6">
-      <Card className="p-6 shadow-lg bg-white rounded-xl border-0">
-        <h2 className="text-2xl font-bold text-blue-800 mb-4">
-          Become Part of Our Global Growth
-        </h2>
-        <p className="mb-4">
-          We're offering an exclusive opportunity to invest in MoveSync - the leading AI-powered relocation platform expanding across multiple countries.
-        </p>
-        <p className="mb-4 font-medium text-indigo-600">
-          Your investment gives you equity in our entire global business across all countries, not just in a single market.
-        </p>
-        <p className="mb-4">
-          Based on a company valuation of ${premoneyValuation.toLocaleString()} pre-money, we're raising ${targetRaise.toLocaleString()} for a post-money valuation of ${postmoneyValuation.toLocaleString()}, with investors receiving {totalEquityOffered.toFixed(0)}% equity.
-        </p>
-        <p className="mb-6">
-          Use our calculator to see how your investment could grow over time as we expand our connections across different countries.
-        </p>
-      </Card>
+    <div>
+      <h2 className="heading-md mb-6">
+        Become Part of Our Global Growth
+      </h2>
+      <p className="mb-4">
+        We're offering an exclusive opportunity to invest in MoveSync - the leading AI-powered relocation platform expanding across multiple countries.
+      </p>
+      <p className="mb-4 font-medium text-movesync-blue">
+        Your investment gives you equity in our entire global business across all countries, not just in a single market.
+      </p>
+      <p className="mb-4">
+        Based on a company valuation of ${premoneyValuation.toLocaleString()} pre-money, we're raising ${targetRaise.toLocaleString()} for a post-money valuation of ${postmoneyValuation.toLocaleString()}, with investors receiving {totalEquityOffered.toFixed(0)}% equity.
+      </p>
+      <p className="mb-6">
+        Use our calculator to see how your investment could grow over time as we expand our connections across different countries.
+      </p>
       
-      <Card className="p-6 bg-amber-50 border-amber-100 shadow-lg rounded-xl border-0">
-        <h3 className="text-xl font-bold text-amber-800 mb-4">Why Invest in MoveSync?</h3>
-        <ul className="space-y-3">
-          {[
-            'Growing market for relocation services globally',
-            'Proprietary AI technology creates a competitive advantage',
-            'Scalable business model with recurring revenue',
-            'Expanding to new countries in the next 3 years',
-            'Strong team with industry expertise'
-          ].map((item, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <BadgeCheck className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
-              <span>{item}</span>
-            </li>
-          ))}
+      <div className="bg-movesync-gray-light p-6 rounded-xl mb-8">
+        <h3 className="font-semibold mb-3">Why Invest in MoveSync?</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Growing market for relocation services globally</li>
+          <li>Proprietary AI technology creates a competitive advantage</li>
+          <li>Scalable business model with recurring revenue</li>
+          <li>Expanding to new countries in the next 3 years</li>
+          <li>Strong team with industry expertise</li>
         </ul>
-      </Card>
+      </div>
       
-      <Card className="p-6 bg-white shadow-lg rounded-xl border-0">
-        <h3 className="text-xl font-bold text-blue-800 mb-4">Our Global Presence</h3>
+      <div className="bg-white rounded-xl p-6 shadow-md mb-8">
+        <h3 className="font-semibold mb-4">Our Global Presence</h3>
         <p className="mb-4">Your investment includes our operations in all these countries:</p>
         
-        <div className="h-[220px] w-full mb-6">
+        <div className="h-[200px] w-full mb-4">
           <ChartContainer
             config={{
               value: { theme: { light: "#8B5CF6", dark: "#8B5CF6" }, label: "Growth Rate" },
@@ -82,6 +71,7 @@ const InvestmentIntro = () => {
                   cx="50%"
                   cy="50%"
                   outerRadius={80}
+                  fill="#8884d8"
                   dataKey="value"
                   nameKey="name"
                   label={({name, percent}) => `${name}: ${(Number(percent) * 100).toFixed(0)}%`}
@@ -90,7 +80,6 @@ const InvestmentIntro = () => {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Legend layout="horizontal" verticalAlign="bottom" align="center" />
                 <ChartTooltip />
               </PieChart>
             </ResponsiveContainer>
@@ -100,20 +89,20 @@ const InvestmentIntro = () => {
         <div className="flex items-center space-x-4 mb-6">
           <button
             onClick={() => setViewMode('global')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
               viewMode === 'global'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                ? 'bg-movesync-blue text-white'
+                : 'bg-movesync-gray-light text-movesync-black'
             }`}
           >
             Global Investment
           </button>
           <button
             onClick={() => setViewMode('country')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
               viewMode === 'country'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                ? 'bg-movesync-blue text-white'
+                : 'bg-movesync-gray-light text-movesync-black'
             }`}
           >
             View By Country
@@ -128,10 +117,10 @@ const InvestmentIntro = () => {
                 <button
                   key={country}
                   onClick={() => setSelectedCountry(country)}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
                     selectedCountry === country
-                      ? 'bg-indigo-600 text-white shadow-md'
-                      : 'bg-indigo-100 text-indigo-800 hover:bg-indigo-200'
+                      ? 'bg-movesync-blue text-white'
+                      : 'bg-movesync-gray-light text-movesync-black'
                   }`}
                 >
                   {country}
@@ -141,16 +130,16 @@ const InvestmentIntro = () => {
           </div>
         )}
         
-        <div className="flex justify-between items-center text-sm bg-blue-50 p-3 rounded-lg">
-          <div className="font-medium">Selected Growth Rate:</div>
-          <div className="font-bold text-green-600 text-base">
+        <div className="flex justify-between items-center text-sm text-movesync-gray">
+          <div>Selected Growth Rate:</div>
+          <div className="font-semibold text-movesync-blue">
             {viewMode === 'global' 
               ? `${(globalGrowthRate * 100).toFixed(0)}% (Average across all countries)`
               : `${(countryGrowthRates[selectedCountry] * 100).toFixed(0)}%`
             }
           </div>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };
