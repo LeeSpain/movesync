@@ -2,6 +2,7 @@
 import React from 'react';
 import { useInvestment } from './InvestmentContext';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { calculateROI } from './InvestmentUtils';
 
 const FutureVision = () => {
   const { 
@@ -10,6 +11,15 @@ const FutureVision = () => {
     financialParams,
     globalGrowthRate
   } = useInvestment();
+  
+  // Calculate equity value based on investment amount
+  const equityPercentage = (investmentAmount / financialParams.postmoneyValuation) * 100;
+  const equityValue = (equityPercentage / 100) * financialParams.postmoneyValuation;
+  
+  // Calculate projected returns based on user's selected years
+  const projectedReturns = calculateROI(equityValue, years, globalGrowthRate);
+  const finalReturn = projectedReturns[projectedReturns.length - 1];
+  const returnPercentage = Math.round((finalReturn / equityValue - 1) * 100);
   
   // Calculate 5-year projection regardless of selected year value
   const fiveYearProjection = financialParams.premoneyValuation * Math.pow(1 + globalGrowthRate, 5);
@@ -68,7 +78,7 @@ const FutureVision = () => {
           <h3 className="font-bold text-xl mb-4 text-center">Our Growth Roadmap</h3>
           <p className="mb-4">
             MoveSync is positioned to achieve consistent {(globalGrowthRate * 100).toFixed(0)}% annual growth through our multi-faceted expansion strategy. 
-            Here's how we'll turn your ${investmentAmount.toLocaleString()} investment into significant returns over the next {years} years:
+            Here's how we'll turn your ${investmentAmount.toLocaleString()} investment into ${finalReturn.toLocaleString()} (a {returnPercentage}% return) over the next {years} years:
           </p>
           <div className="flex justify-between items-center text-sm bg-white p-3 rounded-lg border border-blue-100 mb-4">
             <span className="font-semibold">Current Valuation:</span>
@@ -138,7 +148,7 @@ const FutureVision = () => {
           </div>
         </div>
         
-        {/* New Exit Strategy Section */}
+        {/* Exit Strategy Section */}
         <div className="mt-10 bg-amber-50 p-6 rounded-xl border border-amber-200">
           <h3 className="font-bold text-xl mb-4 text-center">Exit Strategy</h3>
           <p className="mb-6">
