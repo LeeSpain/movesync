@@ -11,11 +11,11 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >            
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-          Welcome to <span className="text-movesync-blue">MoveSync</span>
+        <h1 className="heading-xl mb-4 text-foreground">
+          Welcome to <span className="text-gradient">MoveSync</span>
         </h1>
         
-        <p className="text-lg text-muted-foreground mb-6">
+        <p className="text-lg md:text-xl text-movesync-gray-dark leading-relaxed mb-6">
           Select your destination to begin your personalized relocation experience. 
           Our AI-powered platform will guide you through every step of your journey.
         </p>
