@@ -13,9 +13,6 @@ const CountrySelection = () => {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* How It Works */}
-      <HowItWorks />
-      
       {/* Countries Section - Enhanced with subtle improvements */}
       <div className="py-16 relative">
         {/* Subtle background pattern */}
@@ -35,6 +32,9 @@ const CountrySelection = () => {
           <UpdateSection />
         </div>
       </div>
+      
+      {/* How It Works - Moved to after Country Selection */}
+      <HowItWorks />
     </div>
   );
 };
