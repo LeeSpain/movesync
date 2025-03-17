@@ -14,6 +14,9 @@ import PremiumDashboard from "./pages/PremiumDashboard";
 import PremiumAIAssistant from "./pages/premium-dashboard/AIAssistant";
 import PropertySearch from "./pages/premium-dashboard/PropertySearch";
 import VisaServices from "./pages/premium-dashboard/VisaServices";
+import CostOfLiving from "./pages/premium-dashboard/CostOfLiving";
+import JobSearch from "./pages/premium-dashboard/JobSearch";
+import ServicesFinder from "./pages/premium-dashboard/ServicesFinder";
 
 // Create a placeholder component for feature pages that aren't fully implemented yet
 const FeaturePlaceholder = ({ feature, isPremium = false }: { feature: string; isPremium?: boolean }) => (
@@ -106,17 +109,17 @@ const App = () => (
             } />
             <Route path="/dashboard/premium/cost-living" element={
               <RequireAuth>
-                <FeaturePlaceholder feature="Cost of Living" isPremium={true} />
+                <CostOfLiving />
               </RequireAuth>
             } />
             <Route path="/dashboard/premium/jobs" element={
               <RequireAuth>
-                <FeaturePlaceholder feature="Job Search" isPremium={true} />
+                <JobSearch />
               </RequireAuth>
             } />
             <Route path="/dashboard/premium/services" element={
               <RequireAuth>
-                <FeaturePlaceholder feature="Services Finder" isPremium={true} />
+                <ServicesFinder />
               </RequireAuth>
             } />
             
