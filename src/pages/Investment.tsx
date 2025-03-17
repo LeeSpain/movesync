@@ -9,16 +9,16 @@ import InvestmentCTA from '@/components/investment/InvestmentCTA';
 
 const Investment = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-blue-50 text-foreground">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-movesync-gray-light text-foreground">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 pt-32 pb-12"> {/* Increased top padding to avoid header overlap */}
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-blue-800">
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-movesync-outback-red">
             Global Investment Opportunity
           </h1>
           
-          <p className="text-xl text-center text-blue-700 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-center text-movesync-blue-dark mb-12 max-w-3xl mx-auto">
             Join us in building the future of global relocation with MoveSync's innovative AI platform
           </p>
           
