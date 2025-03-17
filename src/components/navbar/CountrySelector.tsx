@@ -2,6 +2,7 @@
 import React from 'react';
 import { Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 interface CountrySelectorProps {
   selectedCountry: string | null;
@@ -12,11 +13,15 @@ export const CountrySelector = ({ selectedCountry, countryFlags }: CountrySelect
   return (
     <Link 
       to="/" 
-      className="flex items-center gap-1 text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200"
+      className={cn(
+        "flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-colors duration-200",
+        "text-movesync-gray-dark hover:text-movesync-blue",
+        "bg-accent/50 hover:bg-accent"
+      )}
     >
-      <Globe size={18} />
-      <span>
-        {selectedCountry ? `${countryFlags[selectedCountry] || ''}` : 'Select Country'}
+      <Globe className="h-4 w-4" />
+      <span className="text-sm font-medium">
+        {selectedCountry ? `${countryFlags[selectedCountry]} ${selectedCountry}` : 'Select Country'}
       </span>
     </Link>
   );
