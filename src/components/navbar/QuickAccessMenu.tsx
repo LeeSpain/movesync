@@ -7,6 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 
 interface QuickAccessMenuProps {
@@ -23,18 +24,22 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg rounded-md border border-gray-200 p-1 z-50">
         <DropdownMenuItem asChild>
-          <Link to="/dashboard/free" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
+          <Link to="/dashboard/free" className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
             <LayoutDashboard className="h-4 w-4 mr-2" />
             Dashboard
           </Link>
         </DropdownMenuItem>
+        
         {isAdmin && (
-          <DropdownMenuItem asChild>
-            <Link to="/admin" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
-              <Shield className="h-4 w-4 mr-2" />
-              Admin Dashboard
-            </Link>
-          </DropdownMenuItem>
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link to="/admin" className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
+                <Shield className="h-4 w-4 mr-2" />
+                Admin Dashboard
+              </Link>
+            </DropdownMenuItem>
+          </>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
