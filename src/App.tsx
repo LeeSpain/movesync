@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,7 @@ import CostOfLiving from "./pages/premium-dashboard/CostOfLiving";
 import JobSearch from "./pages/premium-dashboard/JobSearch";
 import ServicesFinder from "./pages/premium-dashboard/ServicesFinder";
 import Countries from "./pages/Countries";
+import Investment from "./pages/Investment";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -67,6 +67,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
             <Route path="/countries" element={<Countries />} />
+            <Route path="/investment" element={<Investment />} />
             
             {/* Protected routes */}
             <Route path="/dashboard" element={

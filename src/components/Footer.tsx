@@ -1,6 +1,6 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -105,7 +105,7 @@ const Footer = () => {
               <li><a href="#" className="text-white/70 hover:text-white transition-colors">About Us</a></li>
               <li><a href="#" className="text-white/70 hover:text-white transition-colors">Careers</a></li>
               <li><a href="#" className="text-white/70 hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Blog</a></li>
+              <li><Link to="/investment" className="text-white/70 hover:text-white transition-colors">Investment</Link></li>
             </ul>
           </div>
           
