@@ -1,5 +1,5 @@
 
-import { Route, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 
@@ -11,7 +11,7 @@ const RequireAuth = ({ children }: { children: React.ReactNode }) => {
 
 const AuthRoutes = () => {
   return (
-    <>
+    <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={
         <RequireAuth>
@@ -25,7 +25,8 @@ const AuthRoutes = () => {
           <FeaturePlaceholder feature="Account Settings" />
         </RequireAuth>
       } />
-    </>
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
   );
 };
 

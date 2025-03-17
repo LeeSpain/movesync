@@ -23,7 +23,7 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg rounded-md border border-gray-200 p-1 z-50">
         <DropdownMenuItem asChild>
-          <Link to="/dashboard" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
+          <Link to="/dashboard/free" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
             <LayoutDashboard className="h-4 w-4 mr-2" />
             Dashboard
           </Link>
