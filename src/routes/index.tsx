@@ -1,5 +1,5 @@
 
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PublicRoutes from "./PublicRoutes";
 import AuthRoutes from "./AuthRoutes";
 import AdminRoutes from "./AdminRoutes";
@@ -17,7 +17,7 @@ const AppRoutes = () => {
       {/* Authentication Routes */}
       <Route path="/auth/*" element={<AuthRoutes />} />
       
-      {/* Main Dashboard Route */}
+      {/* Main Dashboard Route for redirection */}
       <Route path="/dashboard" element={<Dashboard />} />
       
       {/* Free Dashboard Routes */}

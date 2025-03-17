@@ -1,5 +1,5 @@
 
-import { Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import UserManagement from "@/pages/admin/UserManagement";
 import CountryManagement from "@/pages/admin/CountryManagement";
@@ -9,70 +9,70 @@ import { FeaturePlaceholder } from "./AuthRoutes";
 // Admin guard component
 const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
   const user = localStorage.getItem('moveSync_user') ? JSON.parse(localStorage.getItem('moveSync_user') || '{}') : null;
-  const isAdmin = user && user.id === '1'; // For demo purposes, assume user with ID 1 is admin
+  const isAdmin = user && user.isAdmin === true; // Check specifically for isAdmin property
   
   return isAdmin ? <>{children}</> : <Navigate to="/dashboard" replace />;
 };
 
 const AdminRoutes = () => {
   return (
-    <>
-      <Route path="/admin" element={
+    <Routes>
+      <Route path="/" element={
         <RequireAdmin>
           <AdminDashboard />
         </RequireAdmin>
       } />
-      <Route path="/admin/users" element={
+      <Route path="/users" element={
         <RequireAdmin>
           <UserManagement />
         </RequireAdmin>
       } />
-      <Route path="/admin/countries" element={
+      <Route path="/countries" element={
         <RequireAdmin>
           <CountryManagement />
         </RequireAdmin>
       } />
-      <Route path="/admin/properties" element={
+      <Route path="/properties" element={
         <RequireAdmin>
           <FeaturePlaceholder feature="Property Management" />
         </RequireAdmin>
       } />
-      <Route path="/admin/visa" element={
+      <Route path="/visa" element={
         <RequireAdmin>
           <FeaturePlaceholder feature="Visa Service Management" />
         </RequireAdmin>
       } />
-      <Route path="/admin/cost-living" element={
+      <Route path="/cost-living" element={
         <RequireAdmin>
           <FeaturePlaceholder feature="Cost of Living Management" />
         </RequireAdmin>
       } />
-      <Route path="/admin/jobs" element={
+      <Route path="/jobs" element={
         <RequireAdmin>
           <FeaturePlaceholder feature="Job Management" />
         </RequireAdmin>
       } />
-      <Route path="/admin/services" element={
+      <Route path="/services" element={
         <RequireAdmin>
           <FeaturePlaceholder feature="Services Management" />
         </RequireAdmin>
       } />
-      <Route path="/admin/ai-assistant" element={
+      <Route path="/ai-assistant" element={
         <RequireAdmin>
           <FeaturePlaceholder feature="AI Assistant Management" />
         </RequireAdmin>
       } />
-      <Route path="/admin/analytics" element={
+      <Route path="/analytics" element={
         <RequireAdmin>
           <FeaturePlaceholder feature="Analytics" />
         </RequireAdmin>
       } />
-      <Route path="/admin/settings" element={
+      <Route path="/settings" element={
         <RequireAdmin>
           <AdminSettings />
         </RequireAdmin>
       } />
-    </>
+    </Routes>
   );
 };
 

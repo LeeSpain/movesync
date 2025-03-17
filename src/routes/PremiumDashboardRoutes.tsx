@@ -1,5 +1,5 @@
 
-import { Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PremiumDashboard from "@/pages/PremiumDashboard";
 import PremiumAIAssistant from "@/pages/premium-dashboard/AIAssistant";
 import PropertySearch from "@/pages/premium-dashboard/PropertySearch";
@@ -11,44 +11,44 @@ import { RequireAuth } from "./AuthRoutes";
 
 const PremiumDashboardRoutes = () => {
   return (
-    <>
+    <Routes>
       {/* Premium dashboard routes */}
-      <Route path="/dashboard/premium" element={
+      <Route path="/" element={
         <RequireAuth>
           <PremiumDashboard />
         </RequireAuth>
       } />
-      <Route path="/dashboard/premium/assistant" element={
+      <Route path="/assistant" element={
         <RequireAuth>
           <PremiumAIAssistant />
         </RequireAuth>
       } />
-      <Route path="/dashboard/premium/property" element={
+      <Route path="/property" element={
         <RequireAuth>
           <PropertySearch />
         </RequireAuth>
       } />
-      <Route path="/dashboard/premium/visa" element={
+      <Route path="/visa" element={
         <RequireAuth>
           <VisaServices />
         </RequireAuth>
       } />
-      <Route path="/dashboard/premium/cost-living" element={
+      <Route path="/cost-living" element={
         <RequireAuth>
           <CostOfLiving />
         </RequireAuth>
       } />
-      <Route path="/dashboard/premium/jobs" element={
+      <Route path="/jobs" element={
         <RequireAuth>
           <JobSearch />
         </RequireAuth>
       } />
-      <Route path="/dashboard/premium/services" element={
+      <Route path="/services" element={
         <RequireAuth>
           <ServicesFinder />
         </RequireAuth>
       } />
-    </>
+    </Routes>
   );
 };
 
