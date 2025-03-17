@@ -3,8 +3,14 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import UserManagement from "@/pages/admin/UserManagement";
 import CountryManagement from "@/pages/admin/CountryManagement";
+import PropertyManagement from "@/pages/admin/PropertyManagement";
+import VisaManagement from "@/pages/admin/VisaManagement";
+import CostOfLivingManagement from "@/pages/admin/CostOfLivingManagement";
+import JobManagement from "@/pages/admin/JobManagement";
+import ServicesManagement from "@/pages/admin/ServicesManagement";
+import AIAssistantManagement from "@/pages/admin/AIAssistantManagement";
+import AnalyticsManagement from "@/pages/admin/AnalyticsManagement";
 import AdminSettings from "@/pages/admin/AdminSettings";
-import { FeaturePlaceholder } from "./AuthRoutes";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
 
@@ -55,37 +61,37 @@ const AdminRoutes = () => {
       } />
       <Route path="/properties" element={
         <RequireAdmin>
-          <FeaturePlaceholder feature="Property Management" />
+          <PropertyManagement />
         </RequireAdmin>
       } />
       <Route path="/visa" element={
         <RequireAdmin>
-          <FeaturePlaceholder feature="Visa Service Management" />
+          <VisaManagement />
         </RequireAdmin>
       } />
       <Route path="/cost-living" element={
         <RequireAdmin>
-          <FeaturePlaceholder feature="Cost of Living Management" />
+          <CostOfLivingManagement />
         </RequireAdmin>
       } />
       <Route path="/jobs" element={
         <RequireAdmin>
-          <FeaturePlaceholder feature="Job Management" />
+          <JobManagement />
         </RequireAdmin>
       } />
       <Route path="/services" element={
         <RequireAdmin>
-          <FeaturePlaceholder feature="Services Management" />
+          <ServicesManagement />
         </RequireAdmin>
       } />
       <Route path="/ai-assistant" element={
         <RequireAdmin>
-          <FeaturePlaceholder feature="AI Assistant Management" />
+          <AIAssistantManagement />
         </RequireAdmin>
       } />
       <Route path="/analytics" element={
         <RequireAdmin>
-          <FeaturePlaceholder feature="Analytics" />
+          <AnalyticsManagement />
         </RequireAdmin>
       } />
       <Route path="/settings" element={
