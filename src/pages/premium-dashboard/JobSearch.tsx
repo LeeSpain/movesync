@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,7 +7,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Briefcase, Building, MapPin, Sliders, Filter, Save, Clock, Star } from 'lucide-react';
+import { Search, Briefcase, Building, MapPin, Sliders, Filter, Save, Clock, Star, ChevronDown, CalendarIcon, GraduationCap, Banknote, CheckCircle } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { 
+  Accordion, 
+  AccordionContent, 
+  AccordionItem, 
+  AccordionTrigger 
+} from '@/components/ui/accordion';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+  SheetFooter
+} from "@/components/ui/sheet";
 
 // Sample job data
 const jobListings = [
@@ -86,16 +103,44 @@ const jobListings = [
   }
 ];
 
+// Add job categories
+const jobCategories = [
+  { id: 'tech', name: 'Technology' },
+  { id: 'healthcare', name: 'Healthcare' },
+  { id: 'finance', name: 'Finance' },
+  { id: 'education', name: 'Education' },
+  { id: 'hospitality', name: 'Hospitality' },
+  { id: 'construction', name: 'Construction' },
+  { id: 'retail', name: 'Retail' },
+  { id: 'marketing', name: 'Marketing' },
+];
+
+// Add skills list
+const skillOptions = [
+  'JavaScript', 'React', 'Node.js', 'TypeScript', 'AWS', 
+  'Python', 'SQL', 'Java', 'PHP', 'C#', '.NET',
+  'Marketing', 'Sales', 'Customer Service', 'Project Management',
+  'Accounting', 'Finance', 'Healthcare', 'Teaching', 'Design'
+];
+
 const JobSearch = () => {
   const { user } = useAuth();
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     location: 'all',
     jobType: 'all',
     industry: 'all',
-    experience: 'all'
+    experience: 'all',
+    salaryRange: [0, 200000],
+    categories: [],
+    skills: [],
+    postedWithin: 'anytime',
+    remoteOnly: false
   });
   const [showFilters, setShowFilters] = useState(false);
+  const [activeView, setActiveView] = useState('matches');
+  const [savedJobs, setSavedJobs<number[]>([]);
   
   // Filter jobs based on search term and filters
   const filteredJobs = jobListings.filter(job => {
@@ -109,6 +154,22 @@ const JobSearch = () => {
     return matchesSearch && matchesLocation && matchesType;
   });
 
+  const handleSaveJob = (jobId: number) => {
+    if (savedJobs.includes(jobId)) {
+      setSavedJobs(savedJobs.filter(id => id !== jobId));
+    } else {
+      setSavedJobs([...savedJobs, jobId]);
+    }
+  };
+
+  const handleApplyJob = (jobId: number) => {
+    // Show toast notification
+    toast({
+      title: "Application Started",
+      description: "Your job application has been initiated.",
+    });
+  };
+
   return (
     <DashboardLayout isPremium={true} userName={user?.name || "User"} progressPercentage={user?.progressPercentage || 65}>
       <div className="space-y-6">
@@ -117,10 +178,119 @@ const JobSearch = () => {
             <h1 className="text-3xl font-bold tracking-tight">Job Search</h1>
             <p className="text-muted-foreground">Find your ideal job opportunity in Australia</p>
           </div>
-          <Button variant="outline" onClick={() => setShowFilters(!showFilters)}>
-            <Sliders className="h-4 w-4 mr-2" />
-            {showFilters ? "Hide Filters" : "Show Filters"}
-          </Button>
+          <div className="flex gap-2">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline">
+                  <Filter className="h-4 w-4 mr-2" />
+                  Advanced Filters
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="w-[350px] sm:w-[450px] overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle>Advanced Job Filters</SheetTitle>
+                </SheetHeader>
+                <div className="py-6 space-y-6">
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-medium">Job Categories</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {jobCategories.map(category => (
+                        <div key={category.id} className="flex items-center space-x-2">
+                          <Checkbox id={`category-${category.id}`} />
+                          <Label htmlFor={`category-${category.id}`}>{category.name}</Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-medium">Salary Range</h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between">
+                        <span>${filters.salaryRange[0].toLocaleString()}</span>
+                        <span>${filters.salaryRange[1].toLocaleString()}</span>
+                      </div>
+                      <Slider
+                        min={0}
+                        max={200000}
+                        step={5000}
+                        value={filters.salaryRange}
+                        onValueChange={(value) => setFilters({...filters, salaryRange: value as [number, number]})}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-medium">Posted Within</h3>
+                    <Select 
+                      value={filters.postedWithin} 
+                      onValueChange={(value) => setFilters({...filters, postedWithin: value})}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select timeframe" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="anytime">Anytime</SelectItem>
+                        <SelectItem value="day">Last 24 hours</SelectItem>
+                        <SelectItem value="week">Last week</SelectItem>
+                        <SelectItem value="month">Last month</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-medium">Experience Level</h3>
+                    <Select 
+                      value={filters.experience} 
+                      onValueChange={(value) => setFilters({...filters, experience: value})}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select experience level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Levels</SelectItem>
+                        <SelectItem value="Entry">Entry Level</SelectItem>
+                        <SelectItem value="Mid">Mid Level</SelectItem>
+                        <SelectItem value="Senior">Senior Level</SelectItem>
+                        <SelectItem value="Executive">Executive</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-medium">Required Skills</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {skillOptions.slice(0, 10).map(skill => (
+                        <div key={skill} className="flex items-center space-x-2">
+                          <Checkbox id={`skill-${skill}`} />
+                          <Label htmlFor={`skill-${skill}`}>{skill}</Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="remote-only" 
+                      checked={filters.remoteOnly}
+                      onCheckedChange={(checked) => setFilters({...filters, remoteOnly: checked as boolean})}
+                    />
+                    <Label htmlFor="remote-only">Remote jobs only</Label>
+                  </div>
+                </div>
+                <SheetFooter>
+                  <SheetClose asChild>
+                    <Button className="w-full">Apply Filters</Button>
+                  </SheetClose>
+                </SheetFooter>
+              </SheetContent>
+            </Sheet>
+            
+            <Button variant="outline" onClick={() => setShowFilters(!showFilters)}>
+              <Sliders className="h-4 w-4 mr-2" />
+              {showFilters ? "Hide Filters" : "Show Filters"}
+            </Button>
+          </div>
         </div>
         
         {/* Search and filters */}
@@ -210,84 +380,149 @@ const JobSearch = () => {
           </CardContent>
         </Card>
         
-        {/* Job listings */}
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold">Available Jobs ({filteredJobs.length})</h2>
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">Sort by:</span>
-              <Select defaultValue="matchScore">
-                <SelectTrigger className="w-[160px]">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="matchScore">Match Score</SelectItem>
-                  <SelectItem value="datePosted">Date Posted</SelectItem>
-                  <SelectItem value="salary">Salary</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+        {/* Job listings tabs */}
+        <Tabs value={activeView} onValueChange={setActiveView}>
+          <TabsList className="bg-transparent border-b w-full justify-start rounded-none p-0">
+            <TabsTrigger value="matches" className="rounded-t-lg data-[state=active]:bg-background border data-[state=active]:border-b-transparent data-[state=inactive]:border-transparent">
+              AI Matched Jobs
+            </TabsTrigger>
+            <TabsTrigger value="all" className="rounded-t-lg data-[state=active]:bg-background border data-[state=active]:border-b-transparent data-[state=inactive]:border-transparent">
+              All Jobs
+            </TabsTrigger>
+            <TabsTrigger value="saved" className="rounded-t-lg data-[state=active]:bg-background border data-[state=active]:border-b-transparent data-[state=inactive]:border-transparent">
+              Saved Jobs
+            </TabsTrigger>
+          </TabsList>
           
-          {filteredJobs.map(job => (
-            <Card key={job.id} className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="p-6">
-                  <div className="flex flex-col md:flex-row md:justify-between gap-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-lg font-semibold">{job.title}</h3>
-                        <Badge className={`${job.match >= 90 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
-                          {job.match}% Match
-                        </Badge>
-                      </div>
-                      <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Building className="h-4 w-4" />
-                          <span>{job.company}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-4 w-4" />
-                          <span>{job.location}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Briefcase className="h-4 w-4" />
-                          <span>{job.type}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-4 w-4" />
-                          <span>{job.postedDate}</span>
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground">{job.description}</p>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {job.skills.map((skill, index) => (
-                          <Badge key={index} variant="outline" className="bg-slate-50">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex flex-row md:flex-col gap-2 justify-start md:justify-between items-start md:items-end">
-                      <div className="text-right">
-                        <p className="font-semibold">{job.salary}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <Save className="h-4 w-4 mr-2" />
-                          Save
-                        </Button>
-                        <Button size="sm">
-                          Apply Now
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
+          <TabsContent value="matches" className="pt-6">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-semibold">AI Matched Jobs ({filteredJobs.length})</h2>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Sort by:</span>
+                  <Select defaultValue="matchScore">
+                    <SelectTrigger className="w-[160px]">
+                      <SelectValue placeholder="Sort by" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="matchScore">Match Score</SelectItem>
+                      <SelectItem value="datePosted">Date Posted</SelectItem>
+                      <SelectItem value="salary">Salary</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </div>
+              
+              {filteredJobs.map(job => (
+                <Card key={job.id} className="overflow-hidden">
+                  <CardContent className="p-0">
+                    <div className="p-6">
+                      <div className="flex flex-col md:flex-row md:justify-between gap-4">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-lg font-semibold">{job.title}</h3>
+                            <Badge className={`${job.match >= 90 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                              {job.match}% Match
+                            </Badge>
+                          </div>
+                          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <Building className="h-4 w-4" />
+                              <span>{job.company}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <MapPin className="h-4 w-4" />
+                              <span>{job.location}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Briefcase className="h-4 w-4" />
+                              <span>{job.type}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              <span>{job.postedDate}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Banknote className="h-4 w-4" />
+                              <span>{job.salary}</span>
+                            </div>
+                          </div>
+                          
+                          <Accordion type="single" collapsible className="w-full">
+                            <AccordionItem value={`description-${job.id}`} className="border-none">
+                              <AccordionTrigger className="py-2 text-sm font-medium text-movesync-blue hover:text-movesync-blue hover:no-underline">
+                                View Details
+                              </AccordionTrigger>
+                              <AccordionContent>
+                                <div className="space-y-3 pt-2">
+                                  <p className="text-muted-foreground">{job.description}</p>
+                                  
+                                  <div>
+                                    <h4 className="text-sm font-medium mb-2">Required Skills</h4>
+                                    <div className="flex flex-wrap gap-2">
+                                      {job.skills.map((skill, index) => (
+                                        <Badge key={index} variant="outline" className="bg-slate-50">
+                                          {skill}
+                                        </Badge>
+                                      ))}
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <h4 className="text-sm font-medium mb-2">Why You're a Good Match</h4>
+                                    <div className="space-y-2">
+                                      <div className="flex items-start gap-2">
+                                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
+                                        <p className="text-sm">Your experience with {job.skills[0]} matches the job requirements.</p>
+                                      </div>
+                                      <div className="flex items-start gap-2">
+                                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
+                                        <p className="text-sm">Your profile indicates expertise in {job.skills[1]}.</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </AccordionContent>
+                            </AccordionItem>
+                          </Accordion>
+                        </div>
+                        
+                        <div className="flex flex-row md:flex-col gap-2 justify-start md:justify-between items-start md:items-end">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            onClick={() => handleSaveJob(job.id)}
+                            className={savedJobs.includes(job.id) ? "bg-blue-50" : ""}
+                          >
+                            <Save className={`h-4 w-4 mr-2 ${savedJobs.includes(job.id) ? "fill-movesync-blue" : ""}`} />
+                            {savedJobs.includes(job.id) ? "Saved" : "Save"}
+                          </Button>
+                          <Button size="sm" onClick={() => handleApplyJob(job.id)}>
+                            Apply Now
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="all" className="pt-6">
+            <div className="text-center py-8">
+              <h3 className="text-lg font-medium">Browse All Available Jobs</h3>
+              <p className="text-muted-foreground mt-1">Use the search and filters to find jobs that match your criteria</p>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="saved" className="pt-6">
+            <div className="text-center py-8">
+              <h3 className="text-lg font-medium">Your Saved Jobs</h3>
+              <p className="text-muted-foreground mt-1">You have {savedJobs.length} saved jobs</p>
+            </div>
+          </TabsContent>
+        </Tabs>
         
         {/* Job search tips */}
         <Card className="bg-slate-50 border-slate-200">
