@@ -8,9 +8,9 @@ import { InvestmentProvider } from "@/components/investment/InvestmentContext";
 const PublicRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/countries" element={<Countries />} />
-      <Route path="/investment" element={
+      <Route index element={<Index />} />
+      <Route path="countries" element={<Countries />} />
+      <Route path="investment" element={
         <InvestmentProvider>
           <Investment />
         </InvestmentProvider>

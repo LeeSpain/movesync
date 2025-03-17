@@ -1,10 +1,15 @@
 
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Globe } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 
 const Countries = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,6 +25,20 @@ const Countries = () => {
     { id: 'newzealand', name: 'New Zealand', flag: '🇳🇿', active: true },
   ];
 
+  const handleSelectCountry = (countryId: string) => {
+    // Save selected country to localStorage
+    localStorage.setItem('moveSync_country', countryId);
+    
+    const country = countries.find(c => c.id === countryId);
+    toast({
+      title: "Country updated",
+      description: `Your selected destination is now ${country?.name} ${country?.flag}`,
+    });
+    
+    // Navigate back to the previous page or dashboard
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -31,7 +50,11 @@ const Countries = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {countries.map(country => (
-            <Card key={country.id} className="hover:shadow-lg transition-shadow cursor-pointer">
+            <Card 
+              key={country.id} 
+              className="hover:shadow-lg transition-shadow cursor-pointer"
+              onClick={() => handleSelectCountry(country.id)}
+            >
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <span className="text-2xl">{country.flag}</span>
