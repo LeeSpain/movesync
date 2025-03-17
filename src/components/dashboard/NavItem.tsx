@@ -23,6 +23,7 @@ const NavItem = ({ icon: Icon, label, href, isActive, isPremiumLocked, onClick }
         title: "Premium Feature",
         description: "This feature is only available with the Premium plan.",
       });
+      return;
     }
     
     if (onClick) {

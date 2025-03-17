@@ -1,8 +1,7 @@
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import NavItem from './NavItem';
 import { useToast } from '@/components/ui/use-toast';
@@ -23,7 +22,8 @@ const SidebarNavigation = ({ navItems, isSidebarOpen }: SidebarNavigationProps) 
   const location = useLocation();
   const { toast } = useToast();
 
-  const handleLockedFeatureClick = () => {
+  const handleLockedFeatureClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     toast({
       title: "Premium Feature",
       description: "This feature is only available with the Premium plan.",
