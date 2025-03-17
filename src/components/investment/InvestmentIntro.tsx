@@ -1,30 +1,20 @@
 
 import React from 'react';
 import { useInvestment } from './InvestmentContext';
-import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts';
-import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
 
 const InvestmentIntro = () => {
   const { 
-    countryGrowthRates, 
-    financialParams, 
     viewMode,
     setViewMode, 
     selectedCountry,
     setSelectedCountry,
+    countryGrowthRates,
+    financialParams, 
     globalGrowthRate
   } = useInvestment();
   
   const { premoneyValuation, targetRaise, postmoneyValuation, totalEquityOffered } = financialParams;
 
-  // Pie chart data for market distribution
-  const pieChartData = Object.entries(countryGrowthRates).map(([country, rate]) => ({
-    name: country,
-    value: Math.round(rate * 100), // Convert to percentage for better visualization
-  }));
-  
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#83a6ed'];
-  
   return (
     <div>
       <h2 className="heading-md mb-6">
@@ -54,90 +44,57 @@ const InvestmentIntro = () => {
         </ul>
       </div>
       
-      <div className="bg-white rounded-xl p-6 shadow-md mb-8">
-        <h3 className="font-semibold mb-4">Our Global Presence</h3>
-        <p className="mb-4">Your investment includes our operations in all these countries:</p>
-        
-        <div className="h-[200px] w-full mb-4">
-          <ChartContainer
-            config={{
-              value: { theme: { light: "#8B5CF6", dark: "#8B5CF6" }, label: "Growth Rate" },
-            }}
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={pieChartData}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                  nameKey="name"
-                  label={({name, percent}) => `${name}: ${(Number(percent) * 100).toFixed(0)}%`}
-                >
-                  {pieChartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <ChartTooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </ChartContainer>
-        </div>
-        
-        <div className="flex items-center space-x-4 mb-6">
-          <button
-            onClick={() => setViewMode('global')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-              viewMode === 'global'
-                ? 'bg-movesync-blue text-white'
-                : 'bg-movesync-gray-light text-movesync-black'
-            }`}
-          >
-            Global Investment
-          </button>
-          <button
-            onClick={() => setViewMode('country')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-              viewMode === 'country'
-                ? 'bg-movesync-blue text-white'
-                : 'bg-movesync-gray-light text-movesync-black'
-            }`}
-          >
-            View By Country
-          </button>
-        </div>
-        
-        {viewMode === 'country' && (
-          <div className="mb-4">
-            <p className="mb-2">Select a country to see individual growth rates:</p>
-            <div className="flex flex-wrap gap-2">
-              {Object.keys(countryGrowthRates).map((country) => (
-                <button
-                  key={country}
-                  onClick={() => setSelectedCountry(country)}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
-                    selectedCountry === country
-                      ? 'bg-movesync-blue text-white'
-                      : 'bg-movesync-gray-light text-movesync-black'
-                  }`}
-                >
-                  {country}
-                </button>
-              ))}
-            </div>
+      <div className="flex items-center space-x-4 mb-6">
+        <button
+          onClick={() => setViewMode('global')}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+            viewMode === 'global'
+              ? 'bg-movesync-blue text-white'
+              : 'bg-movesync-gray-light text-movesync-black'
+          }`}
+        >
+          Global Investment
+        </button>
+        <button
+          onClick={() => setViewMode('country')}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+            viewMode === 'country'
+              ? 'bg-movesync-blue text-white'
+              : 'bg-movesync-gray-light text-movesync-black'
+          }`}
+        >
+          View By Country
+        </button>
+      </div>
+      
+      {viewMode === 'country' && (
+        <div className="mb-4">
+          <p className="mb-2">Select a country to see individual growth rates:</p>
+          <div className="flex flex-wrap gap-2">
+            {Object.keys(countryGrowthRates).map((country) => (
+              <button
+                key={country}
+                onClick={() => setSelectedCountry(country)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
+                  selectedCountry === country
+                    ? 'bg-movesync-blue text-white'
+                    : 'bg-movesync-gray-light text-movesync-black'
+                }`}
+              >
+                {country}
+              </button>
+            ))}
           </div>
-        )}
-        
-        <div className="flex justify-between items-center text-sm text-movesync-gray">
-          <div>Selected Growth Rate:</div>
-          <div className="font-semibold text-movesync-blue">
-            {viewMode === 'global' 
-              ? `${(globalGrowthRate * 100).toFixed(0)}% (Average across all countries)`
-              : `${(countryGrowthRates[selectedCountry] * 100).toFixed(0)}%`
-            }
-          </div>
+        </div>
+      )}
+      
+      <div className="flex justify-between items-center text-sm text-movesync-gray">
+        <div>Selected Growth Rate:</div>
+        <div className="font-semibold text-movesync-blue">
+          {viewMode === 'global' 
+            ? `${(globalGrowthRate * 100).toFixed(0)}% (Average across all countries)`
+            : `${(countryGrowthRates[selectedCountry] * 100).toFixed(0)}%`
+          }
         </div>
       </div>
     </div>

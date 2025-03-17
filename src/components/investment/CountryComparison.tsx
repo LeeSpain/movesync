@@ -2,7 +2,7 @@
 import React from 'react';
 import { useInvestment } from './InvestmentContext';
 import { calculateEquity, generateComparisonData } from './InvestmentUtils';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
@@ -34,23 +34,26 @@ const CountryComparison = () => {
     growthPercentage: item.growthPercentage,
   }));
 
+  // Multiple colors for the chart
+  const COLORS = ['#E67E22', '#2E86C1', '#27AE60', '#8E44AD', '#D35400', '#16A085'];
+
   return (
     <Card className="shadow-md border border-gray-200">
       <CardHeader className="pb-0">
-        <CardTitle className="text-center text-2xl">Investment Growth Comparison</CardTitle>
+        <CardTitle className="text-center text-2xl">Investment Comparison</CardTitle>
         <CardDescription className="text-center pt-2 pb-4">
-          See how your ${investmentAmount.toLocaleString()} investment in our global company would grow over {years} years, with a breakdown by country.
+          See how your ${investmentAmount.toLocaleString()} investment in our global company would grow over {years} years.
         </CardDescription>
       </CardHeader>
       
       <CardContent className="px-2 pt-4 pb-6 md:px-4">
-        <div className="h-[500px] w-full mb-10">
+        <div className="h-[500px] w-full mb-8">
           <ChartContainer
             config={{
               value: { theme: { light: "#E67E22", dark: "#E67E22" }, label: "Value" },
             }}
           >
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height={500}>
               <BarChart 
                 data={barChartData} 
                 margin={{ top: 20, right: 30, left: 40, bottom: 100 }}
@@ -85,7 +88,11 @@ const CountryComparison = () => {
                     return null;
                   }}
                 />
-                <Bar dataKey="value" fill="#E67E22" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                  {barChartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </ChartContainer>
