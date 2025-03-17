@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Search, MapPin, Star, Clock, Phone, Globe, Filter, ChevronDown, XCircle, CheckCircle, Info, Map, Share, ExternalLink } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -29,6 +30,7 @@ import {
   SheetDescription,
   SheetFooter,
   SheetClose,
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import {
   Drawer,
