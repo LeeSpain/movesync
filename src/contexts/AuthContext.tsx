@@ -70,6 +70,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const foundUser = MOCK_USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
     
     if (foundUser) {
+      console.log("User logged in:", foundUser);
       setUser(foundUser);
       localStorage.setItem('moveSync_user', JSON.stringify(foundUser));
     } else {
@@ -94,6 +95,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  const isAdminUser = user?.isAdmin === true;
+  console.log("Auth context state:", { user, isAdmin: isAdminUser });
+
   return (
     <AuthContext.Provider value={{ 
       isAuthenticated: !!user, 
@@ -102,7 +106,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       login, 
       logout, 
       upgradeToPremium,
-      isAdmin: user?.isAdmin || false // Added isAdmin accessor
+      isAdmin: isAdminUser
     }}>
       {children}
     </AuthContext.Provider>

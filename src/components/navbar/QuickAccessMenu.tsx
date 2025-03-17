@@ -20,6 +20,8 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
   const { user } = useAuth();
   const isPremium = user?.plan === 'premium';
   
+  console.log("QuickAccessMenu props:", { isAdmin });
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

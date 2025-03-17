@@ -9,6 +9,8 @@ import NotFound from "@/pages/NotFound";
 import Dashboard from "@/pages/Dashboard";
 
 const AppRoutes = () => {
+  console.log("Rendering AppRoutes");
+  
   return (
     <Routes>
       {/* Public Routes */}

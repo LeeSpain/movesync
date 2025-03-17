@@ -11,7 +11,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-  const { isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   
   // Handle scroll effect
   useEffect(() => {
@@ -37,7 +37,7 @@ export const Navbar = () => {
     'spain': '🇪🇸',
   };
   
-  console.log("Auth check in Navbar:", { isAdmin }); // Debug logging
+  console.log("Auth check in Navbar:", { isAdmin, user });
   
   return (
     <header 

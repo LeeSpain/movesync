@@ -5,11 +5,12 @@ import UserManagement from "@/pages/admin/UserManagement";
 import CountryManagement from "@/pages/admin/CountryManagement";
 import AdminSettings from "@/pages/admin/AdminSettings";
 import { FeaturePlaceholder } from "./AuthRoutes";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Admin guard component
 const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
-  const user = localStorage.getItem('moveSync_user') ? JSON.parse(localStorage.getItem('moveSync_user') || '{}') : null;
-  const isAdmin = user && user.isAdmin === true; // Check specifically for isAdmin property
+  const { user, isAdmin } = useAuth();
+  console.log("RequireAdmin check:", { user, isAdmin });
   
   return isAdmin ? <>{children}</> : <Navigate to="/dashboard" replace />;
 };
