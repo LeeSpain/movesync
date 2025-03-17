@@ -11,6 +11,9 @@ const FutureVision = () => {
     globalGrowthRate
   } = useInvestment();
   
+  // Calculate 5-year projection regardless of selected year value
+  const fiveYearProjection = financialParams.premoneyValuation * Math.pow(1 + globalGrowthRate, 5);
+  
   // Growth strategies with descriptions
   const growthStrategies = [
     {
@@ -72,9 +75,9 @@ const FutureVision = () => {
             <span className="font-bold text-movesync-blue">${financialParams.premoneyValuation.toLocaleString()}</span>
           </div>
           <div className="flex justify-between items-center text-sm bg-white p-3 rounded-lg border border-blue-100">
-            <span className="font-semibold">Projected Valuation in {years} Years:</span>
+            <span className="font-semibold">Projected Valuation in 5 Years:</span>
             <span className="font-bold text-green-600">
-              ${(financialParams.premoneyValuation * Math.pow(1 + globalGrowthRate, years)).toLocaleString(undefined, {maximumFractionDigits: 0})}
+              ${fiveYearProjection.toLocaleString(undefined, {maximumFractionDigits: 0})}
             </span>
           </div>
         </div>
@@ -118,6 +121,69 @@ const FutureVision = () => {
                 <p className="text-sm text-gray-600">Market leader in 7+ countries, enterprise partnerships, potential Series A funding at 3x valuation</p>
               </div>
             </div>
+            <div className="flex items-center">
+              <div className="h-10 w-10 rounded-full bg-movesync-blue flex items-center justify-center text-white font-bold mr-4">4</div>
+              <div>
+                <h4 className="font-semibold">Year 4: Market Share Growth</h4>
+                <p className="text-sm text-gray-600">40% market share in core regions, international team expansion, advanced AI capabilities</p>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="h-10 w-10 rounded-full bg-movesync-blue flex items-center justify-center text-white font-bold mr-4">5</div>
+              <div>
+                <h4 className="font-semibold">Year 5: Exit Opportunity</h4>
+                <p className="text-sm text-gray-600">Strategic acquisition target for major tech companies at 5-7x valuation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* New Exit Strategy Section */}
+        <div className="mt-10 bg-amber-50 p-6 rounded-xl border border-amber-200">
+          <h3 className="font-bold text-xl mb-4 text-center">Exit Strategy</h3>
+          <p className="mb-6">
+            Our clear exit strategy aims to maximize shareholder returns within a 5-year horizon:
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="bg-white p-5 rounded-xl border border-amber-100 shadow-sm">
+              <h4 className="font-bold text-lg mb-3 flex items-center">
+                <span className="text-2xl mr-2">🏢</span>
+                Strategic Acquisition
+              </h4>
+              <p className="text-sm text-gray-600 mb-3">
+                Position MoveSync as an attractive acquisition target for major tech companies or established relocation firms looking to acquire our technology and market share.
+              </p>
+              <div className="bg-amber-50 p-2 rounded-lg text-center">
+                <span className="font-semibold text-amber-800 text-sm">Potential 5-7x return on investment</span>
+              </div>
+            </div>
+            
+            <div className="bg-white p-5 rounded-xl border border-amber-100 shadow-sm">
+              <h4 className="font-bold text-lg mb-3 flex items-center">
+                <span className="text-2xl mr-2">📈</span>
+                IPO Opportunity
+              </h4>
+              <p className="text-sm text-gray-600 mb-3">
+                If market conditions are favorable and we meet growth targets, pursuing an Initial Public Offering to provide liquidity to early investors.
+              </p>
+              <div className="bg-amber-50 p-2 rounded-lg text-center">
+                <span className="font-semibold text-amber-800 text-sm">Potentially 8-10x return on investment</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-amber-100/50 p-4 rounded-lg">
+            <h4 className="font-semibold mb-2 flex items-center">
+              <span className="text-xl mr-2">⭐</span>
+              Investor Exit Timeline
+            </h4>
+            <ul className="list-disc pl-6 space-y-1 text-sm">
+              <li><span className="font-medium">Years 1-3:</span> Reinvest profits for growth, build market dominance</li>
+              <li><span className="font-medium">Year 4:</span> Initiate conversations with potential acquirers/strategic partners</li>
+              <li><span className="font-medium">Year 5:</span> Execute exit strategy, distribute returns to shareholders</li>
+              <li><span className="font-medium">Secondary Option:</span> If market conditions prevent exit, continue profitable operations with potential dividend distributions</li>
+            </ul>
           </div>
         </div>
       </CardContent>
