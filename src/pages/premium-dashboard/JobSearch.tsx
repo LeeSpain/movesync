@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Filter } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
@@ -49,7 +50,7 @@ const JobSearch = () => {
             />
             
             <Button variant="outline" onClick={() => setShowFilters(!showFilters)}>
-              <Sliders className="h-4 w-4 mr-2" />
+              <Filter className="h-4 w-4 mr-2" />
               {showFilters ? "Hide Filters" : "Show Filters"}
             </Button>
           </div>
