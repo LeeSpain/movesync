@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Globe, MapPin, Flag } from 'lucide-react';
+import { Globe, MapPin, Flag, AlertCircle } from 'lucide-react';
 
 const CountrySelection = () => {
   const navigate = useNavigate();
@@ -29,35 +29,35 @@ const CountrySelection = () => {
       name: 'Canada', 
       flag: '🇨🇦', 
       description: 'Discover the great north with friendly communities and stunning natural beauty.',
-      active: true 
+      active: false 
     },
     { 
       id: 'uk', 
       name: 'United Kingdom', 
       flag: '🇬🇧', 
       description: 'Learn about life in the UK with its rich history and diverse cultural experiences.',
-      active: true 
+      active: false 
     },
     { 
       id: 'usa', 
       name: 'United States', 
       flag: '🇺🇸', 
       description: 'Explore the land of opportunity with diverse landscapes and vibrant cities.',
-      active: true 
+      active: false 
     },
     { 
       id: 'germany', 
       name: 'Germany', 
       flag: '🇩🇪', 
       description: 'Consider Germany for its strong economy and high quality of life in the heart of Europe.',
-      active: true 
+      active: false 
     },
     { 
       id: 'newzealand', 
       name: 'New Zealand', 
       flag: '🇳🇿', 
       description: 'Experience the natural wonders and relaxed lifestyle of this Pacific paradise.',
-      active: true 
+      active: false 
     },
   ];
 
@@ -72,7 +72,16 @@ const CountrySelection = () => {
     });
     
     // Navigate to the homepage with the selected country
-    navigate('/');
+    if (countryId === 'australia') {
+      navigate('/home');
+    } else {
+      // For other countries, just show toast but don't navigate
+      toast({
+        title: "Coming Soon",
+        description: `Support for ${country?.name} is coming soon. Stay tuned!`,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -90,14 +99,20 @@ const CountrySelection = () => {
           {countries.map(country => (
             <Card 
               key={country.id} 
-              className="hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden group border-2 hover:border-movesync-blue"
+              className={`hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden group border-2 ${country.active ? 'hover:border-movesync-blue' : 'hover:border-gray-400'}`}
               onClick={() => handleSelectCountry(country.id)}
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${country.active ? 'from-blue-400 to-purple-500' : 'from-gray-300 to-gray-400'} transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></div>
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2">
                   <span className="text-4xl">{country.flag}</span>
                   <span>{country.name}</span>
+                  {!country.active && (
+                    <span className="ml-auto text-xs bg-gray-200 text-gray-600 py-1 px-2 rounded-full flex items-center">
+                      <AlertCircle className="w-3 h-3 mr-1" />
+                      Coming Soon
+                    </span>
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -106,10 +121,12 @@ const CountrySelection = () => {
                 </p>
                 <Button 
                   variant="outline" 
-                  className="w-full group-hover:bg-movesync-blue group-hover:text-white transition-colors"
+                  className={`w-full ${country.active 
+                    ? 'group-hover:bg-movesync-blue group-hover:text-white' 
+                    : 'group-hover:bg-gray-200'} transition-colors`}
                 >
                   <MapPin className="mr-2 h-4 w-4" />
-                  Explore {country.name}
+                  {country.active ? `Explore ${country.name}` : `${country.name} (Coming Soon)`}
                 </Button>
               </CardContent>
             </Card>
