@@ -56,6 +56,11 @@ const AdminSidebarNav = ({ isSidebarOpen }: AdminSidebarNavProps) => {
       href: '/admin/finance',
     },
     {
+      label: 'Cost of Living',
+      icon: CreditCard,
+      href: '/admin/cost-living',
+    },
+    {
       label: 'AI Performance',
       icon: Bot,
       href: '/admin/ai-assistant',
