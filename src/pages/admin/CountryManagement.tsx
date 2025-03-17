@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Search, Plus, Edit, Trash2, Globe, Flag, Check, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -278,7 +277,7 @@ const CountryManagement = () => {
                   <TableCell>{country.jobs.toLocaleString()}</TableCell>
                   <TableCell>{country.visaProcessTime}</TableCell>
                   <TableCell>
-                    <Badge variant={country.active ? 'success' : 'outline'}>
+                    <Badge variant={country.active ? 'default' : 'outline'}>
                       {country.active ? 'Active' : 'Inactive'}
                     </Badge>
                   </TableCell>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Search, Filter, Plus, Edit, Trash2, CreditCard, CheckCircle, XCircle } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -275,7 +274,7 @@ const UserManagement = () => {
                   <TableCell>{user.country}</TableCell>
                   <TableCell>{new Date(user.joinDate).toLocaleDateString()}</TableCell>
                   <TableCell>
-                    <Badge variant={user.status === 'active' ? 'success' : 'destructive'}>
+                    <Badge variant={user.status === 'active' ? 'default' : 'destructive'}>
                       {user.status === 'active' ? 'Active' : 'Inactive'}
                     </Badge>
                   </TableCell>
