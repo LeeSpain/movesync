@@ -1,10 +1,10 @@
-
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import AIAssistant from '@/components/AIAssistant';
+import InvestorSection from '@/components/InvestorSection';
 import Footer from '@/components/Footer';
 import { useInView } from 'react-intersection-observer';
 
@@ -64,6 +64,7 @@ const Index = () => {
         <Features />
         <AIAssistant />
         <Pricing />
+        <InvestorSection />
       </main>
       <Footer />
     </div>
