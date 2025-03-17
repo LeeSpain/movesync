@@ -3,13 +3,18 @@ import { Routes, Route } from "react-router-dom";
 import Index from "@/pages/Index";
 import Countries from "@/pages/Countries";
 import Investment from "@/pages/Investment";
+import { InvestmentProvider } from "@/components/investment/InvestmentContext";
 
 const PublicRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/countries" element={<Countries />} />
-      <Route path="/investment" element={<Investment />} />
+      <Route path="/investment" element={
+        <InvestmentProvider>
+          <Investment />
+        </InvestmentProvider>
+      } />
     </Routes>
   );
 };
