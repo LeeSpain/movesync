@@ -39,12 +39,12 @@ const CountryComparison = () => {
     <Card className="bg-white p-8 rounded-xl shadow-lg mb-16 border-0">
       <div className="flex items-center gap-3 mb-6">
         <Globe className="h-8 w-8 text-movesync-outback-red" />
-        <h2 className="text-3xl font-bold text-movesync-blue">
+        <h2 className="text-3xl font-bold text-movesync-outback-red">
           Investment Growth Comparison
         </h2>
       </div>
       
-      <p className="text-lg mb-8 text-gray-700 max-w-3xl">
+      <p className="text-lg mb-8 text-movesync-blue-dark max-w-3xl">
         See how your ${investmentAmount.toLocaleString()} investment in our global company would grow over {years} years, with a breakdown by country.
       </p>
       
@@ -64,7 +64,7 @@ const CountryComparison = () => {
                     return (
                       <div className="bg-white p-3 border border-gray-200 rounded shadow-md">
                         <p className="text-base font-semibold">{payload[0].payload.country}</p>
-                        <p className="text-base text-movesync-blue font-bold">
+                        <p className="text-base text-movesync-outback-red font-bold">
                           ${Number(payload[0].value).toLocaleString()}
                         </p>
                         <p className="text-sm text-movesync-aussie-green font-medium">
@@ -92,11 +92,11 @@ const CountryComparison = () => {
                 ? 'bg-gradient-to-br from-movesync-blue-light to-movesync-blue border border-movesync-blue-light shadow-md transform scale-105' 
                 : item.country === 'Global (All Countries)'
                   ? 'bg-gradient-to-br from-movesync-aussie-green/20 to-movesync-aussie-green/40 border border-movesync-aussie-green/20'
-                  : 'bg-gray-50 hover:bg-gray-100'
+                  : 'bg-movesync-gray-light hover:bg-movesync-gray'
             }`}
           >
-            <h3 className="font-semibold text-center mb-2 text-gray-800">{item.country}</h3>
-            <p className="text-center text-xl font-bold text-movesync-blue">${item.finalReturn.toLocaleString()}</p>
+            <h3 className="font-semibold text-center mb-2 text-movesync-blue-dark">{item.country}</h3>
+            <p className="text-center text-xl font-bold text-movesync-outback-red">${item.finalReturn.toLocaleString()}</p>
             <p className="text-center text-movesync-aussie-green text-sm font-medium">+{item.growthPercentage}% growth</p>
           </div>
         ))}
