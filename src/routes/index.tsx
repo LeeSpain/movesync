@@ -11,19 +11,29 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* Public Routes */}
-      <PublicRoutes />
+      <Route>
+        <PublicRoutes />
+      </Route>
       
       {/* Authentication Routes */}
-      <AuthRoutes />
+      <Route>
+        <AuthRoutes />
+      </Route>
       
       {/* Free Dashboard Routes */}
-      <FreeDashboardRoutes />
+      <Route>
+        <FreeDashboardRoutes />
+      </Route>
       
       {/* Premium Dashboard Routes */}
-      <PremiumDashboardRoutes />
+      <Route>
+        <PremiumDashboardRoutes />
+      </Route>
       
       {/* Admin Routes */}
-      <AdminRoutes />
+      <Route>
+        <AdminRoutes />
+      </Route>
       
       {/* Catch-all route */}
       <Route path="*" element={<NotFound />} />
