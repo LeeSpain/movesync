@@ -23,9 +23,12 @@ const Dashboard = () => {
     }
   }, [isAuthenticated, user, loading, navigate]);
 
+  // Add a loading state for better user feedback
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-pulse">Redirecting to your dashboard...</div>
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="animate-pulse text-movesync-gray-dark text-lg">
+        Redirecting to your dashboard...
+      </div>
     </div>
   );
 };

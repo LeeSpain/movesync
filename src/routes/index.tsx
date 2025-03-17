@@ -6,6 +6,7 @@ import AdminRoutes from "./AdminRoutes";
 import FreeDashboardRoutes from "./FreeDashboardRoutes";
 import PremiumDashboardRoutes from "./PremiumDashboardRoutes";
 import NotFound from "@/pages/NotFound";
+import Dashboard from "@/pages/Dashboard";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,9 @@ const AppRoutes = () => {
       
       {/* Authentication Routes */}
       <Route path="/auth/*" element={<AuthRoutes />} />
+      
+      {/* Main Dashboard Route */}
+      <Route path="/dashboard" element={<Dashboard />} />
       
       {/* Free Dashboard Routes */}
       <Route path="/dashboard/free/*" element={<FreeDashboardRoutes />} />
