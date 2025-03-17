@@ -37,7 +37,7 @@ const InvestmentIntro = () => {
         Your investment gives you equity in our entire global business across all countries, not just in a single market.
       </p>
       <p className="mb-4">
-        Based on a company valuation of ${premoneyValuation.toLocaleString()} pre-money, we're raising ${targetRaise.toLocaleString()} for a post-money valuation of ${postmoneyValuation.toLocaleString()}, with investors receiving approximately {totalEquityOffered.toFixed(2)}% equity.
+        Based on a company valuation of ${premoneyValuation.toLocaleString()} pre-money, we're raising ${targetRaise.toLocaleString()} for a post-money valuation of ${postmoneyValuation.toLocaleString()}, with investors receiving {totalEquityOffered.toFixed(0)}% equity.
       </p>
       <p className="mb-6">
         Use our calculator to see how your investment could grow over time as we expand our connections across different countries.

@@ -30,7 +30,7 @@ const defaultContext: InvestmentContextType = {
     premoneyValuation: 12000000,
     targetRaise: 2000000,
     postmoneyValuation: 14000000,
-    totalEquityOffered: 14.29
+    totalEquityOffered: 20 // Updated from 14.29 to 20 percent
   },
   globalGrowthRate: 0
 };
@@ -54,7 +54,7 @@ export const InvestmentProvider: React.FC<InvestmentProviderProps> = ({ children
     premoneyValuation: 12000000, // $12M pre-money valuation
     targetRaise: 2000000, // $2M raise
     postmoneyValuation: 14000000, // $14M post-money valuation
-    totalEquityOffered: 14.29 // 14.29% equity offered
+    totalEquityOffered: 20 // Updated from 14.29% to 20% equity offered
   };
   
   // Countries and their growth rates
