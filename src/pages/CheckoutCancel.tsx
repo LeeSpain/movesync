@@ -1,8 +1,9 @@
 
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { XCircle } from 'lucide-react';
+import { XCircle, ArrowLeft, MessageSquareQuestion } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 
 const CheckoutCancel = () => {
@@ -31,14 +32,51 @@ const CheckoutCancel = () => {
           Your payment has been cancelled. If you experienced any issues or have questions, please contact our support team.
         </p>
         
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="text-lg">Not ready to upgrade?</CardTitle>
+            <CardDescription>You can still use our free plan with limited features</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="text-sm text-left space-y-2">
+              <li className="flex items-start gap-2">
+                <span className="text-movesync-blue">•</span>
+                <span>Access to basic relocation tools</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-movesync-blue">•</span>
+                <span>Limited AI assistant interactions (5 per month)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-movesync-blue">•</span>
+                <span>Basic property search functionality</span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+        
         <div className="space-y-4">
           <Button asChild className="w-full">
-            <Link to="/checkout">Try Again</Link>
+            <Link to="/checkout">
+              Try Again
+            </Link>
           </Button>
           
           <Button variant="outline" asChild className="w-full">
-            <Link to="/">Return to Home Page</Link>
+            <Link to="/dashboard/free">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Return to Free Dashboard
+            </Link>
           </Button>
+          
+          <div className="pt-4">
+            <Button variant="link" asChild className="text-sm">
+              <Link to="/choose-plan">
+                <MessageSquareQuestion className="mr-2 h-4 w-4" />
+                Compare Plans
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

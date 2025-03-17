@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 interface UpgradeBannerProps {
   onUpgrade?: () => void; // Make this prop optional
@@ -11,8 +12,16 @@ interface UpgradeBannerProps {
 const UpgradeBanner = ({ onUpgrade }: UpgradeBannerProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
+  const { toast } = useToast();
   
   const handleUpgrade = () => {
+    // Show toast notification
+    toast({
+      title: "Upgrading to Premium",
+      description: "Taking you to the checkout page...",
+      duration: 3000,
+    });
+    
     // Call the onUpgrade callback if provided
     if (onUpgrade) {
       onUpgrade();
