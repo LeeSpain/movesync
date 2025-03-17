@@ -1,8 +1,9 @@
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
-  Users, Globe, Home, Settings, Map, CreditCard, Briefcase, 
-  FileText, BarChart3, Lock, Database, Bot 
+  Users, Home, Settings, BarChart3, Bot, 
+  DollarSign, PieChart, TrendingUp, BadgePercent,
+  CreditCard
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -20,8 +21,9 @@ type AdminSidebarNavProps = {
 
 const AdminSidebarNav = ({ isSidebarOpen }: AdminSidebarNavProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Navigation items for the admin sidebar
+  // Updated navigation items focused on CEO metrics and financials
   const navigationItems: NavigationItem[] = [
     {
       label: 'Dashboard',
@@ -34,37 +36,27 @@ const AdminSidebarNav = ({ isSidebarOpen }: AdminSidebarNavProps) => {
       href: '/admin/users',
     },
     {
-      label: 'Countries',
-      icon: Globe,
-      href: '/admin/countries',
+      label: 'Revenue',
+      icon: DollarSign,
+      href: '/admin/revenue',
     },
     {
-      label: 'Properties',
-      icon: Map,
-      href: '/admin/properties',
+      label: 'Subscriptions',
+      icon: BadgePercent,
+      href: '/admin/subscriptions',
     },
     {
-      label: 'Visa Services',
-      icon: FileText,
-      href: '/admin/visa',
+      label: 'Growth Metrics',
+      icon: TrendingUp,
+      href: '/admin/growth',
     },
     {
-      label: 'Cost of Living',
-      icon: CreditCard,
-      href: '/admin/cost-living',
+      label: 'Financial Reports',
+      icon: PieChart,
+      href: '/admin/finance',
     },
     {
-      label: 'Jobs',
-      icon: Briefcase,
-      href: '/admin/jobs',
-    },
-    {
-      label: 'Service Providers',
-      icon: Database,
-      href: '/admin/services',
-    },
-    {
-      label: 'AI Assistant',
+      label: 'AI Performance',
       icon: Bot,
       href: '/admin/ai-assistant',
     },

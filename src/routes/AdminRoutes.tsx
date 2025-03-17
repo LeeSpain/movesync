@@ -2,17 +2,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import UserManagement from "@/pages/admin/UserManagement";
-import CountryManagement from "@/pages/admin/CountryManagement";
-import PropertyManagement from "@/pages/admin/PropertyManagement";
-import VisaManagement from "@/pages/admin/VisaManagement";
-import CostOfLivingManagement from "@/pages/admin/CostOfLivingManagement";
-import JobManagement from "@/pages/admin/JobManagement";
-import ServicesManagement from "@/pages/admin/ServicesManagement";
-import AIAssistantManagement from "@/pages/admin/AIAssistantManagement";
 import AnalyticsManagement from "@/pages/admin/AnalyticsManagement";
+import AIAssistantManagement from "@/pages/admin/AIAssistantManagement";
 import AdminSettings from "@/pages/admin/AdminSettings";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
+import RevenueManagement from "@/pages/admin/RevenueManagement";
+import SubscriptionsManagement from "@/pages/admin/SubscriptionsManagement";
+import GrowthMetricsManagement from "@/pages/admin/GrowthMetricsManagement";
+import FinancialReportsManagement from "@/pages/admin/FinancialReportsManagement";
 
 // Admin guard component
 const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
@@ -54,34 +52,24 @@ const AdminRoutes = () => {
           <UserManagement />
         </RequireAdmin>
       } />
-      <Route path="/countries" element={
+      <Route path="/revenue" element={
         <RequireAdmin>
-          <CountryManagement />
+          <RevenueManagement />
         </RequireAdmin>
       } />
-      <Route path="/properties" element={
+      <Route path="/subscriptions" element={
         <RequireAdmin>
-          <PropertyManagement />
+          <SubscriptionsManagement />
         </RequireAdmin>
       } />
-      <Route path="/visa" element={
+      <Route path="/growth" element={
         <RequireAdmin>
-          <VisaManagement />
+          <GrowthMetricsManagement />
         </RequireAdmin>
       } />
-      <Route path="/cost-living" element={
+      <Route path="/finance" element={
         <RequireAdmin>
-          <CostOfLivingManagement />
-        </RequireAdmin>
-      } />
-      <Route path="/jobs" element={
-        <RequireAdmin>
-          <JobManagement />
-        </RequireAdmin>
-      } />
-      <Route path="/services" element={
-        <RequireAdmin>
-          <ServicesManagement />
+          <FinancialReportsManagement />
         </RequireAdmin>
       } />
       <Route path="/ai-assistant" element={
