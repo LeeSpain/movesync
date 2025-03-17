@@ -37,7 +37,18 @@ export const Navbar = () => {
     'spain': '🇪🇸',
   };
   
-  console.log("Auth check in Navbar:", { isAdmin, user, userIsAdmin: user?.isAdmin });
+  // Extra debug for auth status
+  useEffect(() => {
+    console.log("Navbar auth status updated:", { isAdmin, user, userIsAdmin: user?.isAdmin });
+    
+    // Check localStorage directly
+    const storedUser = localStorage.getItem('moveSync_user');
+    if (storedUser) {
+      console.log("User from localStorage in Navbar:", JSON.parse(storedUser));
+    } else {
+      console.log("No user found in localStorage in Navbar");
+    }
+  }, [isAdmin, user]);
   
   return (
     <header 

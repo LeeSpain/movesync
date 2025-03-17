@@ -56,9 +56,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const checkStoredUser = () => {
       const storedUser = localStorage.getItem('moveSync_user');
       if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        console.log("Loading user from localStorage:", parsedUser);
-        setUser(parsedUser);
+        try {
+          const parsedUser = JSON.parse(storedUser);
+          console.log("Loading user from localStorage:", parsedUser);
+          setUser(parsedUser);
+        } catch (e) {
+          console.error("Error parsing user from localStorage:", e);
+          localStorage.removeItem('moveSync_user');
+        }
+      } else {
+        console.log("No user found in localStorage");
       }
       setLoading(false);
     };
@@ -103,8 +110,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  // Explicitly calculate isAdmin based on user?.isAdmin
   const isAdminUser = user?.isAdmin === true;
-  console.log("Auth context state:", { user, isAdmin: isAdminUser, userIsAdmin: user?.isAdmin });
+  
+  // Add more detailed logging
+  useEffect(() => {
+    console.log("Auth context updated:", { 
+      user, 
+      isAdmin: isAdminUser, 
+      userIsAdmin: user?.isAdmin,
+      isAuthenticated: !!user 
+    });
+  }, [user, isAdminUser]);
 
   return (
     <AuthContext.Provider value={{ 
