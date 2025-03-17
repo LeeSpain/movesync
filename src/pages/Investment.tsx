@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -107,7 +106,7 @@ const Investment = () => {
   // Create pie chart data for market distribution
   const pieChartData = Object.entries(countryGrowthRates).map(([country, rate]) => ({
     name: country,
-    value: rate * 100, // Convert to percentage for better visualization
+    value: Math.round(rate * 100), // Convert to percentage for better visualization, ensure it's a number
   }));
   
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#83a6ed'];
@@ -329,10 +328,10 @@ const Investment = () => {
                               <div className="bg-white p-2 border border-gray-200 rounded shadow-sm">
                                 <p className="text-sm font-medium">{payload[0].payload.year}</p>
                                 <p className="text-sm text-blue-600">
-                                  ${payload[0].value.toLocaleString()}
+                                  ${Number(payload[0].value).toLocaleString()}
                                 </p>
                                 <p className="text-xs text-green-600">
-                                  +{Math.round((payload[0].value / equityValue - 1) * 100)}%
+                                  +{Math.round((Number(payload[0].value) / equityValue - 1) * 100)}%
                                 </p>
                               </div>
                             );
@@ -402,7 +401,7 @@ const Investment = () => {
                           <div className="bg-white p-2 border border-gray-200 rounded shadow-sm">
                             <p className="text-sm font-medium">{payload[0].payload.country}</p>
                             <p className="text-sm text-purple-600">
-                              ${payload[0].value.toLocaleString()}
+                              ${Number(payload[0].value).toLocaleString()}
                             </p>
                             <p className="text-xs text-green-600">
                               +{payload[0].payload.growthPercentage}% growth
