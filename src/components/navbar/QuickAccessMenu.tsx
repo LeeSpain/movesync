@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, LayoutDashboard, Shield } from 'lucide-react';
+import { ChevronDown, LayoutDashboard } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,7 +47,7 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
           onClick={() => handleNavigate('/dashboard/free')}
         >
           <LayoutDashboard className="h-4 w-4 mr-2" />
-          Members Dashboard
+          Dashboard
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
