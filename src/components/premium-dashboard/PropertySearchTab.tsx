@@ -21,7 +21,10 @@ const PropertySearchTab = ({ properties }: PropertySearchTabProps) => {
   return (
     <div className="mt-0 space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold">Your Top Property Matches</h3>
+        <div>
+          <h3 className="text-xl font-semibold">Your Top Property Matches</h3>
+          <p className="text-muted-foreground text-sm">Updated daily via our AI web scraping system</p>
+        </div>
         <Button>
           <Search className="h-4 w-4 mr-2" /> New Search
         </Button>

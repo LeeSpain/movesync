@@ -23,7 +23,7 @@ const JobOpportunitiesTab = ({ jobs }: JobOpportunitiesTabProps) => {
       <div className="flex justify-between items-center">
         <div>
           <h3 className="text-xl font-semibold">AI-Matched Job Opportunities</h3>
-          <p className="text-movesync-gray">Based on your skills and experience</p>
+          <p className="text-movesync-gray">Fresh data collected daily from across the web</p>
         </div>
         <Button>
           <Search className="h-4 w-4 mr-2" /> Refine Search
@@ -67,7 +67,7 @@ const JobOpportunitiesTab = ({ jobs }: JobOpportunitiesTabProps) => {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="flex-1">
               <h4 className="font-semibold">Enhance Your Job Search</h4>
-              <p className="text-movesync-gray-dark">Let our AI improve your resume and prepare you for interviews</p>
+              <p className="text-movesync-gray-dark">Our AI continuously scans job sites for opportunities matching your profile</p>
             </div>
             <div className="flex gap-2">
               <Button variant="outline">Upload Resume</Button>
