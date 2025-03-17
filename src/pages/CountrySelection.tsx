@@ -6,7 +6,7 @@ import HowItWorks from '@/components/country-selection/HowItWorks';
 import UpdateSection from '@/components/country-selection/UpdateSection';
 import InvestorSection from '@/components/InvestorSection';
 import Footer from '@/components/Footer';
-import useCountries from '@/hooks/useCountries';
+import { useCountries } from '@/hooks/useCountries';
 import useScrollToTop from '@/hooks/useScrollToTop';
 
 const CountrySelection = () => {
