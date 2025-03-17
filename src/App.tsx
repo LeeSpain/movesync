@@ -19,6 +19,12 @@ import JobSearch from "./pages/premium-dashboard/JobSearch";
 import ServicesFinder from "./pages/premium-dashboard/ServicesFinder";
 import Countries from "./pages/Countries";
 
+// Admin pages
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import UserManagement from "./pages/admin/UserManagement";
+import CountryManagement from "./pages/admin/CountryManagement";
+import AdminSettings from "./pages/admin/AdminSettings";
+
 // Create a placeholder component for feature pages that aren't fully implemented yet
 const FeaturePlaceholder = ({ feature, isPremium = false }: { feature: string; isPremium?: boolean }) => (
   <div className="flex flex-col items-center justify-center p-8">
@@ -38,6 +44,14 @@ const FeaturePlaceholder = ({ feature, isPremium = false }: { feature: string; i
 const RequireAuth = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = localStorage.getItem('moveSync_user') !== null;
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+};
+
+// Admin guard component
+const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
+  const user = localStorage.getItem('moveSync_user') ? JSON.parse(localStorage.getItem('moveSync_user') || '{}') : null;
+  const isAdmin = user && user.id === '1'; // For demo purposes, assume user with ID 1 is admin
+  
+  return isAdmin ? <>{children}</> : <Navigate to="/dashboard" replace />;
 };
 
 const queryClient = new QueryClient();
@@ -123,6 +137,63 @@ const App = () => (
               <RequireAuth>
                 <ServicesFinder />
               </RequireAuth>
+            } />
+            
+            {/* Admin routes */}
+            <Route path="/admin" element={
+              <RequireAdmin>
+                <AdminDashboard />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/users" element={
+              <RequireAdmin>
+                <UserManagement />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/countries" element={
+              <RequireAdmin>
+                <CountryManagement />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/properties" element={
+              <RequireAdmin>
+                <FeaturePlaceholder feature="Property Management" />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/visa" element={
+              <RequireAdmin>
+                <FeaturePlaceholder feature="Visa Service Management" />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/cost-living" element={
+              <RequireAdmin>
+                <FeaturePlaceholder feature="Cost of Living Management" />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/jobs" element={
+              <RequireAdmin>
+                <FeaturePlaceholder feature="Job Management" />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/services" element={
+              <RequireAdmin>
+                <FeaturePlaceholder feature="Services Management" />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/ai-assistant" element={
+              <RequireAdmin>
+                <FeaturePlaceholder feature="AI Assistant Management" />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/analytics" element={
+              <RequireAdmin>
+                <FeaturePlaceholder feature="Analytics" />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/settings" element={
+              <RequireAdmin>
+                <AdminSettings />
+              </RequireAdmin>
             } />
             
             {/* Settings route */}

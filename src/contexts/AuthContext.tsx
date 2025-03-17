@@ -10,6 +10,7 @@ interface User {
   email: string;
   plan: UserPlan;
   progressPercentage: number;
+  isAdmin?: boolean; // Added isAdmin flag
 }
 
 interface AuthContextType {
@@ -19,6 +20,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   upgradeToPremium: () => void;
+  isAdmin: boolean; // Added isAdmin accessor
 }
 
 // Create the context
@@ -31,14 +33,16 @@ const MOCK_USERS = [
     name: 'Alex Smith',
     email: 'alex@example.com',
     plan: 'free' as UserPlan,
-    progressPercentage: 30
+    progressPercentage: 30,
+    isAdmin: true // Admin user
   },
   {
     id: '2',
     name: 'Sarah Johnson',
     email: 'sarah@example.com',
     plan: 'premium' as UserPlan,
-    progressPercentage: 65
+    progressPercentage: 65,
+    isAdmin: false
   }
 ];
 
@@ -91,7 +95,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: !!user, user, loading, login, logout, upgradeToPremium }}>
+    <AuthContext.Provider value={{ 
+      isAuthenticated: !!user, 
+      user, 
+      loading, 
+      login, 
+      logout, 
+      upgradeToPremium,
+      isAdmin: user?.isAdmin || false // Added isAdmin accessor
+    }}>
       {children}
     </AuthContext.Provider>
   );
