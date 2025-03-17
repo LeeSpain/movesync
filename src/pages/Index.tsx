@@ -63,10 +63,10 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
+        <AIAssistant />
         <div ref={ref}>
           <Testimonial isIntersecting={inView} />
         </div>
-        <AIAssistant />
         <Pricing />
       </main>
       <Footer />

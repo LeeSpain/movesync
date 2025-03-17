@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { countries, Country } from './ai-assistant/types';
 import ChatInterface from './ai-assistant/ChatInterface';
 import CapabilitiesSection from './ai-assistant/CapabilitiesSection';
+import PremiumDashboardPreview from './features/PremiumDashboardPreview';
 
 const AIAssistant = () => {
   const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
@@ -50,6 +51,9 @@ const AIAssistant = () => {
             setSelectedCountry={setSelectedCountry}
           />
         </div>
+        
+        {/* Premium Dashboard Preview */}
+        <PremiumDashboardPreview isIntersecting={isIntersecting} />
       </div>
     </section>
   );
