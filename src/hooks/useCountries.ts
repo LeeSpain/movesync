@@ -38,7 +38,7 @@ export const useCountries = () => {
       description: 'Rich in history and culture, the UK blends historical charm with modern innovation, featuring world-class education and universal healthcare.',
       active: false,
       highlights: ['Historical landmarks & culture', 'Excellent education system', 'Universal healthcare (NHS)', 'Diverse metropolitan cities'],
-      image: 'https://images.unsplash.com/photo-1543799382-9a7c8b9c3b77?auto=format&fit=crop&q=80'
+      image: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&q=80'
     },
     { 
       id: 'spain', 
@@ -56,7 +56,7 @@ export const useCountries = () => {
       description: 'Known for its stunning landscapes, diverse cities, and friendly locals, Canada offers universal healthcare and excellent quality of life.',
       active: false,
       highlights: ['Universal healthcare', 'High safety index', 'Inclusive immigration policies', 'Natural beauty & outdoor lifestyle'],
-      image: 'https://images.unsplash.com/photo-1569681157440-8e4db3f62da8?auto=format&fit=crop&q=80'
+      image: 'https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&q=80'
     },
     { 
       id: 'newzealand', 
@@ -66,6 +66,15 @@ export const useCountries = () => {
       active: false,
       highlights: ['Excellent work-life balance', 'Spectacular natural beauty', 'Strong environmental focus', 'Safe & politically stable'],
       image: 'https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&q=80'
+    },
+    { 
+      id: 'netherlands', 
+      name: 'Netherlands', 
+      flag: '🇳🇱', 
+      description: 'Discover the charming canals, cycling culture, and innovative cities of the Netherlands, known for its high quality of life and work-life balance.',
+      active: false,
+      highlights: ['Excellent healthcare system', 'Strong economy & innovation', 'Bicycle-friendly cities', 'Progressive social policies'],
+      image: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&q=80'
     },
   ]);
 
