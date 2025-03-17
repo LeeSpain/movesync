@@ -13,7 +13,7 @@ const Investment = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       
-      <main className="container-content py-24 md:py-32">
+      <main className="container-content py-12 md:py-16">
         <h1 className="heading-lg text-center mb-8">
           Global Investment Opportunity
         </h1>
@@ -26,7 +26,7 @@ const Investment = () => {
           </Card>
           
           <Card className="shadow-sm overflow-hidden h-full">
-            <CardContent className="p-0">
+            <CardContent className="p-6">
               <InvestmentCalculator />
             </CardContent>
           </Card>

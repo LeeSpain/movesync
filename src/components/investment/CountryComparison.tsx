@@ -38,22 +38,34 @@ const CountryComparison = () => {
     <Card className="overflow-hidden">
       <CardHeader className="pb-0">
         <CardTitle className="text-center">Investment Growth Comparison</CardTitle>
-        <CardDescription className="text-center pt-2">
+        <CardDescription className="text-center pt-2 pb-2">
           See how your ${investmentAmount.toLocaleString()} investment in our global company would grow over {years} years, with a breakdown by country.
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="px-4 pt-6 pb-6 md:px-6">
-        <div className="h-[300px] w-full mb-6">
+      <CardContent className="px-4 pt-4 pb-6 md:px-6">
+        <div className="h-[400px] w-full mb-8">
           <ChartContainer
             config={{
               value: { theme: { light: "#E67E22", dark: "#E67E22" }, label: "Value" },
             }}
           >
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={barChartData} margin={{ top: 10, right: 30, left: 20, bottom: 40 }}>
-                <XAxis dataKey="country" />
-                <YAxis tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`} />
+              <BarChart 
+                data={barChartData} 
+                margin={{ top: 20, right: 30, left: 20, bottom: 70 }}
+              >
+                <XAxis 
+                  dataKey="country" 
+                  angle={-45}
+                  textAnchor="end"
+                  height={70}
+                  interval={0}
+                />
+                <YAxis 
+                  tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`} 
+                  width={80}
+                />
                 <ChartTooltip
                   content={({ active, payload }) => {
                     if (active && payload && payload.length) {
@@ -86,7 +98,7 @@ const CountryComparison = () => {
                 ? 'bg-movesync-blue/10 border border-movesync-blue/20' 
                 : item.country === 'Global (All Countries)'
                   ? 'bg-movesync-aussie-green/10 border border-movesync-aussie-green/20'
-                  : 'bg-gray-50'
+                  : 'bg-gray-50 border border-gray-100'
             }`}>
               <h3 className="font-semibold text-center text-sm mb-1">{item.country}</h3>
               <p className="text-center text-base font-bold">${item.finalReturn.toLocaleString()}</p>

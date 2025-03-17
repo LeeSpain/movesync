@@ -4,11 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const InvestmentCTA = () => {
   return (
-    <Card className="bg-movesync-blue/10 border-movesync-blue/20">
+    <Card className="bg-[#FEF7CD] border-movesync-blue/20">
       <CardHeader className="pb-2">
         <CardTitle className="text-center">Ready to Invest in Our Global Platform?</CardTitle>
       </CardHeader>
-      <CardContent className="text-center">
+      <CardContent className="text-center pb-8">
         <p className="mb-6 max-w-2xl mx-auto">
           Contact our investment team to discuss your options and learn more about our global growth plans and expansion strategy.
         </p>
