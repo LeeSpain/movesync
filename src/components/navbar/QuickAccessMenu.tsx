@@ -1,13 +1,12 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, LayoutDashboard, Shield, Sparkles } from 'lucide-react';
+import { ChevronDown, LayoutDashboard, Shield } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from '@/contexts/AuthContext';
@@ -30,7 +29,6 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
 
   const handleNavigate = (path: string) => {
     console.log("QuickAccessMenu: Navigating to:", path);
-    // Prevent default behavior and use programmatic navigation
     navigate(path);
   };
 
@@ -52,26 +50,14 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
           Members Dashboard
         </DropdownMenuItem>
         
-        <DropdownMenuItem
-          className="flex items-center gap-2 w-full px-3 py-2 text-sm cursor-pointer"
-          onClick={() => handleNavigate('/dashboard/premium')}
-        >
-          <Sparkles className="h-4 w-4 mr-2" />
-          Premium Dashboard
-        </DropdownMenuItem>
-        
         {isAdmin && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuLabel className="px-3 py-2 text-xs text-gray-500">Admin</DropdownMenuLabel>
-            <DropdownMenuItem
-              className="flex items-center gap-2 w-full px-3 py-2 text-sm cursor-pointer"
-              onClick={() => handleNavigate('/admin')}
-            >
-              <Shield className="h-4 w-4 mr-2" />
-              Admin Dashboard
-            </DropdownMenuItem>
-          </>
+          <DropdownMenuItem
+            className="flex items-center gap-2 w-full px-3 py-2 text-sm cursor-pointer"
+            onClick={() => handleNavigate('/admin')}
+          >
+            <Shield className="h-4 w-4 mr-2" />
+            Admin Dashboard
+          </DropdownMenuItem>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
