@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Search, Filter, MapPin, Building, Home as HomeIcon, Briefcase } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/components/ui/use-toast';
+import PropertySearchTab from '@/components/premium-dashboard/PropertySearchTab';
 
 // Sample property data
 const sampleProperties = [
