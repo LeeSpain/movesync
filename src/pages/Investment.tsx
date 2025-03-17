@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import InvestmentIntro from '@/components/investment/InvestmentIntro';
 import InvestmentCalculator from '@/components/investment/InvestmentCalculator';
-import CountryComparison from '@/components/investment/CountryComparison';
+import FutureVision from '@/components/investment/FutureVision';
 import InvestmentCTA from '@/components/investment/InvestmentCTA';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -13,7 +13,7 @@ const Investment = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-12 max-w-7xl">
+      <main className="container mx-auto px-4 pt-24 pb-12 max-w-7xl"> {/* Added pt-24 to move content below navbar */}
         <h1 className="text-4xl font-bold text-center mb-12">
           Global Investment Opportunity
         </h1>
@@ -33,7 +33,7 @@ const Investment = () => {
         </div>
         
         <div className="mb-16">
-          <CountryComparison />
+          <FutureVision />
         </div>
         
         <div className="mb-12">
