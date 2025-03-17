@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
@@ -71,7 +70,7 @@ const CountrySelection = () => {
       description: 'From coast to coast, discover endless opportunities in this diverse melting pot.',
       active: false,
       benefits: ['Career opportunities', 'Educational excellence', 'Cultural diversity'],
-      highlights: 'World's largest economy',
+      highlights: 'World\'s largest economy',
       image: 'bg-[url("/img/usa.jpg")]',
       color: 'from-blue-600/80 to-red-600/80'
     },
