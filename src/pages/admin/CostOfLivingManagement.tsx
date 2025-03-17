@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { CreditCard, LineChart, BarChart3, Globe, DollarSign, PlusCircle, Building, Pencil, Trash2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -541,7 +540,7 @@ const CostOfLivingManagement = () => {
                             {diff > 0 ? `+$${diff}` : `-$${Math.abs(diff)}`}
                           </TableCell>
                           <TableCell>
-                            <Badge variant={diff > 0 ? 'destructive' : 'success'} className={diff > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}>
+                            <Badge variant={diff > 0 ? 'destructive' : 'secondary'} className={diff > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}>
                               {diff > 0 ? `+${percentage}%` : `${percentage}%`}
                             </Badge>
                           </TableCell>
@@ -558,7 +557,7 @@ const CostOfLivingManagement = () => {
                           : `-$${Math.abs(compareData.reduce((acc, curr) => acc + curr.Sydney, 0) - compareData.reduce((acc, curr) => acc + curr.Melbourne, 0))}`}
                       </TableCell>
                       <TableCell>
-                        <Badge variant={compareData.reduce((acc, curr) => acc + curr.Sydney, 0) - compareData.reduce((acc, curr) => acc + curr.Melbourne, 0) > 0 ? 'destructive' : 'success'} 
+                        <Badge variant={compareData.reduce((acc, curr) => acc + curr.Sydney, 0) - compareData.reduce((acc, curr) => acc + curr.Melbourne, 0) > 0 ? 'destructive' : 'secondary'} 
                           className={compareData.reduce((acc, curr) => acc + curr.Sydney, 0) - compareData.reduce((acc, curr) => acc + curr.Melbourne, 0) > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}>
                           {((compareData.reduce((acc, curr) => acc + curr.Sydney, 0) - compareData.reduce((acc, curr) => acc + curr.Melbourne, 0)) / compareData.reduce((acc, curr) => acc + curr.Melbourne, 0) * 100).toFixed(1)}%
                         </Badge>
