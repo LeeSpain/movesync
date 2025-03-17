@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Globe, LayoutDashboard } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
@@ -96,15 +96,15 @@ export const Navbar = () => {
                   </Link>
                 </DropdownMenuItem>
                 {isAdmin && (
-                <React.Fragment>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link to="/admin" className="flex items-center gap-2">
-                      <LayoutDashboard className="h-4 w-4 mr-2" />
-                      Admin Dashboard
-                    </Link>
-                  </DropdownMenuItem>
-                </React.Fragment>
+                  <React.Fragment>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin" className="flex items-center gap-2">
+                        <LayoutDashboard className="h-4 w-4 mr-2" />
+                        Admin Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                  </React.Fragment>
                 )}
               </DropdownMenuContent>
             </DropdownMenu>
