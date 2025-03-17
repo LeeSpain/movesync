@@ -13,6 +13,14 @@ const AuthRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      
+      {/* Main dashboard route - will redirect to free or premium based on user plan */}
+      <Route path="/" element={
+        <RequireAuth>
+          <Dashboard />
+        </RequireAuth>
+      } />
+      
       <Route path="/dashboard" element={
         <RequireAuth>
           <Dashboard />
@@ -25,6 +33,7 @@ const AuthRoutes = () => {
           <FeaturePlaceholder feature="Account Settings" />
         </RequireAuth>
       } />
+      
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
