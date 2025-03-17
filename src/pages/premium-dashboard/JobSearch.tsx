@@ -39,7 +39,7 @@ const JobSearch = () => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Job Search</h1>
-            <p className="text-muted-foreground">Find your ideal job opportunity in Australia</p>
+            <p className="text-muted-foreground">Find your ideal job opportunity in Australia. Whether you're changing cities or arriving from overseas, our AI scans thousands of job listings daily.</p>
           </div>
           <div className="flex gap-2">
             <AdvancedFiltersSheet 

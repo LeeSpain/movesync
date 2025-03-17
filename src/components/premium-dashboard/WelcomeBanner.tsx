@@ -17,13 +17,13 @@ const WelcomeBanner = ({ userName, progressPercentage }: WelcomeBannerProps) => 
           <div>
             <h2 className="text-2xl font-bold mb-2">Welcome Back, {userName}!</h2>
             <p className="max-w-2xl mb-4">
-              Your premium relocation journey to Australia is progressing well. 
+              Your premium relocation journey in Australia is progressing well. 
               You've completed {progressPercentage}% of your relocation tasks.
             </p>
             <div className="flex flex-wrap gap-2">
-              <Badge className="bg-white/20 hover:bg-white/30">Visa: In Progress</Badge>
               <Badge className="bg-white/20 hover:bg-white/30">Housing: 3 Matches</Badge>
               <Badge className="bg-white/20 hover:bg-white/30">Moving Date: Aug 15</Badge>
+              <Badge className="bg-white/20 hover:bg-white/30">Local Services: 8 Found</Badge>
             </div>
           </div>
           <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
@@ -31,7 +31,7 @@ const WelcomeBanner = ({ userName, progressPercentage }: WelcomeBannerProps) => 
               <AlertCircle className="h-4 w-4" /> Priority Action Required
             </h3>
             <p className="text-sm mb-3">
-              Your visa application needs additional documents before July 5th.
+              Your property inspection is scheduled for tomorrow at 2 PM.
             </p>
             <Button size="sm" className="bg-white text-movesync-blue hover:bg-gray-100">
               Review Now

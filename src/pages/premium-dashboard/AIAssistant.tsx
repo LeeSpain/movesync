@@ -8,7 +8,8 @@ import { Message } from '@/components/ai-assistant/types';
 
 const CapabilitiesSection = ({ isIntersecting }: { isIntersecting: boolean }) => {
   const capabilities = [
-    "Answer questions about Australian visa requirements",
+    "Answer questions about relocating within Australia",
+    "Assist international migrants with visa requirements",
     "Provide information on cost of living in Australian cities",
     "Assist with property searches and understanding neighborhoods",
     "Offer guidance on job markets and employment opportunities",
@@ -40,7 +41,7 @@ const PremiumAIAssistant = () => {
     {
       id: '1',
       role: 'assistant',
-      content: "Welcome to your Premium AI Assistant. As your dedicated moving companion, I'm here to help with every aspect of your relocation to Australia. How can I assist you today?",
+      content: "Welcome to your Premium AI Assistant. Whether you're moving to Australia from overseas or relocating within the country, I'm here to help with every aspect of your move. How can I assist you today?",
       timestamp: new Date(),
     }
   ]);
@@ -51,7 +52,7 @@ const PremiumAIAssistant = () => {
     <DashboardLayout isPremium={true} userName={user?.name || "User"} progressPercentage={user?.progressPercentage || 65}>
       <div className="space-y-6">
         <h1 className="text-3xl font-bold tracking-tight">AI Assistant</h1>
-        <p className="text-muted-foreground">Your premium AI assistant helps with all aspects of your move to Australia.</p>
+        <p className="text-muted-foreground">Your premium AI assistant helps with all aspects of your move within or to Australia.</p>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="lg:col-span-2">

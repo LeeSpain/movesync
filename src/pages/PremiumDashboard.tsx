@@ -65,7 +65,7 @@ const PremiumDashboard = () => {
   const { user } = useAuth();
   const [progressPercentage, setProgressPercentage] = useState(user?.progressPercentage || 65);
   const [initialChatHistory] = useState([
-    { role: 'assistant', content: "Welcome to your premium AI assistant! I'm here to help with every aspect of your move to Australia. Our system continuously scans the web for the latest properties, jobs, and relocation information - updated daily just for you. What can I assist you with today?" }
+    { role: 'assistant', content: "Welcome to your premium AI assistant! I'm here to help with every aspect of your move within or to Australia. Our system continuously scans the web for the latest properties, jobs, and relocation information - updated daily just for you. What can I assist you with today?" }
   ]);
 
   const handleTaskComplete = (taskId: number) => {

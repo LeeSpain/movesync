@@ -26,7 +26,7 @@ const AIAssistantCard = ({ initialMessages }: AIAssistantCardProps) => {
     
     // Simulate AI response
     setTimeout(() => {
-      const aiResponse = `Here's detailed information about ${chatMessage} for your move to Australia. Is there anything specific you'd like to know more about?`;
+      const aiResponse = `Here's detailed information about ${chatMessage} for your move within or to Australia. Is there anything specific you'd like to know more about?`;
       setChatHistory([...chatHistory, { role: 'user', content: chatMessage }, { role: 'assistant', content: aiResponse }]);
     }, 1000);
     
@@ -66,7 +66,7 @@ const AIAssistantCard = ({ initialMessages }: AIAssistantCardProps) => {
         <form onSubmit={handleChatSubmit} className="flex gap-2">
           <input
             type="text"
-            placeholder="Ask me anything about your move to Australia..."
+            placeholder="Ask me anything about your move within or to Australia..."
             className="flex-1 px-4 py-2 border border-gray-200 rounded-lg"
             value={chatMessage}
             onChange={(e) => setChatMessage(e.target.value)}
