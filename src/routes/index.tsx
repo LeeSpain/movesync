@@ -10,6 +10,7 @@ import NotFound from "@/pages/NotFound";
 import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
 import Countries from "@/pages/Countries";
+import CountrySelection from "@/pages/CountrySelection";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -17,10 +18,13 @@ const AppRoutes = () => {
   return (
     <AuthProvider>
       <Routes>
-        {/* Public Routes */}
-        <Route path="/*" element={<PublicRoutes />} />
+        {/* Initial Landing Page - Country Selection */}
+        <Route path="/" element={<CountrySelection />} />
         
-        {/* Direct country route for easier access */}
+        {/* Public Routes - accessed after country selection */}
+        <Route path="/home/*" element={<PublicRoutes />} />
+        
+        {/* Country selection page - can be accessed directly */}
         <Route path="/countries" element={<Countries />} />
         
         {/* Login Route - directly accessible */}
