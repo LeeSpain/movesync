@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import {
@@ -13,7 +13,8 @@ import {
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +24,20 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Get selected country from localStorage
+  useEffect(() => {
+    const country = localStorage.getItem('moveSync_country');
+    setSelectedCountry(country);
+  }, []);
+
+  // Country flag mapping
+  const countryFlags: Record<string, string> = {
+    'australia': '🇦🇺',
+    'usa': '🇺🇸',
+    'uk': '🇬🇧',
+    'spain': '🇪🇸',
+  };
 
   return (
     <header 
@@ -53,6 +68,18 @@ export const Navbar = () => {
             <a href="#about" className="text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200">
               About
             </a>
+            
+            {/* Country Selector Button */}
+            <Link 
+              to="/countries" 
+              className="flex items-center gap-1 text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200"
+            >
+              <Globe size={18} />
+              <span>
+                {selectedCountry ? `${countryFlags[selectedCountry] || ''}` : 'Select Country'}
+              </span>
+            </Link>
+            
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200 flex items-center gap-1">
@@ -63,6 +90,12 @@ export const Navbar = () => {
                 <DropdownMenuItem asChild>
                   <Link to="/dashboard" className="flex items-center gap-2">
                     Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/countries" className="flex items-center gap-2">
+                    <Globe size={16} />
+                    Change Country
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -117,6 +150,14 @@ export const Navbar = () => {
           >
             About
           </a>
+          <Link 
+            to="/countries" 
+            className="text-xl text-movesync-black py-2 border-b border-gray-100 flex items-center gap-2"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <Globe size={20} />
+            {selectedCountry ? `Change Country ${countryFlags[selectedCountry] || ''}` : 'Select Country'}
+          </Link>
           <Link 
             to="/dashboard" 
             className="text-xl text-movesync-black py-2 border-b border-gray-100"

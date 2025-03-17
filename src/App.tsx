@@ -17,6 +17,7 @@ import VisaServices from "./pages/premium-dashboard/VisaServices";
 import CostOfLiving from "./pages/premium-dashboard/CostOfLiving";
 import JobSearch from "./pages/premium-dashboard/JobSearch";
 import ServicesFinder from "./pages/premium-dashboard/ServicesFinder";
+import Countries from "./pages/Countries";
 
 // Create a placeholder component for feature pages that aren't fully implemented yet
 const FeaturePlaceholder = ({ feature, isPremium = false }: { feature: string; isPremium?: boolean }) => (
@@ -51,6 +52,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/countries" element={<Countries />} />
             
             {/* Protected routes */}
             <Route path="/dashboard" element={
