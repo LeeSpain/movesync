@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Globe, LayoutDashboard } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -41,7 +40,7 @@ export const Navbar = () => {
     'uk': '🇬🇧',
     'spain': '🇪🇸',
   };
-
+  
   return (
     <header 
       className={cn(
@@ -96,12 +95,15 @@ export const Navbar = () => {
                   </Link>
                 </DropdownMenuItem>
                 {isAdmin && (
-                  <DropdownMenuItem asChild>
-                    <Link to="/admin" className="flex items-center gap-2">
-                      <LayoutDashboard className="h-4 w-4 mr-2" />
-                      Admin Dashboard
-                    </Link>
-                  </DropdownMenuItem>
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin" className="flex items-center gap-2">
+                        <LayoutDashboard className="h-4 w-4 mr-2" />
+                        Admin Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                  </>
                 )}
               </DropdownMenuContent>
             </DropdownMenu>
