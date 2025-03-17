@@ -54,20 +54,34 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Simulate checking for authenticated user on load
   useEffect(() => {
     const checkStoredUser = () => {
-      const storedUser = localStorage.getItem('moveSync_user');
-      if (storedUser) {
-        try {
-          const parsedUser = JSON.parse(storedUser);
-          console.log("Loading user from localStorage:", parsedUser);
-          setUser(parsedUser);
-        } catch (e) {
-          console.error("Error parsing user from localStorage:", e);
-          localStorage.removeItem('moveSync_user');
+      try {
+        const storedUser = localStorage.getItem('moveSync_user');
+        console.log("Raw stored user data:", storedUser);
+        
+        if (storedUser) {
+          try {
+            const parsedUser = JSON.parse(storedUser);
+            console.log("Parsed user from localStorage:", parsedUser);
+            
+            // Ensure isAdmin is properly set
+            if (typeof parsedUser.isAdmin !== 'boolean') {
+              console.warn("isAdmin property is not a boolean, setting to false");
+              parsedUser.isAdmin = false;
+            }
+            
+            setUser(parsedUser);
+          } catch (e) {
+            console.error("Error parsing user from localStorage:", e);
+            localStorage.removeItem('moveSync_user');
+          }
+        } else {
+          console.log("No user found in localStorage");
         }
-      } else {
-        console.log("No user found in localStorage");
+      } catch (e) {
+        console.error("Error accessing localStorage:", e);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     
     checkStoredUser();
@@ -86,7 +100,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       console.log("User logged in:", foundUser);
       console.log("User isAdmin value:", foundUser.isAdmin);
       setUser(foundUser);
-      localStorage.setItem('moveSync_user', JSON.stringify(foundUser));
+      try {
+        localStorage.setItem('moveSync_user', JSON.stringify(foundUser));
+        console.log("User saved to localStorage:", foundUser);
+      } catch (e) {
+        console.error("Error saving user to localStorage:", e);
+      }
     } else {
       throw new Error('Invalid credentials');
     }
@@ -110,29 +129,31 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  // Explicitly calculate isAdmin based on user?.isAdmin
-  const isAdminUser = user?.isAdmin === true;
+  // Calculate isAdmin based on user?.isAdmin
+  const isAdminValue = Boolean(user?.isAdmin);
   
   // Add more detailed logging
   useEffect(() => {
-    console.log("Auth context updated:", { 
-      user, 
-      isAdmin: isAdminUser, 
+    console.log("Auth context state:", { 
+      user,
+      isAdmin: isAdminValue,
       userIsAdmin: user?.isAdmin,
       isAuthenticated: !!user 
     });
-  }, [user, isAdminUser]);
+  }, [user, isAdminValue]);
+
+  const contextValue = {
+    isAuthenticated: !!user,
+    user,
+    loading,
+    login,
+    logout,
+    upgradeToPremium,
+    isAdmin: isAdminValue
+  };
 
   return (
-    <AuthContext.Provider value={{ 
-      isAuthenticated: !!user, 
-      user, 
-      loading, 
-      login, 
-      logout, 
-      upgradeToPremium,
-      isAdmin: isAdminUser
-    }}>
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );

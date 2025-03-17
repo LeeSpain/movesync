@@ -14,7 +14,6 @@ const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
   
   // Use effect to log admin check on component mount and when auth state changes
   useEffect(() => {
-    console.log("RequireAdmin component mounted/updated");
     console.log("RequireAdmin check:", { 
       user, 
       isAdmin, 
@@ -22,16 +21,17 @@ const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
       userIsAdmin: user?.isAdmin
     });
     
-    const storedUser = localStorage.getItem('moveSync_user');
-    if (storedUser) {
-      try {
+    try {
+      const storedUser = localStorage.getItem('moveSync_user');
+      if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         console.log("User from localStorage in RequireAdmin:", parsedUser);
-      } catch (e) {
-        console.error("Error parsing user from localStorage:", e);
+        console.log("Is admin from localStorage:", parsedUser.isAdmin);
+      } else {
+        console.log("No user found in localStorage in RequireAdmin");
       }
-    } else {
-      console.log("No user found in localStorage in RequireAdmin");
+    } catch (e) {
+      console.error("Error checking user in localStorage:", e);
     }
   }, [user, isAdmin]);
   

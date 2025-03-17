@@ -39,15 +39,12 @@ export const Navbar = () => {
   
   // Extra debug for auth status
   useEffect(() => {
-    console.log("Navbar auth status updated:", { isAdmin, user, userIsAdmin: user?.isAdmin });
-    
-    // Check localStorage directly
-    const storedUser = localStorage.getItem('moveSync_user');
-    if (storedUser) {
-      console.log("User from localStorage in Navbar:", JSON.parse(storedUser));
-    } else {
-      console.log("No user found in localStorage in Navbar");
-    }
+    console.log("Navbar auth status:", { 
+      isAdmin, 
+      userObject: user, 
+      userIsAdmin: user?.isAdmin,
+      userId: user?.id
+    });
   }, [isAdmin, user]);
   
   return (

@@ -2,11 +2,31 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
+import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
 
 // Authentication guard component
 const RequireAuth = ({ children }: { children: React.ReactNode }) => {
-  const isAuthenticated = localStorage.getItem('moveSync_user') !== null;
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+  const { isAuthenticated, user } = useAuth();
+  
+  useEffect(() => {
+    console.log("RequireAuth check:", { isAuthenticated, user });
+    
+    try {
+      const storedUser = localStorage.getItem('moveSync_user');
+      console.log("Raw stored user in RequireAuth:", storedUser);
+    } catch (e) {
+      console.error("Error accessing localStorage in RequireAuth:", e);
+    }
+  }, [isAuthenticated, user]);
+  
+  if (!isAuthenticated) {
+    console.log("Not authenticated, redirecting to login");
+    return <Navigate to="/login" replace />;
+  }
+  
+  console.log("Authentication verified, rendering protected content");
+  return <>{children}</>;
 };
 
 const AuthRoutes = () => {
