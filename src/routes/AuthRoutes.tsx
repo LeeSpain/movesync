@@ -1,6 +1,5 @@
 
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
@@ -25,16 +24,8 @@ const RequireAuth = ({ children }: { children: React.ReactNode }) => {
 const AuthRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      
       {/* Main dashboard route - will redirect to free or premium based on user plan */}
       <Route path="/" element={
-        <RequireAuth>
-          <Dashboard />
-        </RequireAuth>
-      } />
-      
-      <Route path="/dashboard" element={
         <RequireAuth>
           <Dashboard />
         </RequireAuth>

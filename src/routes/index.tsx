@@ -1,5 +1,5 @@
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import PublicRoutes from "./PublicRoutes";
 import AuthRoutes from "./AuthRoutes";
@@ -8,6 +8,7 @@ import FreeDashboardRoutes from "./FreeDashboardRoutes";
 import PremiumDashboardRoutes from "./PremiumDashboardRoutes";
 import NotFound from "@/pages/NotFound";
 import Dashboard from "@/pages/Dashboard";
+import Login from "@/pages/Login";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -16,7 +17,10 @@ const AppRoutes = () => {
     <AuthProvider>
       <Routes>
         {/* Public Routes */}
-        <Route path="/*" element={<PublicRoutes />} />
+        <Route path="/" element={<PublicRoutes />} />
+        
+        {/* Login Route - directly accessible */}
+        <Route path="/login" element={<Login />} />
         
         {/* Authentication Routes */}
         <Route path="/auth/*" element={<AuthRoutes />} />

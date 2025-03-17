@@ -9,29 +9,40 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login, isAdmin, user } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+  const { login, isAdmin, user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Check if already logged in
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("User already authenticated, redirecting to dashboard");
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
+
   // Log auth state when component mounts
   useEffect(() => {
-    console.log("Login component mounted with auth state:", { user, isAdmin });
+    console.log("Login component mounted with auth state:", { user, isAdmin, isAuthenticated });
     
     // Check if a user is already in localStorage
     const storedUser = localStorage.getItem('moveSync_user');
     if (storedUser) {
       console.log("Found user in localStorage:", JSON.parse(storedUser));
     }
-  }, [user, isAdmin]);
+  }, [user, isAdmin, isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
     try {
       console.log("Attempting login with email:", email);
@@ -55,6 +66,7 @@ const Login = () => {
       });
     } catch (error) {
       console.error("Login error:", error);
+      setError("Login failed. Please check your credentials and try again.");
       toast({
         variant: "destructive",
         title: "Login failed",
@@ -88,6 +100,16 @@ const Login = () => {
               Enter your email below to access your relocation dashboard
             </CardDescription>
           </CardHeader>
+          
+          {error && (
+            <div className="px-6">
+              <Alert variant="destructive">
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            </div>
+          )}
+          
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
               <div className="space-y-2">
