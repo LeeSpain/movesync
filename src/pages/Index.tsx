@@ -6,8 +6,16 @@ import Features from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import AIAssistant from '@/components/AIAssistant';
 import Footer from '@/components/Footer';
+import { useInView } from 'react-intersection-observer';
+import Testimonial from '@/components/features/Testimonial';
 
 const Index = () => {
+  // For the testimonial animation
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+  
   // Smooth scroll for anchor links
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
@@ -55,6 +63,9 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
+        <div ref={ref}>
+          <Testimonial isIntersecting={inView} />
+        </div>
         <AIAssistant />
         <Pricing />
       </main>
