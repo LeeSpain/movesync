@@ -6,14 +6,33 @@ import CountryManagement from "@/pages/admin/CountryManagement";
 import AdminSettings from "@/pages/admin/AdminSettings";
 import { FeaturePlaceholder } from "./AuthRoutes";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
 
 // Admin guard component
 const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
   const { user, isAdmin } = useAuth();
-  console.log("RequireAdmin check:", { user, isAdmin, isAdminInUser: user?.isAdmin });
+  
+  // Use effect to log admin check on component mount and when auth state changes
+  useEffect(() => {
+    console.log("RequireAdmin component mounted/updated");
+    console.log("RequireAdmin check:", { 
+      user, 
+      isAdmin, 
+      userExists: !!user,
+      userIsAdmin: user?.isAdmin
+    });
+    
+    const storedUser = localStorage.getItem('moveSync_user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      console.log("User from localStorage in RequireAdmin:", parsedUser);
+    } else {
+      console.log("No user found in localStorage in RequireAdmin");
+    }
+  }, [user, isAdmin]);
   
   if (!isAdmin) {
-    console.log("Access denied: Not an admin user");
+    console.log("Access denied: Not an admin user, redirecting to dashboard");
     return <Navigate to="/dashboard" replace />;
   }
   
@@ -22,6 +41,10 @@ const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
 };
 
 const AdminRoutes = () => {
+  const { isAdmin, user } = useAuth();
+  
+  console.log("AdminRoutes rendered with auth state:", { isAdmin, user, userIsAdmin: user?.isAdmin });
+  
   return (
     <Routes>
       <Route path="/" element={

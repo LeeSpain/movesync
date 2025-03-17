@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -14,15 +14,27 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, isAdmin, user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Log auth state when component mounts
+  useEffect(() => {
+    console.log("Login component mounted with auth state:", { user, isAdmin });
+    
+    // Check if a user is already in localStorage
+    const storedUser = localStorage.getItem('moveSync_user');
+    if (storedUser) {
+      console.log("Found user in localStorage:", JSON.parse(storedUser));
+    }
+  }, [user, isAdmin]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
+      console.log("Attempting login with email:", email);
       await login(email, password);
       
       // Get the user from localStorage after login to verify the data
@@ -42,6 +54,7 @@ const Login = () => {
         description: "Welcome back to MoveSync!",
       });
     } catch (error) {
+      console.error("Login error:", error);
       toast({
         variant: "destructive",
         title: "Login failed",

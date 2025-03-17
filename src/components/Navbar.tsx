@@ -37,7 +37,7 @@ export const Navbar = () => {
     'spain': '🇪🇸',
   };
   
-  console.log("Auth check in Navbar:", { isAdmin, user });
+  console.log("Auth check in Navbar:", { isAdmin, user, userIsAdmin: user?.isAdmin });
   
   return (
     <header 
@@ -57,7 +57,7 @@ export const Navbar = () => {
           <NavbarDesktopMenu 
             selectedCountry={selectedCountry}
             countryFlags={countryFlags}
-            isAdmin={isAdmin || false}
+            isAdmin={isAdmin}
           />
 
           {/* Mobile Menu Button */}
@@ -74,7 +74,7 @@ export const Navbar = () => {
         setIsMenuOpen={setIsMenuOpen}
         selectedCountry={selectedCountry}
         countryFlags={countryFlags}
-        isAdmin={isAdmin || false}
+        isAdmin={isAdmin}
       />
     </header>
   );

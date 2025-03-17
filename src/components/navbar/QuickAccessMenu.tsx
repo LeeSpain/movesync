@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, LayoutDashboard, Shield, Sparkles } from 'lucide-react';
 import {
   DropdownMenu,
@@ -21,10 +21,10 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
   const isPremium = user?.plan === 'premium';
   const navigate = useNavigate();
   
-  console.log("QuickAccessMenu props:", { isAdmin, user });
+  console.log("QuickAccessMenu rendering with props:", { isAdmin, user });
 
   const handleNavigation = (path: string) => {
-    console.log("Navigating to:", path);
+    console.log("QuickAccessMenu: Navigating to:", path);
     navigate(path);
   };
 

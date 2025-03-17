@@ -53,11 +53,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Simulate checking for authenticated user on load
   useEffect(() => {
-    const storedUser = localStorage.getItem('moveSync_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
+    const checkStoredUser = () => {
+      const storedUser = localStorage.getItem('moveSync_user');
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        console.log("Loading user from localStorage:", parsedUser);
+        setUser(parsedUser);
+      }
+      setLoading(false);
+    };
+    
+    checkStoredUser();
   }, []);
 
   // Login function
@@ -71,6 +77,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     if (foundUser) {
       console.log("User logged in:", foundUser);
+      console.log("User isAdmin value:", foundUser.isAdmin);
       setUser(foundUser);
       localStorage.setItem('moveSync_user', JSON.stringify(foundUser));
     } else {
@@ -82,6 +89,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Logout function
   const logout = () => {
+    console.log("Logging out user");
     setUser(null);
     localStorage.removeItem('moveSync_user');
   };
@@ -96,7 +104,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const isAdminUser = user?.isAdmin === true;
-  console.log("Auth context state:", { user, isAdmin: isAdminUser });
+  console.log("Auth context state:", { user, isAdmin: isAdminUser, userIsAdmin: user?.isAdmin });
 
   return (
     <AuthContext.Provider value={{ 
