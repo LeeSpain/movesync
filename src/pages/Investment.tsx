@@ -6,7 +6,6 @@ import InvestmentIntro from '@/components/investment/InvestmentIntro';
 import InvestmentCalculator from '@/components/investment/InvestmentCalculator';
 import FutureVision from '@/components/investment/FutureVision';
 import InvestmentCTA from '@/components/investment/InvestmentCTA';
-import CrowdfundingTracker from '@/components/investment/CrowdfundingTracker';
 import { Card, CardContent } from '@/components/ui/card';
 
 const Investment = () => {
@@ -31,11 +30,6 @@ const Investment = () => {
               <InvestmentCalculator />
             </CardContent>
           </Card>
-        </div>
-        
-        {/* Add the CrowdfundingTracker before FutureVision */}
-        <div className="mb-16">
-          <CrowdfundingTracker />
         </div>
         
         <div className="mb-16">
