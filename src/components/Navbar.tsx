@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Globe, LayoutDashboard } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, LayoutDashboard, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import {
@@ -94,19 +93,17 @@ export const Navbar = () => {
               <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg rounded-md border border-gray-200 p-1 z-50">
                 <DropdownMenuItem asChild>
                   <Link to="/dashboard" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
+                    <LayoutDashboard className="h-4 w-4 mr-2" />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
                 {isAdmin && (
-                  <>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
-                      <Link to="/admin" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
-                        <LayoutDashboard className="h-4 w-4 mr-2" />
-                        Admin Dashboard
-                      </Link>
-                    </DropdownMenuItem>
-                  </>
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
+                      <Shield className="h-4 w-4 mr-2" />
+                      Admin Dashboard
+                    </Link>
+                  </DropdownMenuItem>
                 )}
               </DropdownMenuContent>
             </DropdownMenu>
