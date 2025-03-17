@@ -49,7 +49,7 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
           onClick={() => handleNavigate('/dashboard/free')}
         >
           <LayoutDashboard className="h-4 w-4 mr-2" />
-          Free Dashboard
+          Members Dashboard
         </DropdownMenuItem>
         
         <DropdownMenuItem
