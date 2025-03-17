@@ -1,37 +1,34 @@
 
-import { useCountries } from '@/hooks/useCountries';
+import React from 'react';
 import HeroSection from '@/components/country-selection/HeroSection';
 import CountryList from '@/components/country-selection/CountryList';
+import HowItWorks from '@/components/country-selection/HowItWorks';
 import UpdateSection from '@/components/country-selection/UpdateSection';
+import InvestorSection from '@/components/InvestorSection';
+import Footer from '@/components/Footer';
+import useCountries from '@/hooks/useCountries';
+import useScrollToTop from '@/hooks/useScrollToTop';
 
 const CountrySelection = () => {
   const { countries } = useCountries();
+  useScrollToTop();
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
       <HeroSection />
       
-      {/* Countries Section - Enhanced with immersive design */}
-      <div className="py-6 relative">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(109.6deg,rgba(223,234,247,0.2)_11.2%,rgba(244,248,252,0.2)_91.1%)]"></div>
-        
-        <div className="container mx-auto relative">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-3">Select Your Destination</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose a country to begin your personalized relocation journey. 
-              Each destination offers unique opportunities and lifestyle benefits.
-            </p>
-          </div>
-          
+      <main className="py-12">
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-center mb-10">Select Your Destination</h2>
           <CountryList countries={countries} />
-          
-          {/* Info Section */}
-          <UpdateSection />
         </div>
-      </div>
+        
+        <HowItWorks />
+        <UpdateSection />
+        <InvestorSection />
+      </main>
+      
+      <Footer />
     </div>
   );
 };
