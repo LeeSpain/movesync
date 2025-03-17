@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, LayoutDashboard } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import {
@@ -8,12 +8,15 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from '@/contexts/AuthContext';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  const { isAdmin } = useAuth();
   
   // Handle scroll effect
   useEffect(() => {
@@ -86,12 +89,23 @@ export const Navbar = () => {
                   Quick Access <ChevronDown size={16} />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="bg-white">
                 <DropdownMenuItem asChild>
                   <Link to="/dashboard" className="flex items-center gap-2">
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
+                {isAdmin && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin" className="flex items-center gap-2">
+                        <LayoutDashboard className="h-4 w-4 mr-2" />
+                        Admin Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                  </>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
             <Link 
@@ -159,6 +173,16 @@ export const Navbar = () => {
           >
             Dashboard
           </Link>
+          {isAdmin && (
+            <Link 
+              to="/admin" 
+              className="text-xl text-movesync-black py-2 border-b border-gray-100 flex items-center gap-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <LayoutDashboard size={20} />
+              Admin Dashboard
+            </Link>
+          )}
           <Link 
             to="/dashboard" 
             className="btn-primary text-center mt-4"
