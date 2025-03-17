@@ -4,13 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import { X, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const UpgradeBanner = () => {
+interface UpgradeBannerProps {
+  onUpgrade?: () => void; // Make this prop optional
+}
+
+const UpgradeBanner = ({ onUpgrade }: UpgradeBannerProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
   
   const handleUpgrade = () => {
-    // Navigate directly to checkout since the user has decided to upgrade
-    navigate('/checkout');
+    // Call the onUpgrade callback if provided
+    if (onUpgrade) {
+      onUpgrade();
+    } else {
+      // Navigate directly to checkout since the user has decided to upgrade
+      navigate('/checkout');
+    }
   };
   
   if (!isVisible) return null;
