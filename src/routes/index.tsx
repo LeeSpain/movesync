@@ -9,6 +9,7 @@ import PremiumDashboardRoutes from "./PremiumDashboardRoutes";
 import NotFound from "@/pages/NotFound";
 import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
+import Countries from "@/pages/Countries";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -17,7 +18,10 @@ const AppRoutes = () => {
     <AuthProvider>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<PublicRoutes />} />
+        <Route path="/*" element={<PublicRoutes />} />
+        
+        {/* Direct country route for easier access */}
+        <Route path="/countries" element={<Countries />} />
         
         {/* Login Route - directly accessible */}
         <Route path="/login" element={<Login />} />
