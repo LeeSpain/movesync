@@ -156,7 +156,7 @@ const GrowthMetricsManagement = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{(stats.lifetimeValue / stats.customerAcquisitionCost).toFixed(1)}x</div>
-                  <p className="text-xs text-muted-foreground">Target > 3.0</p>
+                  <p className="text-xs text-muted-foreground">Target {'>'} 3.0</p>
                 </CardContent>
               </Card>
               <Card>
