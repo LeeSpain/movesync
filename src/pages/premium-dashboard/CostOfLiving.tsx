@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
@@ -96,7 +97,7 @@ const CostOfLiving = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [selectedCity, setSelectedCity] = useState('sydney');
-  const [comparisonCity, setComparisonCity] = useState('');
+  const [comparisonCity, setComparisonCity] = useState('melbourne');
   const [housingType, setHousingType] = useState('1bed-city');
   const [incomeValue, setIncomeValue] = useState(7000); // Monthly income in AUD
   const [activeTab, setActiveTab] = useState('calculator');
@@ -317,7 +318,8 @@ const CostOfLiving = () => {
                         <SelectValue placeholder="Select a city to compare" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">None</SelectItem>
+                        {/* Fixed: Using "none" instead of empty string */}
+                        <SelectItem value="none">None</SelectItem>
                         {Object.keys(cityData).filter(city => city !== selectedCity).map(city => (
                           <SelectItem key={city} value={city}>
                             {city.charAt(0).toUpperCase() + city.slice(1)}
@@ -327,7 +329,7 @@ const CostOfLiving = () => {
                     </Select>
                   </div>
                   
-                  {comparisonCity && (
+                  {comparisonCity && comparisonCity !== "none" && (
                     <div className="mt-6">
                       <h4 className="text-sm font-medium mb-2">Cost Comparison</h4>
                       <ResponsiveContainer width="100%" height={300}>
@@ -370,7 +372,8 @@ const CostOfLiving = () => {
                       <SelectValue placeholder="Select a city to compare" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">None</SelectItem>
+                      {/* Fixed: Using "none" instead of empty string */}
+                      <SelectItem value="none">None</SelectItem>
                       {Object.keys(cityData).filter(city => city !== selectedCity).map(city => (
                         <SelectItem key={city} value={city}>
                           {city.charAt(0).toUpperCase() + city.slice(1)}
@@ -380,7 +383,7 @@ const CostOfLiving = () => {
                   </Select>
                 </div>
                 
-                {comparisonCity && (
+                {comparisonCity && comparisonCity !== "none" && (
                   <div className="mt-6">
                     <h4 className="text-sm font-medium mb-2">Cost Comparison</h4>
                     <ResponsiveContainer width="100%" height={300}>
