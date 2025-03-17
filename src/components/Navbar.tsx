@@ -92,12 +92,6 @@ export const Navbar = () => {
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/countries" className="flex items-center gap-2">
-                    <Globe size={16} />
-                    Countries
-                  </Link>
-                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <Link 
