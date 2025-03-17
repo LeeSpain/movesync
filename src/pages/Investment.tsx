@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,12 +7,16 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { Slider } from '@/components/ui/slider';
 
 const Investment = () => {
-  const [investmentAmount, setInvestmentAmount] = useState(10000);
+  const [investmentAmount, setInvestmentAmount] = useState(100000);
   const [years, setYears] = useState(3);
   const [viewMode, setViewMode] = useState('global'); // 'global' or 'country'
   const [selectedCountry, setSelectedCountry] = useState('Australia');
-  const companyValuation = 3000000;
-  const percentageForSale = 20;
+  
+  // Updated financial parameters
+  const premoneyValuation = 12000000; // $12M pre-money valuation
+  const targetRaise = 2000000; // $2M raise
+  const postmoneyValuation = premoneyValuation + targetRaise; // $14M post-money valuation
+  const totalEquityOffered = (targetRaise / postmoneyValuation) * 100; // 14.29% equity offered
   
   // Countries and their growth rates
   const countryGrowthRates = {
@@ -30,9 +35,10 @@ const Investment = () => {
   
   const globalGrowthRate = calculateGlobalGrowthRate();
   
-  // Calculate equity percentage based on investment amount
-  const equityPercentage = (investmentAmount / companyValuation) * 100;
-  const equityValue = (equityPercentage / 100) * companyValuation;
+  // Calculate equity percentage based on investment amount 
+  // (pro-rata share of the total equity being offered)
+  const equityPercentage = (investmentAmount / targetRaise) * totalEquityOffered;
+  const equityValue = (equityPercentage / 100) * postmoneyValuation;
   
   // Calculate ROI for the selected country or global
   const calculateROI = (initialInvestment: number, years: number, growthRate: number): number[] => {
@@ -136,7 +142,7 @@ const Investment = () => {
               Your investment gives you equity in our entire global business across all countries, not just in a single market.
             </p>
             <p className="mb-4">
-              Based on a company valuation of ${companyValuation.toLocaleString()}, we're offering {percentageForSale}% equity to strategic investors who believe in our vision.
+              Based on a company valuation of ${premoneyValuation.toLocaleString()} pre-money, we're raising ${targetRaise.toLocaleString()} for a post-money valuation of ${postmoneyValuation.toLocaleString()}, with investors receiving approximately {totalEquityOffered.toFixed(2)}% equity.
             </p>
             <p className="mb-6">
               Use our calculator to see how your investment could grow over time as we expand our connections across different countries.
@@ -252,16 +258,16 @@ const Investment = () => {
               </label>
               <Slider
                 defaultValue={[investmentAmount]}
-                min={5000}
-                max={600000}
-                step={5000}
+                min={10000}
+                max={2000000}
+                step={10000}
                 onValueChange={handleInvestmentChange}
                 className="w-full"
               />
               <div className="flex justify-between mt-2">
-                <span className="text-sm">$5,000</span>
+                <span className="text-sm">$10,000</span>
                 <span className="font-semibold">${investmentAmount.toLocaleString()}</span>
-                <span className="text-sm">$600,000</span>
+                <span className="text-sm">$2,000,000</span>
               </div>
             </div>
             
@@ -453,3 +459,4 @@ const Investment = () => {
 };
 
 export default Investment;
+
