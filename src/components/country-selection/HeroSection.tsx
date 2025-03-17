@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <div className="container mx-auto px-4 pt-16 pb-12">
+    <div className="container mx-auto px-4 pt-16 pb-6">
       <motion.div 
-        className="max-w-3xl mx-auto text-center mb-12"
+        className="max-w-3xl mx-auto text-center mb-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

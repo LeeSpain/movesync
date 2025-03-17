@@ -13,12 +13,12 @@ const CountrySelection = () => {
       <HeroSection />
       
       {/* Countries Section - Enhanced with immersive design */}
-      <div className="py-16 relative">
+      <div className="py-6 relative">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(109.6deg,rgba(223,234,247,0.2)_11.2%,rgba(244,248,252,0.2)_91.1%)]"></div>
         
         <div className="container mx-auto relative">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <h2 className="text-3xl font-bold mb-3">Select Your Destination</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Choose a country to begin your personalized relocation journey. 
