@@ -7,7 +7,6 @@ import Pricing from '@/components/Pricing';
 import AIAssistant from '@/components/AIAssistant';
 import Footer from '@/components/Footer';
 import { useInView } from 'react-intersection-observer';
-import Testimonial from '@/components/features/Testimonial';
 
 const Index = () => {
   // For the testimonial animation
@@ -64,9 +63,6 @@ const Index = () => {
         <Hero />
         <Features />
         <AIAssistant />
-        <div ref={ref}>
-          <Testimonial isIntersecting={inView} />
-        </div>
         <Pricing />
       </main>
       <Footer />
