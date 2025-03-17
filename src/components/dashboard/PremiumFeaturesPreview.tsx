@@ -1,4 +1,5 @@
 
+import { useNavigate } from 'react-router-dom';
 import { Bot, Calendar, Bell, Lock } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,20 @@ type PremiumFeaturesPreviewProps = {
 };
 
 const PremiumFeaturesPreview = ({ onUpgrade }: PremiumFeaturesPreviewProps) => {
+  const navigate = useNavigate();
+  
+  const handleUpgradeClick = () => {
+    // Call the onUpgrade callback (which typically shows a toast)
+    onUpgrade();
+    
+    // Navigate to the checkout page
+    navigate('/checkout');
+  };
+  
+  const handleFeatureClick = () => {
+    handleUpgradeClick();
+  };
+  
   return (
     <Card>
       <CardHeader>
@@ -24,7 +39,7 @@ const PremiumFeaturesPreview = ({ onUpgrade }: PremiumFeaturesPreviewProps) => {
             </div>
             <h3 className="font-medium mb-2">Unlimited AI Assistance</h3>
             <p className="text-sm text-movesync-gray-dark mb-4">24/7 AI support for all your relocation needs.</p>
-            <Button variant="outline" size="sm" className="mt-auto" onClick={onUpgrade}>
+            <Button variant="outline" size="sm" className="mt-auto" onClick={handleFeatureClick}>
               Unlock <Lock className="ml-2 h-3 w-3" />
             </Button>
           </div>
@@ -35,7 +50,7 @@ const PremiumFeaturesPreview = ({ onUpgrade }: PremiumFeaturesPreviewProps) => {
             </div>
             <h3 className="font-medium mb-2">Custom Relocation Timeline</h3>
             <p className="text-sm text-movesync-gray-dark mb-4">AI-generated personalized moving schedules.</p>
-            <Button variant="outline" size="sm" className="mt-auto" onClick={onUpgrade}>
+            <Button variant="outline" size="sm" className="mt-auto" onClick={handleFeatureClick}>
               Unlock <Lock className="ml-2 h-3 w-3" />
             </Button>
           </div>
@@ -46,14 +61,14 @@ const PremiumFeaturesPreview = ({ onUpgrade }: PremiumFeaturesPreviewProps) => {
             </div>
             <h3 className="font-medium mb-2">Smart Notifications</h3>
             <p className="text-sm text-movesync-gray-dark mb-4">Timely alerts for critical relocation steps.</p>
-            <Button variant="outline" size="sm" className="mt-auto" onClick={onUpgrade}>
+            <Button variant="outline" size="sm" className="mt-auto" onClick={handleFeatureClick}>
               Unlock <Lock className="ml-2 h-3 w-3" />
             </Button>
           </div>
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full" onClick={onUpgrade}>
+        <Button className="w-full" onClick={handleUpgradeClick}>
           Upgrade to Premium for Just $99/month
         </Button>
       </CardFooter>

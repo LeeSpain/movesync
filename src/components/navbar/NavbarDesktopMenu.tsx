@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import CountrySelector from './CountrySelector';
 import QuickAccessMenu from './QuickAccessMenu';
 
@@ -16,8 +17,24 @@ export const NavbarDesktopMenu = ({
   isAdmin 
 }: NavbarDesktopMenuProps) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   
   console.log("NavbarDesktopMenu rendering, isAdmin:", isAdmin);
+  
+  const handleGetStarted = () => {
+    // If user is logged in and not premium, send to checkout
+    if (user && user.plan !== 'premium') {
+      navigate('/checkout');
+    } 
+    // If user is logged in and premium, send to premium dashboard
+    else if (user && user.plan === 'premium') {
+      navigate('/dashboard/premium');
+    } 
+    // If not logged in, send to login page
+    else {
+      navigate('/login');
+    }
+  };
   
   return (
     <nav className="hidden md:flex items-center space-x-8">
@@ -38,12 +55,12 @@ export const NavbarDesktopMenu = ({
       
       <QuickAccessMenu isAdmin={isAdmin} />
       
-      <Link 
-        to="/dashboard" 
+      <button 
+        onClick={handleGetStarted}
         className="btn-primary"
       >
         Get Started
-      </Link>
+      </button>
     </nav>
   );
 };

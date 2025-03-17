@@ -1,5 +1,6 @@
 
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -8,6 +9,16 @@ type UpgradeBannerProps = {
 };
 
 const UpgradeBanner = ({ onUpgrade }: UpgradeBannerProps) => {
+  const navigate = useNavigate();
+  
+  const handleUpgradeClick = () => {
+    // Call the onUpgrade callback (which typically shows a toast)
+    onUpgrade();
+    
+    // Navigate to the checkout page
+    navigate('/checkout');
+  };
+  
   return (
     <Card className="bg-gradient-to-r from-movesync-blue-light to-movesync-blue text-white">
       <CardContent className="p-6">
@@ -20,7 +31,7 @@ const UpgradeBanner = ({ onUpgrade }: UpgradeBannerProps) => {
             </p>
           </div>
           <Button 
-            onClick={onUpgrade}
+            onClick={handleUpgradeClick}
             className="bg-white text-movesync-blue hover:bg-gray-100 whitespace-nowrap"
           >
             Upgrade to Premium <ArrowRight className="ml-2 h-4 w-4" />

@@ -56,15 +56,11 @@ const FreeDashboard = () => {
   const handleUpgrade = () => {
     // Show toast notification
     toast({
-      title: "Upgrade successfully initiated",
-      description: "Redirecting you to the premium dashboard...",
+      title: "Initiating upgrade",
+      description: "Taking you to checkout...",
     });
     
-    // Call the upgrade function
-    upgradeToPremium();
-    
-    // Redirect immediately to the premium dashboard
-    navigate('/dashboard/premium');
+    // We don't actually upgrade immediately, we'll do that after successful checkout
   };
 
   // Handle feature button clicks
@@ -81,7 +77,7 @@ const FreeDashboard = () => {
         title: "Premium Feature",
         description: "This feature is only available with the Premium plan.",
         action: (
-          <Button variant="default" size="sm" onClick={handleUpgrade}>Upgrade</Button>
+          <Button variant="default" size="sm" onClick={() => navigate('/checkout')}>Upgrade</Button>
         ),
       });
     }

@@ -3,6 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { Link, useNavigate } from 'react-router-dom';
 import { Globe, LayoutDashboard } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface NavbarMobileMenuProps {
   isMenuOpen: boolean;
@@ -20,6 +21,7 @@ export const NavbarMobileMenu = ({
   isAdmin
 }: NavbarMobileMenuProps) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   
   console.log("NavbarMobileMenu rendering, isAdmin:", isAdmin);
   
@@ -27,6 +29,23 @@ export const NavbarMobileMenu = ({
     console.log("NavbarMobileMenu: Navigating to:", path);
     setIsMenuOpen(false);
     navigate(path);
+  };
+  
+  const handleGetStarted = () => {
+    // If user is logged in and not premium, send to checkout
+    if (user && user.plan !== 'premium') {
+      navigate('/checkout');
+    } 
+    // If user is logged in and premium, send to premium dashboard
+    else if (user && user.plan === 'premium') {
+      navigate('/dashboard/premium');
+    } 
+    // If not logged in, send to login page
+    else {
+      navigate('/login');
+    }
+    
+    setIsMenuOpen(false);
   };
   
   return (
@@ -85,7 +104,7 @@ export const NavbarMobileMenu = ({
         )}
         <div
           className="btn-primary text-center mt-4 cursor-pointer"
-          onClick={() => handleNavigate('/dashboard')}
+          onClick={handleGetStarted}
         >
           Get Started
         </div>

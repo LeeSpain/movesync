@@ -1,6 +1,7 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { Check, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
 // Define pricing plans
@@ -50,7 +51,8 @@ const pricingPlans = [
 const Pricing = () => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { upgradeToPremium } = useAuth();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   
   // Handle intersection observer for entrance animation
   useEffect(() => {
@@ -73,7 +75,18 @@ const Pricing = () => {
   }, []);
 
   const handlePremiumClick = () => {
-    upgradeToPremium();
+    // Navigate to checkout page
+    navigate('/checkout');
+  };
+
+  const handleFreeClick = () => {
+    // If user is logged in, go to free dashboard
+    if (user) {
+      navigate('/dashboard/free');
+    } else {
+      // If not logged in, go to login page
+      navigate('/login');
+    }
   };
 
   return (
@@ -104,7 +117,7 @@ const Pricing = () => {
             isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {pricingPlans.map((plan, index) => (
+          {pricingPlans.map((plan) => (
             <div 
               key={plan.name}
               className={`rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl ${
@@ -174,22 +187,21 @@ const Pricing = () => {
                 
                 {/* CTA Button */}
                 {plan.popular ? (
-                  <Link 
-                    to="/dashboard/premium" 
+                  <button 
                     onClick={handlePremiumClick}
                     className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-medium transition-all duration-200 group bg-movesync-blue text-white hover:bg-movesync-blue-dark"
                   >
                     {plan.cta}
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </button>
                 ) : (
-                  <Link 
-                    to="/dashboard/free"
+                  <button 
+                    onClick={handleFreeClick}
                     className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-medium transition-all duration-200 group bg-white border border-gray-200 text-movesync-black hover:bg-gray-50"
                   >
                     {plan.cta}
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </button>
                 )}
               </div>
             </div>

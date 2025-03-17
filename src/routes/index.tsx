@@ -13,6 +13,10 @@ import Countries from "@/pages/Countries";
 import CountrySelection from "@/pages/CountrySelection";
 import Investment from "@/pages/Investment";
 import { InvestmentProvider } from "@/components/investment/InvestmentContext";
+import Checkout from "@/pages/Checkout";
+import CheckoutSuccess from "@/pages/CheckoutSuccess";
+import CheckoutCancel from "@/pages/CheckoutCancel";
+import StripeWrapper from "@/components/checkout/StripeWrapper";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -35,6 +39,15 @@ const AppRoutes = () => {
             <Investment />
           </InvestmentProvider>
         } />
+        
+        {/* Checkout Pages */}
+        <Route path="/checkout" element={
+          <StripeWrapper>
+            <Checkout />
+          </StripeWrapper>
+        } />
+        <Route path="/checkout/success" element={<CheckoutSuccess />} />
+        <Route path="/checkout/cancel" element={<CheckoutCancel />} />
         
         {/* Login Route - directly accessible */}
         <Route path="/login" element={<Login />} />
