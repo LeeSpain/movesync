@@ -87,7 +87,11 @@ const Investment = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="h-[300px]">
-                <ChartContainer>
+                <ChartContainer
+                  config={{
+                    value: { theme: { light: "#E67E22", dark: "#E67E22" }, label: "Value" }
+                  }}
+                >
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -157,3 +161,4 @@ const Investment = () => {
 };
 
 export default Investment;
+
