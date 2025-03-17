@@ -191,114 +191,126 @@ const CountrySelection = () => {
         </div>
       </div>
       
-      {/* Countries Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold mb-2">Select Your Destination</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Choose a country to begin your personalized relocation journey
-          </p>
-        </div>
+      {/* Countries Section - Enhanced with subtle improvements */}
+      <div className="py-16 relative">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(109.6deg,rgba(223,234,247,0.5)_11.2%,rgba(244,248,252,0.5)_91.1%)] opacity-70"></div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {countries.map((country, index) => (
-            <motion.div 
-              key={country.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="h-full"
-            >
-              <Card 
-                onClick={() => handleSelectCountry(country.id)}
-                className={`h-full cursor-pointer transition-all duration-300 hover:shadow-md ${
-                  country.active ? 'border-movesync-blue/30' : 'opacity-80 hover:opacity-100'
-                }`}
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-2">Select Your Destination</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Choose a country to begin your personalized relocation journey
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {countries.map((country, index) => (
+              <motion.div 
+                key={country.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="h-full"
               >
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">{country.flag}</span>
-                      <h3 className="text-xl font-medium">{country.name}</h3>
-                    </div>
-                    {country.active ? (
-                      <span className="inline-flex items-center px-2 py-0.5 bg-green-100 text-green-800 text-xs rounded-full">
-                        <Check className="w-3 h-3 mr-0.5" /> Available
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
-                        Coming Soon
-                      </span>
-                    )}
-                  </div>
-                </CardHeader>
-                <CardContent className="pb-3">
-                  <p className="text-muted-foreground text-sm mb-4">{country.description}</p>
-                  <div className="space-y-2">
-                    {country.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <div className="h-4 w-4 rounded-full bg-movesync-blue/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Check className="h-2.5 w-2.5 text-movesync-blue" />
-                        </div>
-                        <span className="text-sm">{highlight}</span>
+                <Card 
+                  onClick={() => handleSelectCountry(country.id)}
+                  className={`h-full cursor-pointer transition-all duration-300 hover:shadow-lg 
+                    ${country.active ? 'border-movesync-blue/30' : 'opacity-90 hover:opacity-100'}
+                    backdrop-filter backdrop-blur-sm bg-white/80 hover:bg-white/95
+                    shadow-[0_10px_25px_-15px_rgba(0,0,0,0.1)]
+                  `}
+                >
+                  <CardHeader className="pb-3 relative">
+                    <div 
+                      className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-movesync-blue/5 to-transparent opacity-60 rounded-t-lg"
+                      style={{ pointerEvents: 'none' }}
+                    ></div>
+                    <div className="flex items-center justify-between relative">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl filter drop-shadow-sm">{country.flag}</span>
+                        <h3 className="text-xl font-medium">{country.name}</h3>
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button 
-                    variant={country.active ? "default" : "outline"} 
-                    size="sm"
-                    className="w-full"
-                  >
-                    {country.active ? (
-                      <>
-                        Select Country
-                        <ArrowRight className="ml-1 h-3 w-3" />
-                      </>
-                    ) : (
-                      <>
-                        <MapPin className="mr-1 h-3 w-3" />
-                        Coming Soon
-                      </>
-                    )}
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
+                      {country.active ? (
+                        <span className="inline-flex items-center px-2.5 py-0.5 bg-green-100 text-green-800 text-xs rounded-full shadow-sm">
+                          <Check className="w-3 h-3 mr-0.5" /> Available
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2.5 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full shadow-sm">
+                          Coming Soon
+                        </span>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pb-3 relative">
+                    <p className="text-muted-foreground text-sm mb-4">{country.description}</p>
+                    <div className="space-y-2.5">
+                      {country.highlights.map((highlight, idx) => (
+                        <div key={idx} className="flex items-start gap-2.5">
+                          <div className="h-4 w-4 rounded-full bg-movesync-blue/10 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-inner">
+                            <Check className="h-2.5 w-2.5 text-movesync-blue" />
+                          </div>
+                          <span className="text-sm">{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button 
+                      variant={country.active ? "default" : "outline"} 
+                      size="sm"
+                      className={`w-full ${country.active ? 'shadow-md shadow-movesync-blue/10' : ''}`}
+                    >
+                      {country.active ? (
+                        <>
+                          Select Country
+                          <ArrowRight className="ml-1 h-3 w-3" />
+                        </>
+                      ) : (
+                        <>
+                          <MapPin className="mr-1 h-3 w-3" />
+                          Coming Soon
+                        </>
+                      )}
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Info Section */}
+          <motion.div 
+            className="max-w-2xl mx-auto mt-16 text-center bg-white/70 backdrop-blur-sm p-8 rounded-lg shadow-sm border border-gray-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <h3 className="text-xl font-medium mb-3">Expanding to More Locations</h3>
+            <p className="text-muted-foreground mb-6">
+              Our AI is learning about more destinations every day. Sign up to be notified when we add support for your desired location.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder="Your email address" 
+                className="px-3 py-2 rounded-md border border-input bg-background text-foreground flex-grow focus:outline-none focus:ring-2 focus:ring-ring text-sm shadow-inner"
+              />
+              <Button 
+                type="submit"
+                size="default"
+                className="shadow-md shadow-movesync-blue/10"
+              >
+                Get Updates
+              </Button>
+            </div>
+            
+            <div className="mt-8 pt-6 text-xs text-muted-foreground border-t border-border">
+              Powered by MoveSync AI — making relocation simpler through intelligent assistance.
+            </div>
+          </motion.div>
         </div>
-        
-        {/* Info Section */}
-        <motion.div 
-          className="max-w-2xl mx-auto mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          <h3 className="text-xl font-medium mb-3">Expanding to More Locations</h3>
-          <p className="text-muted-foreground mb-6">
-            Our AI is learning about more destinations every day. Sign up to be notified when we add support for your desired location.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              className="px-3 py-2 rounded-md border border-input bg-background text-foreground flex-grow focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-            />
-            <Button 
-              type="submit"
-              size="default"
-            >
-              Get Updates
-            </Button>
-          </div>
-          
-          <div className="mt-8 pt-6 text-xs text-muted-foreground border-t border-border">
-            Powered by MoveSync AI — making relocation simpler through intelligent assistance.
-          </div>
-        </motion.div>
       </div>
     </div>
   );
