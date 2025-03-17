@@ -1,7 +1,6 @@
 
 import { useCountries } from '@/hooks/useCountries';
 import HeroSection from '@/components/country-selection/HeroSection';
-import HowItWorks from '@/components/country-selection/HowItWorks';
 import CountryList from '@/components/country-selection/CountryList';
 import UpdateSection from '@/components/country-selection/UpdateSection';
 
@@ -32,9 +31,6 @@ const CountrySelection = () => {
           <UpdateSection />
         </div>
       </div>
-      
-      {/* How It Works - Moved to after Country Selection */}
-      <HowItWorks />
     </div>
   );
 };
