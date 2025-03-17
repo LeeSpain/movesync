@@ -17,6 +17,7 @@ import Checkout from "@/pages/Checkout";
 import CheckoutSuccess from "@/pages/CheckoutSuccess";
 import CheckoutCancel from "@/pages/CheckoutCancel";
 import StripeWrapper from "@/components/checkout/StripeWrapper";
+import ChoosePlan from "@/pages/ChoosePlan";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -39,6 +40,9 @@ const AppRoutes = () => {
             <Investment />
           </InvestmentProvider>
         } />
+        
+        {/* Plan selection page */}
+        <Route path="/choose-plan" element={<ChoosePlan />} />
         
         {/* Checkout Pages */}
         <Route path="/checkout" element={

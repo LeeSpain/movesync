@@ -22,18 +22,8 @@ export const NavbarDesktopMenu = ({
   console.log("NavbarDesktopMenu rendering, isAdmin:", isAdmin);
   
   const handleGetStarted = () => {
-    // If user is logged in and not premium, send to checkout
-    if (user && user.plan !== 'premium') {
-      navigate('/checkout');
-    } 
-    // If user is logged in and premium, send to premium dashboard
-    else if (user && user.plan === 'premium') {
-      navigate('/dashboard/premium');
-    } 
-    // If not logged in, send to login page
-    else {
-      navigate('/login');
-    }
+    // Direct users to the plan selection page
+    navigate('/choose-plan');
   };
   
   return (

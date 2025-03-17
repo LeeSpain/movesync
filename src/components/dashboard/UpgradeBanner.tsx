@@ -1,44 +1,61 @@
 
-import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { X, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 
-type UpgradeBannerProps = {
-  onUpgrade: () => void;
-};
-
-const UpgradeBanner = ({ onUpgrade }: UpgradeBannerProps) => {
+const UpgradeBanner = () => {
+  const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
   
-  const handleUpgradeClick = () => {
-    // Call the onUpgrade callback (which typically shows a toast)
-    onUpgrade();
-    
-    // Navigate to the checkout page
+  const handleUpgrade = () => {
+    // Navigate directly to checkout since the user has decided to upgrade
     navigate('/checkout');
   };
   
+  if (!isVisible) return null;
+  
   return (
-    <Card className="bg-gradient-to-r from-movesync-blue-light to-movesync-blue text-white">
-      <CardContent className="p-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div>
-            <h2 className="text-xl font-bold mb-2">Welcome to Your Free Dashboard!</h2>
-            <p className="max-w-2xl">
-              You're currently on the Free plan with limited access. Upgrade to Premium for unlimited AI assistance, 
-              property search, visa support, and more.
-            </p>
+    <div className="bg-gradient-to-r from-movesync-blue/10 to-purple-500/10 rounded-lg p-4 mb-6 border border-movesync-blue/20">
+      <div className="flex items-start justify-between">
+        <div className="space-y-2">
+          <h3 className="font-semibold text-lg">Upgrade to Premium</h3>
+          <p className="text-muted-foreground text-sm">
+            Unlock all features and get unlimited access to AI assistance for your relocation
+          </p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 mt-2">
+            <div className="flex items-center gap-2 text-sm">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Unlimited AI search & chat</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Advanced property search</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>AI job matching</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Visa & immigration assistance</span>
+            </div>
           </div>
-          <Button 
-            onClick={handleUpgradeClick}
-            className="bg-white text-movesync-blue hover:bg-gray-100 whitespace-nowrap"
-          >
-            Upgrade to Premium <ArrowRight className="ml-2 h-4 w-4" />
+          
+          <Button onClick={handleUpgrade} className="mt-2">
+            Upgrade Now
           </Button>
         </div>
-      </CardContent>
-    </Card>
+        
+        <button 
+          onClick={() => setIsVisible(false)}
+          className="text-gray-500 hover:text-gray-700"
+        >
+          <X className="h-5 w-5" />
+        </button>
+      </div>
+    </div>
   );
 };
 
