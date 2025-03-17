@@ -20,19 +20,6 @@ const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
       userExists: !!user,
       userIsAdmin: user?.isAdmin
     });
-    
-    try {
-      const storedUser = localStorage.getItem('moveSync_user');
-      if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        console.log("User from localStorage in RequireAdmin:", parsedUser);
-        console.log("Is admin from localStorage:", parsedUser.isAdmin);
-      } else {
-        console.log("No user found in localStorage in RequireAdmin");
-      }
-    } catch (e) {
-      console.error("Error checking user in localStorage:", e);
-    }
   }, [user, isAdmin]);
   
   if (!isAdmin) {

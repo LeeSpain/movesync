@@ -18,7 +18,11 @@ const Dashboard = () => {
     }
     
     setRedirecting(true);
-    console.log('Auth loaded, redirecting status:', { isAuthenticated, userPlan: user?.plan });
+    console.log('Dashboard: Auth loaded, redirecting status:', { 
+      isAuthenticated, 
+      userPlan: user?.plan,
+      isAdmin: user?.isAdmin
+    });
     
     // If not authenticated, go to login
     if (!isAuthenticated) {

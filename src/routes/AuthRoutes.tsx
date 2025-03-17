@@ -11,13 +11,6 @@ const RequireAuth = ({ children }: { children: React.ReactNode }) => {
   
   useEffect(() => {
     console.log("RequireAuth check:", { isAuthenticated, user });
-    
-    try {
-      const storedUser = localStorage.getItem('moveSync_user');
-      console.log("Raw stored user in RequireAuth:", storedUser);
-    } catch (e) {
-      console.error("Error accessing localStorage in RequireAuth:", e);
-    }
   }, [isAuthenticated, user]);
   
   if (!isAuthenticated) {

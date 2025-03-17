@@ -1,5 +1,6 @@
 
 import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
 import PublicRoutes from "./PublicRoutes";
 import AuthRoutes from "./AuthRoutes";
 import AdminRoutes from "./AdminRoutes";
@@ -12,28 +13,30 @@ const AppRoutes = () => {
   console.log("Rendering AppRoutes");
   
   return (
-    <Routes>
-      {/* Public Routes */}
-      <Route path="/*" element={<PublicRoutes />} />
-      
-      {/* Authentication Routes */}
-      <Route path="/auth/*" element={<AuthRoutes />} />
-      
-      {/* Main Dashboard Route for redirection */}
-      <Route path="/dashboard" element={<Dashboard />} />
-      
-      {/* Free Dashboard Routes */}
-      <Route path="/dashboard/free/*" element={<FreeDashboardRoutes />} />
-      
-      {/* Premium Dashboard Routes */}
-      <Route path="/dashboard/premium/*" element={<PremiumDashboardRoutes />} />
-      
-      {/* Admin Routes */}
-      <Route path="/admin/*" element={<AdminRoutes />} />
-      
-      {/* Catch-all route */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/*" element={<PublicRoutes />} />
+        
+        {/* Authentication Routes */}
+        <Route path="/auth/*" element={<AuthRoutes />} />
+        
+        {/* Main Dashboard Route for redirection */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        
+        {/* Free Dashboard Routes */}
+        <Route path="/dashboard/free/*" element={<FreeDashboardRoutes />} />
+        
+        {/* Premium Dashboard Routes */}
+        <Route path="/dashboard/premium/*" element={<PremiumDashboardRoutes />} />
+        
+        {/* Admin Routes */}
+        <Route path="/admin/*" element={<AdminRoutes />} />
+        
+        {/* Catch-all route */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AuthProvider>
   );
 };
 

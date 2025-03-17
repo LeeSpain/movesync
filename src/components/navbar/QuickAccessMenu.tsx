@@ -21,10 +21,16 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   
-  console.log("QuickAccessMenu rendering with props:", { isAdmin, user, userAdmin: user?.isAdmin });
+  console.log("QuickAccessMenu rendering with auth state:", { 
+    isAdmin, 
+    userIsAdmin: user?.isAdmin,
+    userPlan: user?.plan,
+    userObject: user 
+  });
 
   const handleNavigate = (path: string) => {
     console.log("QuickAccessMenu: Navigating to:", path);
+    // Prevent default behavior and use programmatic navigation
     navigate(path);
   };
 

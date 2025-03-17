@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CountrySelector from './CountrySelector';
 import QuickAccessMenu from './QuickAccessMenu';
 
@@ -15,6 +15,10 @@ export const NavbarDesktopMenu = ({
   countryFlags, 
   isAdmin 
 }: NavbarDesktopMenuProps) => {
+  const navigate = useNavigate();
+  
+  console.log("NavbarDesktopMenu rendering, isAdmin:", isAdmin);
+  
   return (
     <nav className="hidden md:flex items-center space-x-8">
       <a href="#features" className="text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200">

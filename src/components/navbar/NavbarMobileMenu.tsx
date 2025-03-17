@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Globe, LayoutDashboard } from 'lucide-react';
 
 interface NavbarMobileMenuProps {
@@ -19,6 +19,16 @@ export const NavbarMobileMenu = ({
   countryFlags,
   isAdmin
 }: NavbarMobileMenuProps) => {
+  const navigate = useNavigate();
+  
+  console.log("NavbarMobileMenu rendering, isAdmin:", isAdmin);
+  
+  const handleNavigate = (path: string) => {
+    console.log("NavbarMobileMenu: Navigating to:", path);
+    setIsMenuOpen(false);
+    navigate(path);
+  };
+  
   return (
     <div 
       className={cn(
@@ -58,30 +68,27 @@ export const NavbarMobileMenu = ({
           <Globe size={20} />
           {selectedCountry ? `Countries ${countryFlags[selectedCountry] || ''}` : 'Select Country'}
         </Link>
-        <Link 
-          to="/dashboard" 
-          className="text-xl text-movesync-black py-2 border-b border-gray-100"
-          onClick={() => setIsMenuOpen(false)}
+        <div
+          className="text-xl text-movesync-black py-2 border-b border-gray-100 cursor-pointer"
+          onClick={() => handleNavigate('/dashboard')}
         >
           Dashboard
-        </Link>
+        </div>
         {isAdmin && (
-          <Link 
-            to="/admin" 
-            className="text-xl text-movesync-black py-2 border-b border-gray-100 flex items-center gap-2"
-            onClick={() => setIsMenuOpen(false)}
+          <div
+            className="text-xl text-movesync-black py-2 border-b border-gray-100 flex items-center gap-2 cursor-pointer"
+            onClick={() => handleNavigate('/admin')}
           >
             <LayoutDashboard size={20} />
             Admin Dashboard
-          </Link>
+          </div>
         )}
-        <Link 
-          to="/dashboard" 
-          className="btn-primary text-center mt-4"
-          onClick={() => setIsMenuOpen(false)}
+        <div
+          className="btn-primary text-center mt-4 cursor-pointer"
+          onClick={() => handleNavigate('/dashboard')}
         >
           Get Started
-        </Link>
+        </div>
       </nav>
     </div>
   );

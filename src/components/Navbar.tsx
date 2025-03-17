@@ -43,7 +43,8 @@ export const Navbar = () => {
       isAdmin, 
       userObject: user, 
       userIsAdmin: user?.isAdmin,
-      userId: user?.id
+      userId: user?.id,
+      authenticated: !!user
     });
   }, [isAdmin, user]);
   

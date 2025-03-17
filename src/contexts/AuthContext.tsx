@@ -89,28 +89,33 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Login function
   const login = async (email: string, password: string) => {
-    // Simulate API call delay
-    setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Find user by email (demo only - in production this would be a real auth system)
-    const foundUser = MOCK_USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
-    
-    if (foundUser) {
-      console.log("User logged in:", foundUser);
-      console.log("User isAdmin value:", foundUser.isAdmin);
-      setUser(foundUser);
-      try {
-        localStorage.setItem('moveSync_user', JSON.stringify(foundUser));
-        console.log("User saved to localStorage:", foundUser);
-      } catch (e) {
-        console.error("Error saving user to localStorage:", e);
+    try {
+      // Simulate API call delay
+      setLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Find user by email (demo only - in production this would be a real auth system)
+      const foundUser = MOCK_USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
+      
+      if (foundUser) {
+        console.log("User logged in:", foundUser);
+        console.log("User isAdmin value:", foundUser.isAdmin);
+        setUser(foundUser);
+        try {
+          localStorage.setItem('moveSync_user', JSON.stringify(foundUser));
+          console.log("User saved to localStorage:", foundUser);
+        } catch (e) {
+          console.error("Error saving user to localStorage:", e);
+        }
+      } else {
+        throw new Error('Invalid credentials');
       }
-    } else {
-      throw new Error('Invalid credentials');
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
   // Logout function
