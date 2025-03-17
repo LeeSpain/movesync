@@ -11,7 +11,7 @@ interface CountrySelectorProps {
 export const CountrySelector = ({ selectedCountry, countryFlags }: CountrySelectorProps) => {
   return (
     <Link 
-      to="/countries" 
+      to="/" 
       className="flex items-center gap-1 text-movesync-gray-dark hover:text-movesync-blue transition-colors duration-200"
     >
       <Globe size={18} />
