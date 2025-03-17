@@ -34,7 +34,7 @@ const CountryComparison = () => {
   }));
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-lg mb-16">
+    <div className="bg-white p-6 md:p-8 rounded-2xl shadow-md">
       <h2 className="heading-md mb-6 text-center">
         Investment Growth Comparison
       </h2>
@@ -45,7 +45,7 @@ const CountryComparison = () => {
       <div className="h-[300px] w-full mb-8">
         <ChartContainer
           config={{
-            value: { theme: { light: "#8B5CF6", dark: "#8B5CF6" }, label: "Value" },
+            value: { theme: { light: "#E67E22", dark: "#E67E22" }, label: "Value" },
           }}
         >
           <ResponsiveContainer width="100%" height="100%">
@@ -58,7 +58,7 @@ const CountryComparison = () => {
                     return (
                       <div className="bg-white p-2 border border-gray-200 rounded shadow-sm">
                         <p className="text-sm font-medium">{payload[0].payload.country}</p>
-                        <p className="text-sm text-purple-600">
+                        <p className="text-sm text-movesync-blue">
                           ${Number(payload[0].value).toLocaleString()}
                         </p>
                         <p className="text-xs text-green-600">
@@ -70,20 +70,20 @@ const CountryComparison = () => {
                   return null;
                 }}
               />
-              <Bar dataKey="value" fill="#8B5CF6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="value" fill="#E67E22" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
         {comparisonData.map((item, index) => (
           <div key={index} className={`p-4 rounded-xl ${
             (item.country === selectedCountry && viewMode === 'country') || 
             (item.country === 'Global (All Countries)' && viewMode === 'global')
-              ? 'bg-blue-50 border border-blue-200' 
+              ? 'bg-movesync-blue/10 border border-movesync-blue/20' 
               : item.country === 'Global (All Countries)'
-                ? 'bg-green-50 border border-green-200'
+                ? 'bg-movesync-aussie-green/10 border border-movesync-aussie-green/20'
                 : 'bg-gray-50'
           }`}>
             <h3 className="font-semibold text-center mb-2">{item.country}</h3>
