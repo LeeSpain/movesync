@@ -25,30 +25,30 @@ const InvestmentIntro = () => {
     value: Math.round(rate * 100), // Convert to percentage for better visualization
   }));
   
-  const COLORS = ['#E67E22', '#F39C12', '#D35400', '#C0392B', '#27AE60'];
+  const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#14B8A6'];
   
   return (
     <div className="space-y-6">
       <Card className="p-6 shadow-lg bg-white rounded-xl border-0">
-        <h2 className="text-2xl font-bold text-movesync-outback-red mb-4">
+        <h2 className="text-2xl font-bold text-blue-800 mb-4">
           Become Part of Our Global Growth
         </h2>
-        <p className="mb-4 text-movesync-blue-dark">
+        <p className="mb-4">
           We're offering an exclusive opportunity to invest in MoveSync - the leading AI-powered relocation platform expanding across multiple countries.
         </p>
-        <p className="mb-4 font-medium text-movesync-outback-red">
+        <p className="mb-4 font-medium text-indigo-600">
           Your investment gives you equity in our entire global business across all countries, not just in a single market.
         </p>
-        <p className="mb-4 text-movesync-blue-dark">
+        <p className="mb-4">
           Based on a company valuation of ${premoneyValuation.toLocaleString()} pre-money, we're raising ${targetRaise.toLocaleString()} for a post-money valuation of ${postmoneyValuation.toLocaleString()}, with investors receiving {totalEquityOffered.toFixed(0)}% equity.
         </p>
-        <p className="mb-6 text-movesync-blue-dark">
+        <p className="mb-6">
           Use our calculator to see how your investment could grow over time as we expand our connections across different countries.
         </p>
       </Card>
       
-      <Card className="p-6 bg-movesync-gray-light border-movesync-gray shadow-lg rounded-xl border-0">
-        <h3 className="text-xl font-bold text-movesync-outback-red mb-4">Why Invest in MoveSync?</h3>
+      <Card className="p-6 bg-amber-50 border-amber-100 shadow-lg rounded-xl border-0">
+        <h3 className="text-xl font-bold text-amber-800 mb-4">Why Invest in MoveSync?</h3>
         <ul className="space-y-3">
           {[
             'Growing market for relocation services globally',
@@ -58,21 +58,21 @@ const InvestmentIntro = () => {
             'Strong team with industry expertise'
           ].map((item, index) => (
             <li key={index} className="flex items-start gap-2">
-              <BadgeCheck className="h-5 w-5 text-movesync-outback-red mt-0.5 flex-shrink-0" />
-              <span className="text-movesync-blue-dark">{item}</span>
+              <BadgeCheck className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+              <span>{item}</span>
             </li>
           ))}
         </ul>
       </Card>
       
       <Card className="p-6 bg-white shadow-lg rounded-xl border-0">
-        <h3 className="text-xl font-bold text-movesync-outback-red mb-4">Our Global Presence</h3>
-        <p className="mb-4 text-movesync-blue-dark">Your investment includes our operations in all these countries:</p>
+        <h3 className="text-xl font-bold text-blue-800 mb-4">Our Global Presence</h3>
+        <p className="mb-4">Your investment includes our operations in all these countries:</p>
         
         <div className="h-[220px] w-full mb-6">
           <ChartContainer
             config={{
-              value: { theme: { light: "#E67E22", dark: "#E67E22" }, label: "Growth Rate" },
+              value: { theme: { light: "#8B5CF6", dark: "#8B5CF6" }, label: "Growth Rate" },
             }}
           >
             <ResponsiveContainer width="100%" height="100%">
@@ -102,8 +102,8 @@ const InvestmentIntro = () => {
             onClick={() => setViewMode('global')}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
               viewMode === 'global'
-                ? 'bg-movesync-outback-red text-white shadow-md'
-                : 'bg-movesync-gray-light text-movesync-blue-dark hover:bg-movesync-gray'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
             }`}
           >
             Global Investment
@@ -112,8 +112,8 @@ const InvestmentIntro = () => {
             onClick={() => setViewMode('country')}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
               viewMode === 'country'
-                ? 'bg-movesync-outback-red text-white shadow-md'
-                : 'bg-movesync-gray-light text-movesync-blue-dark hover:bg-movesync-gray'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
             }`}
           >
             View By Country
@@ -122,7 +122,7 @@ const InvestmentIntro = () => {
         
         {viewMode === 'country' && (
           <div className="mb-4">
-            <p className="mb-2 text-movesync-blue-dark">Select a country to see individual growth rates:</p>
+            <p className="mb-2">Select a country to see individual growth rates:</p>
             <div className="flex flex-wrap gap-2">
               {Object.keys(countryGrowthRates).map((country) => (
                 <button
@@ -130,8 +130,8 @@ const InvestmentIntro = () => {
                   onClick={() => setSelectedCountry(country)}
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                     selectedCountry === country
-                      ? 'bg-movesync-blue text-white shadow-md'
-                      : 'bg-movesync-gray-light text-movesync-blue-dark hover:bg-movesync-gray'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'bg-indigo-100 text-indigo-800 hover:bg-indigo-200'
                   }`}
                 >
                   {country}
@@ -141,9 +141,9 @@ const InvestmentIntro = () => {
           </div>
         )}
         
-        <div className="flex justify-between items-center text-sm bg-movesync-gray-light p-3 rounded-lg">
-          <div className="font-medium text-movesync-blue-dark">Selected Growth Rate:</div>
-          <div className="font-bold text-movesync-aussie-green text-base">
+        <div className="flex justify-between items-center text-sm bg-blue-50 p-3 rounded-lg">
+          <div className="font-medium">Selected Growth Rate:</div>
+          <div className="font-bold text-green-600 text-base">
             {viewMode === 'global' 
               ? `${(globalGrowthRate * 100).toFixed(0)}% (Average across all countries)`
               : `${(countryGrowthRates[selectedCountry] * 100).toFixed(0)}%`

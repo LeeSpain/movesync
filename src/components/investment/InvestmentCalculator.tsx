@@ -43,12 +43,12 @@ const InvestmentCalculator = () => {
 
   return (
     <Card className="bg-white rounded-xl p-6 shadow-lg border-0">
-      <h2 className="text-2xl font-bold text-movesync-outback-red mb-6 text-center">
+      <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">
         ROI Calculator
       </h2>
       
       <div className="mb-6">
-        <label className="block text-sm font-medium mb-2 text-movesync-blue-dark">
+        <label className="block text-sm font-medium mb-2 text-gray-700">
           Investment Amount ($)
         </label>
         <Slider
@@ -60,14 +60,14 @@ const InvestmentCalculator = () => {
           className="w-full"
         />
         <div className="flex justify-between mt-2 text-sm">
-          <span className="text-movesync-blue-dark">$10,000</span>
-          <span className="font-semibold text-movesync-outback-red">${investmentAmount.toLocaleString()}</span>
-          <span className="text-movesync-blue-dark">$2,000,000</span>
+          <span className="text-gray-600">$10,000</span>
+          <span className="font-semibold text-blue-700">${investmentAmount.toLocaleString()}</span>
+          <span className="text-gray-600">$2,000,000</span>
         </div>
       </div>
       
       <div className="mb-8">
-        <label className="block text-sm font-medium mb-2 text-movesync-blue-dark">
+        <label className="block text-sm font-medium mb-2 text-gray-700">
           Projection Years
         </label>
         <div className="flex justify-between gap-2">
@@ -77,8 +77,8 @@ const InvestmentCalculator = () => {
               onClick={() => setYears(year)}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
                 years === year
-                  ? 'bg-movesync-outback-red text-white shadow-md'
-                  : 'bg-movesync-gray-light text-movesync-blue-dark hover:bg-movesync-gray'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
               }`}
             >
               {year} Year{year > 1 ? 's' : ''}
@@ -87,17 +87,17 @@ const InvestmentCalculator = () => {
         </div>
       </div>
       
-      <div className="p-4 bg-gradient-to-r from-movesync-gray-light to-white border border-movesync-gray-light rounded-xl mb-6">
+      <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl mb-6">
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center">
-            <p className="text-sm text-movesync-blue-dark">Equity Percentage</p>
-            <p className="text-2xl font-bold text-movesync-outback-red">{equityPercentage.toFixed(2)}%</p>
-            <p className="text-xs text-movesync-blue-dark">of entire global company</p>
+            <p className="text-sm text-gray-600">Equity Percentage</p>
+            <p className="text-2xl font-bold text-blue-700">{equityPercentage.toFixed(2)}%</p>
+            <p className="text-xs text-gray-500">of entire global company</p>
           </div>
           <div className="text-center">
-            <p className="text-sm text-movesync-blue-dark">Equity Value</p>
-            <p className="text-2xl font-bold text-movesync-outback-red">${equityValue.toLocaleString()}</p>
-            <p className="text-xs text-movesync-blue-dark">initial investment</p>
+            <p className="text-sm text-gray-600">Equity Value</p>
+            <p className="text-2xl font-bold text-blue-700">${equityValue.toLocaleString()}</p>
+            <p className="text-xs text-gray-500">initial investment</p>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ const InvestmentCalculator = () => {
       {/* ROI Growth Chart */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <TrendingUp className="h-5 w-5 text-movesync-aussie-green" />
+          <TrendingUp className="h-5 w-5 text-green-600" />
           {viewMode === 'global' 
             ? 'Global Growth Projection (All Countries)'
             : `Growth Projection for ${selectedCountry}`
@@ -114,7 +114,7 @@ const InvestmentCalculator = () => {
         <div className="h-[200px] w-full">
           <ChartContainer 
             config={{
-              value: { theme: { light: "#E67E22", dark: "#E67E22" }, label: "Value" },
+              value: { theme: { light: "#0ea5e9", dark: "#0ea5e9" }, label: "Value" },
             }}
           >
             <ResponsiveContainer width="100%" height="100%">
@@ -129,10 +129,10 @@ const InvestmentCalculator = () => {
                       return (
                         <div className="bg-white p-2 border border-gray-200 rounded shadow-sm">
                           <p className="text-sm font-medium">{payload[0].payload.year}</p>
-                          <p className="text-sm text-movesync-outback-red font-bold">
+                          <p className="text-sm text-blue-600">
                             ${Number(payload[0].value).toLocaleString()}
                           </p>
-                          <p className="text-xs text-movesync-aussie-green">
+                          <p className="text-xs text-green-600">
                             +{Math.round((Number(payload[0].value) / equityValue - 1) * 100)}%
                           </p>
                         </div>
@@ -144,7 +144,7 @@ const InvestmentCalculator = () => {
                 <Line 
                   type="monotone" 
                   dataKey="value" 
-                  stroke="#E67E22" 
+                  stroke="#0ea5e9" 
                   strokeWidth={2}
                   dot={{ r: 4 }}
                   activeDot={{ r: 6 }}
@@ -156,7 +156,7 @@ const InvestmentCalculator = () => {
       </div>
       
       <div className="border-t border-gray-200 pt-6">
-        <h3 className="text-lg font-semibold mb-4 text-movesync-blue-dark">
+        <h3 className="text-lg font-semibold mb-4">
           {viewMode === 'global' 
             ? `Potential Returns (${(globalGrowthRate * 100).toFixed(0)}% Annual Growth)`
             : `Potential Returns (${(currentGrowthRate * 100).toFixed(0)}% Annual Growth)`
@@ -164,10 +164,10 @@ const InvestmentCalculator = () => {
         </h3>
         <div className="space-y-3">
           {potentialReturns.map((value, index) => (
-            <div key={index} className="flex justify-between items-center p-2 rounded-lg hover:bg-movesync-gray-light">
-              <span className="font-medium text-movesync-blue-dark">Year {index + 1}</span>
-              <span className="font-bold text-movesync-outback-red">${value.toLocaleString()}</span>
-              <span className="text-movesync-aussie-green text-sm font-semibold">
+            <div key={index} className="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50">
+              <span className="font-medium">Year {index + 1}</span>
+              <span className="font-bold text-blue-700">${value.toLocaleString()}</span>
+              <span className="text-green-600 text-sm font-semibold">
                 +{Math.round((value / equityValue - 1) * 100)}%
               </span>
             </div>
