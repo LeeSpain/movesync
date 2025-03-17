@@ -49,16 +49,6 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
           <LayoutDashboard className="h-4 w-4 mr-2" />
           Members Dashboard
         </DropdownMenuItem>
-        
-        {isAdmin && (
-          <DropdownMenuItem
-            className="flex items-center gap-2 w-full px-3 py-2 text-sm cursor-pointer"
-            onClick={() => handleNavigate('/admin')}
-          >
-            <Shield className="h-4 w-4 mr-2" />
-            Admin Dashboard
-          </DropdownMenuItem>
-        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
