@@ -95,7 +95,7 @@ export const Navbar = () => {
                 <DropdownMenuItem asChild>
                   <Link to="/countries" className="flex items-center gap-2">
                     <Globe size={16} />
-                    Change Country
+                    Countries
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -156,7 +156,7 @@ export const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             <Globe size={20} />
-            {selectedCountry ? `Change Country ${countryFlags[selectedCountry] || ''}` : 'Select Country'}
+            {selectedCountry ? `Countries ${countryFlags[selectedCountry] || ''}` : 'Select Country'}
           </Link>
           <Link 
             to="/dashboard" 
