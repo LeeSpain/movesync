@@ -10,7 +10,7 @@ interface User {
   email: string;
   plan: UserPlan;
   progressPercentage: number;
-  isAdmin?: boolean; // Added isAdmin flag
+  isAdmin: boolean; // Always include isAdmin flag
 }
 
 interface AuthContextType {

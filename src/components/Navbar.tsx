@@ -57,7 +57,7 @@ export const Navbar = () => {
           <NavbarDesktopMenu 
             selectedCountry={selectedCountry}
             countryFlags={countryFlags}
-            isAdmin={isAdmin}
+            isAdmin={isAdmin || false}
           />
 
           {/* Mobile Menu Button */}
@@ -74,7 +74,7 @@ export const Navbar = () => {
         setIsMenuOpen={setIsMenuOpen}
         selectedCountry={selectedCountry}
         countryFlags={countryFlags}
-        isAdmin={isAdmin}
+        isAdmin={isAdmin || false}
       />
     </header>
   );

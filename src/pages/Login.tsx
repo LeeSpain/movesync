@@ -24,6 +24,17 @@ const Login = () => {
 
     try {
       await login(email, password);
+      
+      // Get the user from localStorage after login to verify the data
+      const userFromStorage = localStorage.getItem('moveSync_user');
+      console.log("User from localStorage after login:", userFromStorage);
+      
+      if (userFromStorage) {
+        const parsedUser = JSON.parse(userFromStorage);
+        console.log("Parsed user from storage:", parsedUser);
+        console.log("Is admin user:", parsedUser.isAdmin);
+      }
+      
       navigate('/dashboard');
       
       toast({
@@ -45,7 +56,7 @@ const Login = () => {
   const demoHelper = (
     <div className="mt-4 p-4 bg-blue-50 rounded-lg text-sm">
       <p className="font-medium text-movesync-blue mb-1">Demo Credentials:</p>
-      <p className="text-movesync-gray-dark">Free User: alex@example.com</p>
+      <p className="text-movesync-gray-dark">Admin User: alex@example.com</p>
       <p className="text-movesync-gray-dark">Premium User: sarah@example.com</p>
       <p className="text-movesync-gray-dark mt-1">(Any password will work for the demo)</p>
     </div>

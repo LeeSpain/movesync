@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ChevronDown, LayoutDashboard, Shield, Sparkles } from 'lucide-react';
 import {
   DropdownMenu,
@@ -19,8 +19,14 @@ interface QuickAccessMenuProps {
 export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
   const { user } = useAuth();
   const isPremium = user?.plan === 'premium';
+  const navigate = useNavigate();
   
   console.log("QuickAccessMenu props:", { isAdmin, user });
+
+  const handleNavigation = (path: string) => {
+    console.log("Navigating to:", path);
+    navigate(path);
+  };
 
   return (
     <DropdownMenu>
@@ -32,29 +38,29 @@ export const QuickAccessMenu = ({ isAdmin }: QuickAccessMenuProps) => {
       <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg rounded-md border border-gray-200 p-1 z-50">
         <DropdownMenuLabel className="px-3 py-2 text-xs text-gray-500">Dashboards</DropdownMenuLabel>
         
-        <DropdownMenuItem asChild>
-          <Link to="/dashboard/free" className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
+        <DropdownMenuItem onClick={() => handleNavigation('/dashboard/free')}>
+          <div className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
             <LayoutDashboard className="h-4 w-4 mr-2" />
             Free Dashboard
-          </Link>
+          </div>
         </DropdownMenuItem>
         
-        <DropdownMenuItem asChild>
-          <Link to="/dashboard/premium" className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
+        <DropdownMenuItem onClick={() => handleNavigation('/dashboard/premium')}>
+          <div className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
             <Sparkles className="h-4 w-4 mr-2" />
             Premium Dashboard
-          </Link>
+          </div>
         </DropdownMenuItem>
         
         {isAdmin && (
           <>
             <DropdownMenuSeparator />
             <DropdownMenuLabel className="px-3 py-2 text-xs text-gray-500">Admin</DropdownMenuLabel>
-            <DropdownMenuItem asChild>
-              <Link to="/admin" className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
+            <DropdownMenuItem onClick={() => handleNavigation('/admin')}>
+              <div className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded">
                 <Shield className="h-4 w-4 mr-2" />
                 Admin Dashboard
-              </Link>
+              </div>
             </DropdownMenuItem>
           </>
         )}

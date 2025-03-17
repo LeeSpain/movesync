@@ -10,9 +10,15 @@ import { useAuth } from "@/contexts/AuthContext";
 // Admin guard component
 const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
   const { user, isAdmin } = useAuth();
-  console.log("RequireAdmin check:", { user, isAdmin });
+  console.log("RequireAdmin check:", { user, isAdmin, isAdminInUser: user?.isAdmin });
   
-  return isAdmin ? <>{children}</> : <Navigate to="/dashboard" replace />;
+  if (!isAdmin) {
+    console.log("Access denied: Not an admin user");
+    return <Navigate to="/dashboard" replace />;
+  }
+  
+  console.log("Admin access granted");
+  return <>{children}</>;
 };
 
 const AdminRoutes = () => {
