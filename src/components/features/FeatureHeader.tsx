@@ -13,14 +13,14 @@ const FeatureHeader: React.FC<FeatureHeaderProps> = ({ isIntersecting }) => {
       }`}
     >
       <div className="inline-flex items-center rounded-full bg-movesync-blue/10 px-3 py-1 text-sm font-medium text-movesync-blue mb-4">
-        <span className="animate-pulse-light mr-1">•</span> Australian Relocation Solution
+        <span className="animate-pulse-light mr-1">•</span> Complete Australian Relocation Solution
       </div>
       <h2 className="heading-lg mb-4">
         AI-Powered <span className="text-gradient-aussie">Australian Adventure</span>
       </h2>
       <p className="text-movesync-gray-dark text-lg">
         MoveSync combines advanced artificial intelligence with Australian relocation expertise to provide a 
-        seamless, sun-soaked journey to your new life down under.
+        seamless journey to your new life, whether you're moving within Australia or arriving from overseas.
       </p>
     </div>
   );

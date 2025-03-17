@@ -40,9 +40,9 @@ const Hero = () => {
               Seamless <span className="text-gradient">Australian</span> Relocation with AI Assistance
             </h1>
             
-            {/* Subheading */}
+            {/* Subheading - Updated to mention both domestic and international relocations */}
             <p className="text-lg md:text-xl text-movesync-gray-dark leading-relaxed">
-              MoveSync leverages advanced AI to handle every aspect of your relocation to Australia, from home search in Sydney to cultural integration in Melbourne, making your transition down under effortless.
+              MoveSync leverages advanced AI to handle every aspect of your relocation within or to Australia, from finding homes in Sydney to adapting to life in Melbourne, making your transition effortless whether you're moving interstate or from overseas.
             </p>
             
             {/* CTA buttons */}
@@ -80,14 +80,14 @@ const Hero = () => {
                   />
                 </div>
                 
-                {/* AI Message interface */}
+                {/* AI Message interface - Updated to show both domestic and international relocation */}
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-full bg-movesync-blue flex items-center justify-center text-white">
                       AI
                     </div>
                     <div className="bg-movesync-gray-light rounded-2xl rounded-tl-none p-4 flex-1">
-                      <p className="text-movesync-black">Welcome to MoveSync! I see you're interested in relocating to Sydney. Would you like me to help you find housing options within your budget of A$2,500/month?</p>
+                      <p className="text-movesync-black">Welcome to MoveSync! I see you're interested in relocating to Sydney. Whether you're moving from Melbourne or overseas, I can help find housing options within your budget of A$2,500/month.</p>
                     </div>
                   </div>
                   
@@ -99,7 +99,7 @@ const Hero = () => {
                 </div>
               </div>
               
-              {/* Floating elements */}
+              {/* Floating elements - Updated to highlight both domestic and international relocations */}
               <div className="absolute -top-6 -left-6 z-20 glass p-4 rounded-xl shadow-lg animate-float">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-movesync-blue">
@@ -107,7 +107,7 @@ const Hero = () => {
                   </div>
                   <div>
                     <p className="font-medium text-movesync-black">Australian Home Search</p>
-                    <p className="text-sm text-movesync-gray">AI-matched properties</p>
+                    <p className="text-sm text-movesync-gray">Local & Interstate Moves</p>
                   </div>
                 </div>
               </div>
@@ -119,7 +119,7 @@ const Hero = () => {
                   </div>
                   <div>
                     <p className="font-medium text-movesync-black">Australian Visa Support</p>
-                    <p className="text-sm text-movesync-gray">100% AI-processed</p>
+                    <p className="text-sm text-movesync-gray">For International Arrivals</p>
                   </div>
                 </div>
               </div>
@@ -131,7 +131,7 @@ const Hero = () => {
                   </div>
                   <div>
                     <p className="font-medium text-movesync-black">Australian Job Search</p>
-                    <p className="text-sm text-movesync-gray">AI job matching</p>
+                    <p className="text-sm text-movesync-gray">Local & International</p>
                   </div>
                 </div>
               </div>

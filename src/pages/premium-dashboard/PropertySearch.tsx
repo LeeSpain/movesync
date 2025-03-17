@@ -22,7 +22,7 @@ const PropertySearch = () => {
     <DashboardLayout isPremium={true} userName={user?.name || "User"} progressPercentage={user?.progressPercentage || 65}>
       <div className="space-y-6">
         <h1 className="text-3xl font-bold tracking-tight">Property Search</h1>
-        <p className="text-muted-foreground">Find your ideal home in Australia with our personalized property matching system. Our AI scans thousands of listings daily whether you're moving within Australia or arriving from overseas.</p>
+        <p className="text-muted-foreground">Find your ideal home in Australia with our personalized property matching system. Our AI scans thousands of listings daily to help you whether you're moving within Australia or arriving from overseas.</p>
         
         <PropertySearchForm 
           areaFilter={areaFilter}

@@ -19,7 +19,7 @@ const FeatureHighlights: React.FC<FeatureHighlightsProps> = ({ isIntersecting })
         </div>
         <h3 className="text-xl font-semibold mb-2">Australian Market Analytics</h3>
         <p className="text-movesync-gray-dark">
-          Get insights into Australian property markets, cost of living trends, and job opportunities with AI-powered analytics focused on Sydney, Melbourne, and beyond.
+          Get insights into Australian property markets, cost of living trends, and job opportunities with AI-powered analytics focused on both capital cities and regional areas for locals and newcomers alike.
         </p>
       </div>
       
@@ -29,7 +29,7 @@ const FeatureHighlights: React.FC<FeatureHighlightsProps> = ({ isIntersecting })
         </div>
         <h3 className="text-xl font-semibold mb-2">Australian Relocation Timeline</h3>
         <p className="text-movesync-gray-dark">
-          Your AI assistant creates custom Australian relocation timelines with automated reminders for visa deadlines, shipping arrivals, and property inspections.
+          Your AI assistant creates custom Australian relocation timelines with automated reminders for interstate moves, international arrivals, visa deadlines, shipping, and property inspections.
         </p>
       </div>
       
@@ -39,7 +39,7 @@ const FeatureHighlights: React.FC<FeatureHighlightsProps> = ({ isIntersecting })
         </div>
         <h3 className="text-xl font-semibold mb-2">Australian Documentation</h3>
         <p className="text-movesync-gray-dark">
-          Securely store and manage all your Australian relocation documents, from visa applications to property contracts, with blockchain verification technology.
+          Securely store and manage all your Australian relocation documents, from visa applications to property contracts for international arrivals or interstate lease agreements for locals.
         </p>
       </div>
     </div>

@@ -21,6 +21,15 @@ const Testimonial: React.FC<TestimonialProps> = ({ isIntersecting }) => {
         </p>
         <p className="font-semibold">Sarah & Michael Thompson</p>
         <p className="text-sm text-movesync-gray">Relocated from London to Sydney</p>
+        
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center my-4">
+          <span className="text-2xl">🏙️</span>
+        </div>
+        <p className="italic text-movesync-gray-dark mb-4">
+          "As a Melbourne local moving to Brisbane for work, I was worried about finding the right neighborhood and making new connections. MoveSync's AI found me the perfect apartment near my new office and connected me with local community groups. The interstate move was smoother than I ever expected!"
+        </p>
+        <p className="font-semibold">David Chen</p>
+        <p className="text-sm text-movesync-gray">Relocated from Melbourne to Brisbane</p>
       </div>
     </div>
   );
