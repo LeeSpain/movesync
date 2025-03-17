@@ -77,26 +77,6 @@ const Login = () => {
     }
   };
 
-  // Admin credentials section - highlighted for better visibility
-  const adminCredentialsSection = (
-    <div className="mb-4 p-4 bg-amber-50 border border-amber-200 rounded-lg text-sm">
-      <p className="font-bold text-amber-800 text-base mb-1">🔐 Admin Access:</p>
-      <div className="flex items-center space-x-2 mb-1">
-        <p className="font-medium text-amber-800">Email:</p>
-        <code className="bg-white px-2 py-1 rounded border border-amber-200 text-amber-900">alex@example.com</code>
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="h-7 px-2 text-xs border-amber-300 hover:bg-amber-100 text-amber-800"
-          onClick={() => setEmail("alex@example.com")}
-        >
-          Use this
-        </Button>
-      </div>
-      <p className="text-amber-700 mt-1 text-xs">(Any password will work for the demo)</p>
-    </div>
-  );
-
   // Regular user credentials
   const regularUserCredentials = (
     <div className="p-4 bg-blue-50 rounded-lg text-sm">
@@ -129,11 +109,6 @@ const Login = () => {
               </Alert>
             </div>
           )}
-          
-          {/* Admin credentials highlighted at the top */}
-          <div className="px-6 pt-2">
-            {adminCredentialsSection}
-          </div>
           
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
