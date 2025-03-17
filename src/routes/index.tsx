@@ -11,6 +11,8 @@ import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
 import Countries from "@/pages/Countries";
 import CountrySelection from "@/pages/CountrySelection";
+import Investment from "@/pages/Investment";
+import { InvestmentProvider } from "@/components/investment/InvestmentContext";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -26,6 +28,13 @@ const AppRoutes = () => {
         
         {/* Country selection page - can be accessed directly */}
         <Route path="/countries" element={<Countries />} />
+        
+        {/* Investment page */}
+        <Route path="/investment" element={
+          <InvestmentProvider>
+            <Investment />
+          </InvestmentProvider>
+        } />
         
         {/* Login Route - directly accessible */}
         <Route path="/login" element={<Login />} />
