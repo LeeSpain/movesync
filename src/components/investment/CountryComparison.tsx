@@ -4,6 +4,8 @@ import { useInvestment } from './InvestmentContext';
 import { calculateEquity, generateComparisonData } from './InvestmentUtils';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
+import { Card } from '@/components/ui/card';
+import { Globe } from 'lucide-react';
 
 const CountryComparison = () => {
   const { 
@@ -34,18 +36,22 @@ const CountryComparison = () => {
   }));
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-lg mb-16">
-      <h2 className="heading-md mb-6 text-center">
-        Investment Growth Comparison
-      </h2>
-      <p className="text-center mb-8 max-w-2xl mx-auto">
+    <Card className="bg-white p-8 rounded-xl shadow-lg mb-16 border-0">
+      <div className="flex items-center gap-3 mb-6">
+        <Globe className="h-8 w-8 text-blue-600" />
+        <h2 className="text-3xl font-bold text-blue-800">
+          Investment Growth Comparison
+        </h2>
+      </div>
+      
+      <p className="text-lg mb-8 text-gray-700 max-w-3xl">
         See how your ${investmentAmount.toLocaleString()} investment in our global company would grow over {years} years, with a breakdown by country.
       </p>
       
       <div className="h-[300px] w-full mb-8">
         <ChartContainer
           config={{
-            value: { theme: { light: "#8B5CF6", dark: "#8B5CF6" }, label: "Value" },
+            value: { theme: { light: "#6366F1", dark: "#6366F1" }, label: "Value" },
           }}
         >
           <ResponsiveContainer width="100%" height="100%">
@@ -56,12 +62,12 @@ const CountryComparison = () => {
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     return (
-                      <div className="bg-white p-2 border border-gray-200 rounded shadow-sm">
-                        <p className="text-sm font-medium">{payload[0].payload.country}</p>
-                        <p className="text-sm text-purple-600">
+                      <div className="bg-white p-3 border border-gray-200 rounded shadow-md">
+                        <p className="text-base font-semibold">{payload[0].payload.country}</p>
+                        <p className="text-base text-indigo-600 font-bold">
                           ${Number(payload[0].value).toLocaleString()}
                         </p>
-                        <p className="text-xs text-green-600">
+                        <p className="text-sm text-green-600 font-medium">
                           +{payload[0].payload.growthPercentage}% growth
                         </p>
                       </div>
@@ -70,29 +76,32 @@ const CountryComparison = () => {
                   return null;
                 }}
               />
-              <Bar dataKey="value" fill="#8B5CF6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="value" fill="#6366F1" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {comparisonData.map((item, index) => (
-          <div key={index} className={`p-4 rounded-xl ${
-            (item.country === selectedCountry && viewMode === 'country') || 
-            (item.country === 'Global (All Countries)' && viewMode === 'global')
-              ? 'bg-blue-50 border border-blue-200' 
-              : item.country === 'Global (All Countries)'
-                ? 'bg-green-50 border border-green-200'
-                : 'bg-gray-50'
-          }`}>
-            <h3 className="font-semibold text-center mb-2">{item.country}</h3>
-            <p className="text-center text-lg font-bold">${item.finalReturn.toLocaleString()}</p>
-            <p className="text-center text-green-600 text-sm">+{item.growthPercentage}% growth</p>
+          <div 
+            key={index} 
+            className={`p-4 rounded-xl shadow-sm transition-all ${
+              (item.country === selectedCountry && viewMode === 'country') || 
+              (item.country === 'Global (All Countries)' && viewMode === 'global')
+                ? 'bg-gradient-to-br from-blue-50 to-indigo-100 border border-blue-200 shadow-md transform scale-105' 
+                : item.country === 'Global (All Countries)'
+                  ? 'bg-gradient-to-br from-green-50 to-emerald-100 border border-green-200'
+                  : 'bg-gray-50 hover:bg-gray-100'
+            }`}
+          >
+            <h3 className="font-semibold text-center mb-2 text-gray-800">{item.country}</h3>
+            <p className="text-center text-xl font-bold text-blue-700">${item.finalReturn.toLocaleString()}</p>
+            <p className="text-center text-green-600 text-sm font-medium">+{item.growthPercentage}% growth</p>
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 
