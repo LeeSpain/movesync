@@ -4,7 +4,8 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 // Define user types
 type UserPlan = 'free' | 'premium';
 
-interface User {
+// Export the User interface so it can be imported in other files
+export interface User {
   id: string;
   name: string;
   email: string;
