@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { XCircle, ArrowLeft, MessageSquareQuestion } from 'lucide-react';
+import { XCircle, ArrowLeft, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
@@ -72,7 +72,7 @@ const CheckoutCancel = () => {
           <div className="pt-4">
             <Button variant="link" asChild className="text-sm">
               <Link to="/choose-plan">
-                <MessageSquareQuestion className="mr-2 h-4 w-4" />
+                <HelpCircle className="mr-2 h-4 w-4" />
                 Compare Plans
               </Link>
             </Button>
