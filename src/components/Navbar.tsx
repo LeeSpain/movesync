@@ -42,6 +42,8 @@ export const Navbar = () => {
     'spain': '🇪🇸',
   };
   
+  console.log("Auth check in Navbar:", { isAdmin }); // Debug logging
+  
   return (
     <header 
       className={cn(
@@ -89,7 +91,7 @@ export const Navbar = () => {
                   Quick Access <ChevronDown size={16} />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg rounded-md border border-gray-200 p-1">
+              <DropdownMenuContent align="end" className="w-48 bg-white shadow-lg rounded-md border border-gray-200 p-1 z-50">
                 <DropdownMenuItem asChild>
                   <Link to="/dashboard" className="flex items-center gap-2 w-full px-3 py-2 text-sm">
                     Dashboard
