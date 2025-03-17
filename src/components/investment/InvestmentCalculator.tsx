@@ -40,8 +40,8 @@ const InvestmentCalculator = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg">
-      <h2 className="heading-sm mb-6 text-center">
+    <div className="rounded-xl">
+      <h2 className="text-xl font-bold mb-6 text-center">
         Global Investment ROI Calculator
       </h2>
       
@@ -108,17 +108,21 @@ const InvestmentCalculator = () => {
             : `Growth Projection for ${selectedCountry}`
           }
         </h3>
-        <div className="h-[200px] w-full">
+        <div className="h-[250px] w-full">
           <ChartContainer 
             config={{
               value: { theme: { light: "#0ea5e9", dark: "#0ea5e9" }, label: "Value" },
             }}
           >
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={lineChartData}>
+              <LineChart 
+                data={lineChartData}
+                margin={{ top: 10, right: 10, left: 20, bottom: 10 }}
+              >
                 <XAxis dataKey="year" />
                 <YAxis 
                   tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                  width={60}
                 />
                 <ChartTooltip
                   content={({ active, payload }) => {
