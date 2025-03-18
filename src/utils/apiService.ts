@@ -1,4 +1,3 @@
-
 import TokenService from './tokenService';
 import { toast } from '@/components/ui/use-toast';
 
@@ -131,16 +130,12 @@ export const ApiService = {
       } else {
         let errorMessage = 'Unknown error occurred';
         
-        // Fix for TS2532: Object is possibly 'undefined'
-        if (responseData && 
-            typeof responseData === 'object' && 
-            responseData !== null) {
-          // Safely access the message property with optional chaining
-          const message = responseData.message;
-          if (message !== undefined && message !== null) {
-            // Ensure message is treated as a string
-            errorMessage = String(message);
-          }
+        // Fixed approach to safely handle potentially undefined properties
+        if (responseData && typeof responseData === 'object') {
+          // Use optional chaining and nullish coalescing for safe property access
+          errorMessage = typeof responseData?.message === 'string' 
+            ? responseData.message 
+            : errorMessage;
         }
         
         console.error(`API error: ${response.status} ${response.statusText}`, responseData);
