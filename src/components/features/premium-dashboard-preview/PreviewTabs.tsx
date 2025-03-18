@@ -1,3 +1,4 @@
+
 import { Home, Globe, Briefcase, CreditCard, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,7 +9,12 @@ import { motion } from "framer-motion";
 const PreviewTabs = () => {
   const [activeTab, setActiveTab] = useState("property");
   
-  const propertyImage = "https://images.unsplash.com/photo-1588012886077-cfe4507a3a2d?auto=format&fit=crop&w=400&h=225&q=75";
+  // Use a reliable image URL for property listings
+  const propertyImages = [
+    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=75",
+    "https://images.unsplash.com/photo-1622015663084-307d19eabbbf?w=800&auto=format&fit=crop&q=75",
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=75"
+  ];
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -60,7 +66,7 @@ const PreviewTabs = () => {
             <Card key={index} className="overflow-hidden transform hover:scale-105 transition-transform duration-200 border border-gray-100">
               <div className="h-48 bg-cover bg-center bg-gray-100 relative">
                 <img 
-                  src={propertyImage}
+                  src={propertyImages[index]}
                   alt={title}
                   className="w-full h-full object-cover"
                   loading="lazy"
