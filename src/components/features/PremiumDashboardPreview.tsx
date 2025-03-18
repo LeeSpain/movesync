@@ -21,46 +21,46 @@ const PremiumDashboardPreview = ({ isIntersecting }: { isIntersecting: boolean }
       }`}
     >
       <div className="text-center mb-12">
-        <h2 className="heading-md text-gradient-aussie mb-4">Your Premium Australian Dashboard</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-movesync-blue to-movesync-blue-dark">
+          Your Premium Australian Dashboard
+        </h2>
         <p className="text-lg max-w-3xl mx-auto text-movesync-gray-dark">
           Gain instant access to all the tools you need for a seamless Australian relocation. Our premium dashboard
           integrates all essential services in one place - from property hunting to visa tracking.
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
-          <div className="h-12 w-12 rounded-full bg-movesync-blue/10 flex items-center justify-center mb-4">
-            <CheckCircle className="h-6 w-6 text-movesync-blue" />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 px-4">
+        {[
+          {
+            icon: <CheckCircle className="h-6 w-6 text-movesync-blue" />,
+            title: "Everything in One Place",
+            desc: "No more juggling between different websites and services. Access all your relocation tools from a single dashboard."
+          },
+          {
+            icon: <Bot className="h-6 w-6 text-movesync-blue" />,
+            title: "AI-Powered Recommendations",
+            desc: "Get personalized property, job, and service recommendations based on your preferences and needs."
+          },
+          {
+            icon: <Globe className="h-6 w-6 text-movesync-blue" />,
+            title: "Real-Time Visa Updates",
+            desc: "Stay informed about your visa application status and receive alerts for important deadlines and requirements."
+          }
+        ].map((feature, index) => (
+          <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 shadow-md border border-gray-100">
+            <div className="h-12 w-12 rounded-full bg-movesync-blue/10 flex items-center justify-center mb-4">
+              {feature.icon}
+            </div>
+            <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
+            <p className="text-movesync-gray-dark">
+              {feature.desc}
+            </p>
           </div>
-          <h3 className="font-semibold text-lg mb-2">Everything in One Place</h3>
-          <p className="text-movesync-gray-dark">
-            No more juggling between different websites and services. Access all your relocation tools from a single dashboard.
-          </p>
-        </div>
-        
-        <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
-          <div className="h-12 w-12 rounded-full bg-movesync-blue/10 flex items-center justify-center mb-4">
-            <Bot className="h-6 w-6 text-movesync-blue" />
-          </div>
-          <h3 className="font-semibold text-lg mb-2">AI-Powered Recommendations</h3>
-          <p className="text-movesync-gray-dark">
-            Get personalized property, job, and service recommendations based on your preferences and needs.
-          </p>
-        </div>
-        
-        <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100">
-          <div className="h-12 w-12 rounded-full bg-movesync-blue/10 flex items-center justify-center mb-4">
-            <Globe className="h-6 w-6 text-movesync-blue" />
-          </div>
-          <h3 className="font-semibold text-lg mb-2">Real-Time Visa Updates</h3>
-          <p className="text-movesync-gray-dark">
-            Stay informed about your visa application status and receive alerts for important deadlines and requirements.
-          </p>
-        </div>
+        ))}
       </div>
       
-      <Card className="bg-white shadow-lg border-0 overflow-hidden">
+      <Card className="bg-gradient-to-br from-gray-50 to-white shadow-lg border-0 overflow-hidden">
         <div className="bg-gradient-to-r from-movesync-blue/10 to-purple-500/10 p-4 border-b border-movesync-blue/10">
           <div className="flex justify-between items-center">
             <div>
@@ -243,16 +243,20 @@ const PremiumDashboardPreview = ({ isIntersecting }: { isIntersecting: boolean }
               </div>
             </TabsContent>
           </Tabs>
-          
-          <div className="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
-            <p className="text-movesync-gray-dark text-sm italic">
-              *Preview of the premium dashboard features. Upgrade for full access and personalized assistance.
-            </p>
-            <Button variant="outline" size="sm" onClick={() => navigate('/premium-dashboard')} className="flex items-center">
-              Explore Full Features <ChevronRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
         </CardContent>
+        <div className="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+          <p className="text-movesync-gray-dark text-sm italic">
+            *Preview of premium features. Upgrade for full access and personalized assistance.
+          </p>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => navigate('/premium-dashboard')} 
+            className="flex items-center bg-movesync-blue/5 hover:bg-movesync-blue/10"
+          >
+            Explore Full Features <ChevronRight className="h-4 w-4 ml-1" />
+          </Button>
+        </div>
       </Card>
     </div>
   );
