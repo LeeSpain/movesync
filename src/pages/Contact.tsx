@@ -81,8 +81,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-gray-700">Email Us</h3>
-                    <p className="text-sm text-gray-600 mt-1">support@movesync.com</p>
-                    <p className="text-sm text-gray-600">info@movesync.com</p>
+                    <p className="text-sm text-gray-600 mt-1">support@move-sync.com</p>
+                    <p className="text-sm text-gray-600">info@move-sync.com</p>
                   </div>
                 </div>
               </div>

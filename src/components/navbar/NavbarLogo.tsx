@@ -6,7 +6,7 @@ export const NavbarLogo = () => {
   return (
     <Link to="/" className="flex items-center">
       <span className="text-2xl font-bold text-movesync-black">
-        Move<span className="text-movesync-blue">Sync</span>
+        Move-<span className="text-movesync-blue">Sync</span>
       </span>
     </Link>
   );

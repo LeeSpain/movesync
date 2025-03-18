@@ -10,7 +10,7 @@ const About = () => {
       <Navbar />
       
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-7xl">
-        <h1 className="text-4xl font-bold text-center mb-12">About MoveSync</h1>
+        <h1 className="text-4xl font-bold text-center mb-12">About Move-Sync</h1>
         
         <div className="grid gap-10 mb-16">
           <Card className="shadow-md border border-gray-200">
@@ -19,7 +19,7 @@ const About = () => {
                 <div>
                   <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
                   <p className="text-gray-700 mb-4">
-                    At MoveSync, our mission is to simplify the global relocation process through 
+                    At Move-Sync, our mission is to simplify the global relocation process through 
                     technology and personalized support. We believe that moving to a new country 
                     should be an exciting opportunity, not a stressful challenge.
                   </p>
@@ -33,6 +33,7 @@ const About = () => {
                     src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                     alt="Team meeting" 
                     className="w-full h-64 object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -47,12 +48,13 @@ const About = () => {
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                     alt="Team collaboration" 
                     className="w-full h-64 object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <div className="order-1 md:order-2">
                   <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
                   <p className="text-gray-700 mb-4">
-                    Founded in 2023, MoveSync was born from the personal experiences of our founders 
+                    Founded in 2023, Move-Sync was born from the personal experiences of our founders 
                     who faced the challenges of international relocation firsthand. What began as a 
                     solution to their own problems quickly evolved into a comprehensive platform 
                     helping thousands of people worldwide.

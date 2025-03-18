@@ -60,7 +60,7 @@ const Footer = () => {
             <div className="text-center mb-8">
               <h3 className="text-2xl lg:text-3xl font-bold mb-4">Stay Updated</h3>
               <p className="text-white/80">
-                Subscribe to our newsletter for the latest MoveSync features and relocation tips.
+                Subscribe to our newsletter for the latest Move-Sync features and relocation tips.
               </p>
             </div>
             
@@ -101,7 +101,7 @@ const Footer = () => {
           }`}
         >
           <div>
-            <h4 className="text-lg font-semibold mb-4">MoveSync</h4>
+            <h4 className="text-lg font-semibold mb-4">Move-Sync</h4>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-white/70 hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link></li>
@@ -127,7 +127,7 @@ const Footer = () => {
           <div className="mb-4 md:mb-0">
             <Link to="/" className="flex items-center">
               <span className="text-2xl font-bold">
-                Move<span className="text-movesync-blue">Sync</span>
+                Move-<span className="text-movesync-blue">Sync</span>
               </span>
             </Link>
           </div>
@@ -160,7 +160,7 @@ const Footer = () => {
           </div>
           
           <div className="mt-4 md:mt-0 text-white/50 text-sm">
-            © {new Date().getFullYear()} MoveSync. All rights reserved.
+            © {new Date().getFullYear()} Move-Sync. All rights reserved.
           </div>
         </div>
       </div>
