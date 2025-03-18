@@ -1,3 +1,4 @@
+
 import { Home, Users, Mail, Settings, FileText, LineChart } from 'lucide-react';
 
 type NavItem = {
@@ -57,3 +58,23 @@ export const adminNavItems: NavItem[] = [
     variant: "ghost",
   },
 ];
+
+const AdminSidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  return (
+    <nav className="space-y-2 px-2">
+      {adminNavItems.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+        >
+          <item.icon className="h-5 w-5 mr-3" />
+          {isSidebarOpen && <span>{item.title}</span>}
+        </a>
+      ))}
+    </nav>
+  );
+};
+
+export default AdminSidebarNav;
+

@@ -1,4 +1,3 @@
-
 // Types and initial state for admin dashboard metrics
 export interface AdminStats {
   totalUsers: number;
@@ -10,6 +9,9 @@ export interface AdminStats {
   customerAcquisitionCost: number;
   lifetimeValue: number;
   recentSignups: number;
+  totalInvestment: number;
+  companyValuation: number;
+  equityShare: number;
   aiMetrics: {
     queriesHandled: number;
     satisfactionRate: number;
@@ -30,6 +32,9 @@ export const getInitialStats = (): AdminStats => ({
   customerAcquisitionCost: 0,
   lifetimeValue: 0,
   recentSignups: 0,
+  totalInvestment: 0,
+  companyValuation: 0,
+  equityShare: 0,
   aiMetrics: {
     queriesHandled: 0,
     satisfactionRate: 0,
@@ -56,6 +61,9 @@ export const getMockStats = (): AdminStats => ({
   customerAcquisitionCost: 42,
   lifetimeValue: 850,
   recentSignups: 27,
+  totalInvestment: 500000,
+  companyValuation: 2500000,
+  equityShare: 20,
   aiMetrics: {
     queriesHandled: 8427,
     satisfactionRate: 92,
