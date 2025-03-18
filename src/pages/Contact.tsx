@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import Navbar from '@/components/ui/navbar';
-import Footer from '@/components/ui/footer';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -73,17 +73,17 @@ const Contact = () => {
             <div className="flex flex-col md:flex-row justify-between mb-8">
               <div>
                 <h2 className="text-2xl font-semibold">Get in Touch</h2>
-              </div>
-              <div className="mt-4 md:mt-0 flex items-start space-x-3">
-                <div className="flex-shrink-0">
-                  <div className="bg-movesync-blue p-2 rounded-full text-white">
-                    <Mail size={18} />
+                <div className="mt-4 flex items-start space-x-3">
+                  <div className="flex-shrink-0">
+                    <div className="bg-movesync-blue p-2 rounded-full text-white">
+                      <Mail size={18} />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-700">Email Us</h3>
-                  <p className="text-sm text-gray-600 mt-1">support@movesync.com</p>
-                  <p className="text-sm text-gray-600">info@movesync.com</p>
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-700">Email Us</h3>
+                    <p className="text-sm text-gray-600 mt-1">support@movesync.com</p>
+                    <p className="text-sm text-gray-600">info@movesync.com</p>
+                  </div>
                 </div>
               </div>
             </div>
