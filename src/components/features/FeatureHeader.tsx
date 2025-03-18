@@ -19,7 +19,7 @@ const FeatureHeader: React.FC<FeatureHeaderProps> = ({ isIntersecting }) => {
         AI-Powered <span className="text-gradient-aussie">Australian Adventure</span>
       </h2>
       <p className="text-movesync-gray-dark text-lg">
-        MoveSync combines advanced artificial intelligence with Australian relocation expertise to provide a 
+        Move-Sync combines advanced artificial intelligence with Australian relocation expertise to provide a 
         seamless journey to your new life, whether you're moving within Australia or arriving from overseas.
       </p>
     </div>
