@@ -1,5 +1,5 @@
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import { RequireAuth } from "./AuthRoutes";
 import AdminLayout from "@/components/admin/AdminLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
@@ -22,6 +22,15 @@ import EmailManager from "@/components/admin/EmailManager";
 import { useAuth } from "@/contexts/AuthContext";
 import { Navigate } from "react-router-dom";
 
+// Create a wrapper component to handle the AdminLayout with title
+const AdminLayoutWrapper = () => {
+  return (
+    <AdminLayout title="Admin Dashboard">
+      <Outlet />
+    </AdminLayout>
+  );
+};
+
 const AdminRoutes = () => {
   const { isAdmin } = useAuth();
 
@@ -33,7 +42,7 @@ const AdminRoutes = () => {
   return (
     <RequireAuth>
       <Routes>
-        <Route element={<AdminLayout />}>
+        <Route element={<AdminLayoutWrapper />}>
           <Route index element={<AdminDashboard />} />
           <Route path="users" element={<UserManagement />} />
           <Route path="countries" element={<CountryManagement />} />

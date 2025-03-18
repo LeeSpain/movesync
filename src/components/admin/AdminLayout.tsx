@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 
-type AdminLayoutProps = {
+export type AdminLayoutProps = {
   children: ReactNode;
   title: string;
 };
