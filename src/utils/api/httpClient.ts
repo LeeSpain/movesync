@@ -59,12 +59,13 @@ export const parseResponse = async (response: Response): Promise<any> => {
  * Extracts error message from response data
  */
 export const extractErrorMessage = (responseData: any): string => {
+  // Default error message
   let errorMessage = 'Unknown error occurred';
   
+  // Check if responseData exists and is an object
   if (responseData && typeof responseData === 'object') {
     // Use optional chaining and nullish coalescing for safety
-    const message = responseData?.message;
-    errorMessage = message ? String(message) : errorMessage;
+    errorMessage = responseData?.message ?? errorMessage;
   }
   
   return errorMessage;

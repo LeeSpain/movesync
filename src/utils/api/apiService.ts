@@ -45,7 +45,7 @@ export const ApiService = {
         // Try to refresh the token
         if (requiresAuth && await refreshToken()) {
           // Retry the request with new token
-          return this.request<T>(endpoint, method, data, requiresAuth, customHeaders, options);
+          return ApiService.request<T>(endpoint, method, data, requiresAuth, customHeaders, options);
         } else {
           // Couldn't refresh token, user needs to log in again
           handleUnauthorized();
@@ -64,6 +64,7 @@ export const ApiService = {
           statusCode: response.status,
         };
       } else {
+        // Fix: Use optional chaining and default to a generic error message
         const errorMessage = extractErrorMessage(responseData);
         console.error(`API error: ${response.status} ${response.statusText}`, responseData);
         return {
