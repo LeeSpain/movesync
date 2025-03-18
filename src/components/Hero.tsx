@@ -1,3 +1,4 @@
+
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { ArrowRight, Globe, Home, Briefcase } from 'lucide-react';
 
@@ -41,7 +42,7 @@ const Hero = () => {
             
             {/* Subheading - Updated to mention both domestic and international relocations */}
             <p className="text-lg md:text-xl text-movesync-gray-dark leading-relaxed">
-              MoveSync leverages advanced AI to handle every aspect of your relocation within or to Australia, from finding homes in Sydney to adapting to life in Melbourne, making your transition effortless whether you're moving interstate or from overseas.
+              Move-Sync leverages advanced AI to handle every aspect of your relocation within or to Australia, from finding homes in Sydney to adapting to life in Melbourne, making your transition effortless whether you're moving interstate or from overseas.
             </p>
             
             {/* CTA buttons */}
@@ -88,7 +89,7 @@ const Hero = () => {
                       AI
                     </div>
                     <div className="bg-movesync-gray-light rounded-2xl rounded-tl-none p-4 flex-1">
-                      <p className="text-movesync-black">Welcome to MoveSync! I see you're interested in relocating to Sydney. Whether you're moving from Melbourne or overseas, I can help find housing options within your budget of A$2,500/month.</p>
+                      <p className="text-movesync-black">Welcome to Move-Sync! I see you're interested in relocating to Sydney. Whether you're moving from Melbourne or overseas, I can help find housing options within your budget of A$2,500/month.</p>
                     </div>
                   </div>
                   

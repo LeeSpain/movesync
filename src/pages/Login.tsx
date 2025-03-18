@@ -20,14 +20,8 @@ const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Remove redirect for already authenticated users
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     console.log("User already authenticated, redirecting to dashboard");
-  //     navigate('/dashboard');
-  //   }
-  // }, [isAuthenticated, navigate]);
-
+  // Removed auto-redirect for already authenticated users
+  
   // Log auth state when component mounts
   useEffect(() => {
     console.log("Login component mounted with auth state:", { user, isAdmin, isAuthenticated });
