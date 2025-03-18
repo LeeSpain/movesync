@@ -53,12 +53,6 @@ export const adminNavItems: NavItem[] = [
     icon: Settings,
     variant: "ghost",
   },
-  {
-    title: "Investor Dashboard",
-    href: "/admin/investor",
-    icon: DollarSign,
-    variant: "ghost",
-  },
 ];
 
 const AdminSidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
@@ -77,7 +71,7 @@ const AdminSidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
             className={cn(
               "flex items-center px-3 py-2 rounded-md transition-colors",
               isActive 
-                ? "bg-gray-100 text-gray-900" 
+                ? "bg-gray-100 text-gray-900 font-medium" 
                 : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
             )}
           >

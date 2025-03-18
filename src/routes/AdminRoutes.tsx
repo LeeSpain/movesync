@@ -48,8 +48,10 @@ const AdminRoutes = () => {
         <Route path="/services" element={<ServicesManagement />} />
         <Route path="/settings" element={<AdminSettings />} />
         <Route path="/service-setup" element={<ServiceSetup />} />
-        <Route path="/email-manager" element={<Navigate to="/admin/email" replace />} />
         <Route path="/email" element={<EmailManager />} />
+        {/* Redirect legacy paths */}
+        <Route path="/email-manager" element={<Navigate to="/admin/email" replace />} />
+        <Route path="/investor" element={<Navigate to="/investor" replace />} />
       </Routes>
     </RequireAuth>
   );
