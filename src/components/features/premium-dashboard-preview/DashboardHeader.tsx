@@ -2,10 +2,13 @@
 const DashboardHeader = () => {
   return (
     <div className="text-center mb-12">
-      <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-movesync-blue to-movesync-blue-light">
-        Your Premium Australian Dashboard
+      <div className="inline-flex items-center rounded-full bg-movesync-blue/10 px-3 py-1 text-sm font-medium text-movesync-blue mb-4">
+        <span className="animate-pulse-light mr-1">•</span> Premium Dashboard Access
+      </div>
+      <h2 className="heading-lg mb-4">
+        Your Premium <span className="text-gradient-aussie">Australian Dashboard</span>
       </h2>
-      <p className="text-lg md:text-xl max-w-3xl mx-auto text-movesync-gray-dark leading-relaxed">
+      <p className="text-movesync-gray-dark text-lg max-w-3xl mx-auto">
         Gain instant access to all the tools you need for a seamless Australian relocation. Our premium dashboard
         integrates all essential services in one place - from property hunting to visa tracking.
       </p>

@@ -1,4 +1,3 @@
-
 import { Home, Globe, Briefcase, CreditCard, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,7 +22,7 @@ const PreviewTabs = () => {
 
   return (
     <Tabs defaultValue="property" className="w-full" onValueChange={handleTabChange}>
-      <TabsList className="w-full justify-start mb-6 bg-gradient-to-r from-gray-50 to-white space-x-2 h-auto overflow-x-auto p-2 flex-wrap rounded-xl border border-gray-100 shadow-sm">
+      <TabsList className="w-full justify-start mb-6 bg-gradient-to-r from-gray-50 to-white space-x-2 h-auto overflow-x-auto p-2 flex-wrap rounded-xl border border-gray-100">
         <TabsTrigger 
           value="property" 
           className="data-[state=active]:bg-movesync-blue data-[state=active]:text-white rounded-lg px-4 py-2 transition-all duration-200"
@@ -58,7 +57,7 @@ const PreviewTabs = () => {
           variants={fadeInUp}
         >
           {["Sydney Waterfront Apartment", "Melbourne City Loft", "Brisbane Family Home"].map((title, index) => (
-            <Card key={index} className="overflow-hidden transform hover:scale-105 transition-transform duration-200 shadow-lg">
+            <Card key={index} className="overflow-hidden transform hover:scale-105 transition-transform duration-200 border border-gray-100">
               <div className="h-48 bg-cover bg-center bg-gray-100 relative">
                 <img 
                   src={propertyImage}
@@ -68,7 +67,7 @@ const PreviewTabs = () => {
                   decoding="async"
                 />
                 <div className="absolute top-2 right-2">
-                  <Badge className="bg-movesync-blue/90 backdrop-blur-sm">
+                  <Badge className="bg-movesync-outback-red text-white">
                     {90 - index * 5}% Match
                   </Badge>
                 </div>

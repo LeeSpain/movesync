@@ -19,14 +19,18 @@ const PremiumDashboardPreview = ({ isIntersecting }: { isIntersecting: boolean }
       <DashboardHeader />
       <FeatureCards />
       
-      <Card className="bg-gradient-to-br from-gray-50 to-white shadow-lg border-0 overflow-hidden">
-        <div className="bg-gradient-to-r from-movesync-blue/10 to-movesync-blue-light/10 p-4 border-b border-movesync-blue/10">
+      <Card className="bg-white shadow-lg border border-gray-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-movesync-outback-red/5 to-movesync-ocean-blue/5 p-4 border-b border-movesync-blue/10">
           <div className="flex justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold">Premium Dashboard Preview</h3>
               <p className="text-movesync-gray text-sm">All the tools you need for a seamless Australian relocation</p>
             </div>
-            <Button size="sm" onClick={() => navigate('/checkout')}>
+            <Button 
+              size="sm" 
+              onClick={() => navigate('/checkout')}
+              className="bg-movesync-blue hover:bg-movesync-blue-dark text-white"
+            >
               Upgrade to Premium
             </Button>
           </div>
@@ -36,7 +40,7 @@ const PremiumDashboardPreview = ({ isIntersecting }: { isIntersecting: boolean }
           <PreviewTabs />
         </CardContent>
 
-        <div className="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+        <div className="mt-6 p-4 border-t border-gray-100 flex justify-between items-center">
           <p className="text-movesync-gray-dark text-sm italic">
             *Preview of premium features. Upgrade for full access and personalized assistance.
           </p>
@@ -44,7 +48,7 @@ const PremiumDashboardPreview = ({ isIntersecting }: { isIntersecting: boolean }
             variant="outline" 
             size="sm" 
             onClick={() => navigate('/premium-dashboard')} 
-            className="flex items-center bg-movesync-blue/5 hover:bg-movesync-blue/10"
+            className="flex items-center bg-movesync-blue/5 hover:bg-movesync-blue/10 text-movesync-blue"
           >
             Explore Full Features <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
