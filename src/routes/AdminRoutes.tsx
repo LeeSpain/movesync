@@ -21,12 +21,11 @@ import EmailManager from "@/components/admin/EmailManager";
 import { useAuth } from "@/contexts/AuthContext";
 
 const AdminRoutes = () => {
-  const { isAdmin } = useAuth();
-
-  // Redirect to home if not an admin
-  if (!isAdmin) {
-    return <Navigate to="/" replace />;
-  }
+  // Remove the admin check to allow any user to access the admin dashboard
+  // const { isAdmin } = useAuth();
+  // if (!isAdmin) {
+  //   return <Navigate to="/" replace />;
+  // }
 
   return (
     <RequireAuth>

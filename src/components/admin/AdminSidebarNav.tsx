@@ -52,7 +52,7 @@ export const adminNavItems: NavItem[] = [
     href: "/admin/settings",
     icon: Settings,
     variant: "ghost",
-  },
+  }
 ];
 
 const AdminSidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -19,13 +20,13 @@ const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Check if already logged in
-  useEffect(() => {
-    if (isAuthenticated) {
-      console.log("User already authenticated, redirecting to dashboard");
-      navigate('/dashboard');
-    }
-  }, [isAuthenticated, navigate]);
+  // Remove redirect for already authenticated users
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     console.log("User already authenticated, redirecting to dashboard");
+  //     navigate('/dashboard');
+  //   }
+  // }, [isAuthenticated, navigate]);
 
   // Log auth state when component mounts
   useEffect(() => {
@@ -47,17 +48,14 @@ const Login = () => {
       console.log("Attempting login with email:", email);
       await login(email, password);
       
-      // Get the user from localStorage after login to verify the data
-      const userFromStorage = localStorage.getItem('moveSync_user');
-      console.log("User from localStorage after login:", userFromStorage);
-      
-      if (userFromStorage) {
-        const parsedUser = JSON.parse(userFromStorage);
-        console.log("Parsed user from storage:", parsedUser);
-        console.log("Is admin user:", parsedUser.isAdmin);
+      // Determine redirect based on user type
+      if (email.toLowerCase() === 'alex@example.com') {
+        navigate('/admin');
+      } else if (email.toLowerCase() === 'investor@example.com') {
+        navigate('/investor');
+      } else {
+        navigate('/dashboard');
       }
-      
-      navigate('/dashboard');
       
       toast({
         title: "Login successful",
@@ -95,7 +93,7 @@ const Login = () => {
         </Link>
         <Card>
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold">Sign in to MoveSync</CardTitle>
+            <CardTitle className="text-2xl font-bold">Sign in to Move-Sync</CardTitle>
             <CardDescription>
               Enter your email below to access your relocation dashboard
             </CardDescription>
