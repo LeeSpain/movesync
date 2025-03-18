@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import AdminLayout from '@/components/admin/AdminLayout';
 import { LineChart, BarChart, PieChart } from '@/components/ui/charts';
 import { Badge } from '@/components/ui/badge';
 import { 
@@ -88,7 +86,7 @@ const RevenueManagement = () => {
   };
 
   return (
-    <AdminLayout title="Revenue Management">
+    <>
       {/* Top KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <Card>
@@ -323,7 +321,7 @@ const RevenueManagement = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </AdminLayout>
+    </>
   );
 };
 

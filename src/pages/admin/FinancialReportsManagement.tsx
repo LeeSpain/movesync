@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import AdminLayout from '@/components/admin/AdminLayout';
 import { LineChart, BarChart, PieChart } from '@/components/ui/charts';
 import { Badge } from '@/components/ui/badge';
 import { DollarSign, ArrowUpRight, TrendingUp, CreditCard, BarChart3 } from 'lucide-react';
@@ -74,7 +72,7 @@ const FinancialReportsManagement = () => {
   };
 
   return (
-    <AdminLayout title="Financial Reports">
+    <>
       {/* Top KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <Card>
@@ -316,7 +314,7 @@ const FinancialReportsManagement = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </AdminLayout>
+    </>
   );
 };
 

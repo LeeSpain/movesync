@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Save, RotateCcw, Bot, Globe, Database, Shield } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -53,7 +52,7 @@ const AdminSettings = () => {
   };
 
   return (
-    <AdminLayout title="Admin Settings">
+    <>
       <Tabs defaultValue="general">
         <TabsList className="mb-6">
           <TabsTrigger value="general">
@@ -359,7 +358,7 @@ const AdminSettings = () => {
           </Card>
         </TabsContent>
       </Tabs>
-    </AdminLayout>
+    </>
   );
 };
 

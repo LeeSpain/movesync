@@ -23,6 +23,11 @@ const AdminHeader = ({ title }: AdminHeaderProps) => {
       (item.href !== "/admin" && currentPath.startsWith(item.href))
     );
     
+    // Hard-code some specific titles for consistency
+    if (currentPath.includes('/financial-reports')) return "Financial Reports";
+    if (currentPath.includes('/revenue')) return "Revenue Management";
+    if (currentPath.includes('/settings')) return "Admin Settings";
+    
     return matchingNavItem?.title || "Admin Dashboard";
   };
   
