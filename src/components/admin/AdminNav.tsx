@@ -64,22 +64,22 @@ const AdminNav = () => {
   };
 
   const goToEmailManager = () => {
-    navigate('/admin/email-manager');
+    navigate('/admin/email');
     setIsOpen(false);
   };
   
   const goToSecuritySettings = () => {
-    navigate('/admin/settings#security');
+    navigate('/admin/settings');
     setIsOpen(false);
   };
   
   const goToPaymentSettings = () => {
-    navigate('/admin/service-setup#payment');
+    navigate('/admin/service-setup');
     setIsOpen(false);
   };
   
   const goToNotifications = () => {
-    navigate('/admin/settings#notifications');
+    navigate('/admin/settings');
     setIsOpen(false);
   };
   
