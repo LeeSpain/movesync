@@ -18,7 +18,7 @@ import ServicesManagement from "@/pages/admin/ServicesManagement";
 import AdminSettings from "@/pages/admin/AdminSettings";
 import ServiceSetup from "@/components/admin/ServiceSetup";
 import EmailManager from "@/components/admin/EmailManager";
-import { useAuth } from "@/contexts/AuthContext";
+import AdminLayout from "@/components/admin/AdminLayout";
 
 const AdminRoutes = () => {
   // Remove the admin check to allow any user to access the admin dashboard
@@ -29,28 +29,30 @@ const AdminRoutes = () => {
 
   return (
     <RequireAuth>
-      <Routes>
-        <Route path="/" element={<AdminDashboard />} />
-        <Route path="/dashboard" element={<Navigate to="/admin" replace />} />
-        <Route path="/users" element={<UserManagement />} />
-        <Route path="/countries" element={<CountryManagement />} />
-        <Route path="/properties" element={<PropertyManagement />} />
-        <Route path="/jobs" element={<JobManagement />} />
-        <Route path="/visas" element={<VisaManagement />} />
-        <Route path="/cost-of-living" element={<CostOfLivingManagement />} />
-        <Route path="/ai-assistant" element={<AIAssistantManagement />} />
-        <Route path="/analytics" element={<AnalyticsManagement />} />
-        <Route path="/subscriptions" element={<SubscriptionsManagement />} />
-        <Route path="/revenue" element={<RevenueManagement />} />
-        <Route path="/financial-reports" element={<FinancialReportsManagement />} />
-        <Route path="/growth-metrics" element={<GrowthMetricsManagement />} />
-        <Route path="/services" element={<ServicesManagement />} />
-        <Route path="/settings" element={<AdminSettings />} />
-        <Route path="/service-setup" element={<ServiceSetup />} />
-        <Route path="/email" element={<EmailManager />} />
-        {/* Redirect legacy paths */}
-        <Route path="/email-manager" element={<Navigate to="/admin/email" replace />} />
-      </Routes>
+      <AdminLayout title="Admin Dashboard">
+        <Routes>
+          <Route path="/" element={<AdminDashboard />} />
+          <Route path="/dashboard" element={<Navigate to="/admin" replace />} />
+          <Route path="/users" element={<UserManagement />} />
+          <Route path="/countries" element={<CountryManagement />} />
+          <Route path="/properties" element={<PropertyManagement />} />
+          <Route path="/jobs" element={<JobManagement />} />
+          <Route path="/visas" element={<VisaManagement />} />
+          <Route path="/cost-of-living" element={<CostOfLivingManagement />} />
+          <Route path="/ai-assistant" element={<AIAssistantManagement />} />
+          <Route path="/analytics" element={<AnalyticsManagement />} />
+          <Route path="/subscriptions" element={<SubscriptionsManagement />} />
+          <Route path="/revenue" element={<RevenueManagement />} />
+          <Route path="/financial-reports" element={<FinancialReportsManagement />} />
+          <Route path="/growth-metrics" element={<GrowthMetricsManagement />} />
+          <Route path="/services" element={<ServicesManagement />} />
+          <Route path="/settings" element={<AdminSettings />} />
+          <Route path="/service-setup" element={<ServiceSetup />} />
+          <Route path="/email" element={<EmailManager />} />
+          {/* Redirect legacy paths */}
+          <Route path="/email-manager" element={<Navigate to="/admin/email" replace />} />
+        </Routes>
+      </AdminLayout>
     </RequireAuth>
   );
 };
