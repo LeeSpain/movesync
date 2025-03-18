@@ -3,7 +3,7 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BudgetCalculatorTab from '@/components/premium-dashboard/cost-living/BudgetCalculatorTab';
-import { costOfLivingData } from '@/components/premium-dashboard/cost-living/costOfLivingData';
+import { cityData } from '@/components/premium-dashboard/cost-living/costOfLivingData';
 
 const CostCalculator = () => {
   return (
@@ -17,7 +17,7 @@ const CostCalculator = () => {
           and understand what to expect financially in your new location.
         </p>
         
-        <BudgetCalculatorTab cityData={costOfLivingData} />
+        <BudgetCalculatorTab cityData={cityData} />
       </main>
       
       <Footer />
