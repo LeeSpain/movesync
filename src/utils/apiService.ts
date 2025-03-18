@@ -131,13 +131,15 @@ export const ApiService = {
       } else {
         let errorMessage = 'Unknown error occurred';
         
-        // Fix for TypeScript error - use type guards and safe access
+        // Fix for TypeScript error - use proper type checking
         if (responseData && 
             typeof responseData === 'object' && 
-            'message' in responseData && 
-            responseData.message !== null && 
-            responseData.message !== undefined) {
-          errorMessage = String(responseData.message);
+            'message' in responseData) {
+          // Convert to string only if message is defined
+          const message = responseData.message;
+          if (message !== null && message !== undefined) {
+            errorMessage = String(message);
+          }
         }
         
         console.error(`API error: ${response.status} ${response.statusText}`, responseData);
