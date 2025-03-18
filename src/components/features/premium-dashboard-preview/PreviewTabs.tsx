@@ -1,4 +1,5 @@
-import { Home, Globe, Briefcase, CreditCard } from 'lucide-react';
+
+import { Home, Globe, Briefcase, CreditCard, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +7,9 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const PreviewTabs = () => {
   const [activeTab, setActiveTab] = useState("property");
+  
+  // Lazy load images with loading="lazy"
+  const propertyImage = "https://images.unsplash.com/photo-1588012886077-cfe4507a3a2d?auto=format&fit=crop&w=400&h=225&q=75";
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -41,14 +45,17 @@ const PreviewTabs = () => {
       </TabsList>
 
       <TabsContent value="property">
-        {/* Property Tab Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {["Sydney Waterfront Apartment", "Melbourne City Loft", "Brisbane Family Home"].map((title, index) => (
             <Card key={index} className="overflow-hidden">
-              <div 
-                className="h-40 bg-cover bg-center"
-                style={{ backgroundImage: `url(https://images.unsplash.com/photo-1588012886077-cfe4507a3a2d?auto=format&fit=crop&q=80&w=400&h=225)` }}
-              >
+              <div className="h-40 bg-cover bg-center bg-gray-100">
+                <img 
+                  src={propertyImage}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="p-2">
                   <Badge className="bg-movesync-blue">
                     {90 - index * 5}% Match

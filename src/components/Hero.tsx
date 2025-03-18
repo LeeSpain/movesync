@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { ArrowRight, Globe, Home, Briefcase } from 'lucide-react';
 
 const Hero = () => {
@@ -63,20 +62,22 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Hero Visual */}
+          {/* Hero Visual with optimized image loading */}
           <div 
             className={`lg:col-span-6 ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             } transition-all duration-1000 ease-out delay-300`}
           >
             <div className="relative">
-              {/* Main image or illustration */}
               <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-xl mb-4">
+                <div className="aspect-[4/3] relative overflow-hidden rounded-xl mb-4 bg-gray-100">
                   <img 
-                    src="https://images.unsplash.com/photo-1528072164453-f4e8ef0d475a" 
-                    alt="Sydney Opera House - iconic symbol of Sydney" 
+                    src="https://images.unsplash.com/photo-1528072164453-f4e8ef0d475a?w=800&auto=format&fit=crop&q=75" 
+                    alt="Sydney Opera House" 
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 

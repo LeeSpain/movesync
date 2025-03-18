@@ -1,11 +1,12 @@
-
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { featureCategories } from '@/data/featureCategories';
-import FeatureHeader from './features/FeatureHeader';
-import FeatureTabs from './features/FeatureTabs';
-import FeatureDetail from './features/FeatureDetail';
-import FeatureHighlights from './features/FeatureHighlights';
-import Testimonial from './features/Testimonial';
+
+// Lazy load sub-components
+const FeatureHeader = lazy(() => import('./features/FeatureHeader'));
+const FeatureTabs = lazy(() => import('./features/FeatureTabs'));
+const FeatureDetail = lazy(() => import('./features/FeatureDetail'));
+const FeatureHighlights = lazy(() => import('./features/FeatureHighlights'));
+const Testimonial = lazy(() => import('./features/Testimonial'));
 
 const Features = () => {
   const [activeCategory, setActiveCategory] = useState<string>(featureCategories[0].id);
@@ -66,55 +67,50 @@ const Features = () => {
       </div>
       
       <div className="container-content">
-        {/* Section header */}
-        <FeatureHeader isIntersecting={isIntersecting} />
+        <Suspense fallback={<div className="h-20 bg-gray-100 animate-pulse rounded-lg"></div>}>
+          <FeatureHeader isIntersecting={isIntersecting} />
+        </Suspense>
         
         {/* Australian iconic city imagery */}
         <div className={`grid grid-cols-4 gap-3 mb-12 transition-all duration-700 ${
           isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <img 
-            src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9"
-            alt="Bondi Beach - Sydney's famous beach culture"
-            className="aspect-video object-cover rounded-lg shadow-md"
-          />
-          <img 
-            src="https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8"
-            alt="Great Ocean Road - Melbourne's scenic coastal drive"
-            className="aspect-video object-cover rounded-lg shadow-md"
-          />
-          <img 
-            src="https://images.unsplash.com/photo-1566734904496-9309bb1798ae"
-            alt="Gold Coast - Queensland's iconic skyline and beaches"
-            className="aspect-video object-cover rounded-lg shadow-md"
-          />
-          <img 
-            src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07"
-            alt="Blue Mountains - Natural wonder near Sydney"
-            className="aspect-video object-cover rounded-lg shadow-md"
-          />
+          {[
+            "photo-1506973035872-a4ec16b8e8d9",
+            "photo-1529108190281-9a4f620bc2d8",
+            "photo-1566734904496-9309bb1798ae",
+            "photo-1465146344425-f00d5f5c8f07"
+          ].map((photoId, index) => (
+            <div key={index} className="aspect-video bg-gray-100 rounded-lg shadow-md">
+              <img 
+                src={`https://images.unsplash.com/${photoId}?w=400&auto=format&fit=crop&q=75`}
+                alt=""
+                className="w-full h-full object-cover rounded-lg"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
         </div>
         
-        {/* Feature tabs and content */}
-        <div 
-          className={`grid grid-cols-1 lg:grid-cols-12 gap-8 transition-all duration-700 delay-300 ${
-            isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <FeatureTabs 
-            featureCategories={featureCategories}
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
-          
-          <FeatureDetail activeFeature={activeFeature} />
+        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 transition-all duration-700 delay-300 ${
+          isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <Suspense fallback={<div className="h-40 bg-gray-100 animate-pulse rounded-lg"></div>}>
+            <FeatureTabs 
+              featureCategories={featureCategories}
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
+            
+            <FeatureDetail activeFeature={activeFeature} />
+          </Suspense>
         </div>
         
-        {/* Additional feature highlights with Australian context */}
-        <FeatureHighlights isIntersecting={isIntersecting} />
-        
-        {/* Australian testimonial */}
-        <Testimonial isIntersecting={isIntersecting} />
+        <Suspense fallback={<div className="h-40 bg-gray-100 animate-pulse rounded-lg"></div>}>
+          <FeatureHighlights isIntersecting={isIntersecting} />
+          <Testimonial isIntersecting={isIntersecting} />
+        </Suspense>
       </div>
     </section>
   );
