@@ -21,7 +21,7 @@ const InvestmentIntro = () => {
         Become Part of Our Global Growth
       </h2>
       <p className="mb-4">
-        We're offering an exclusive opportunity to invest in MoveSync - the leading AI-powered relocation platform expanding across multiple countries.
+        We're offering an exclusive opportunity to invest in Move-Sync - the leading AI-powered relocation platform expanding across multiple countries.
       </p>
       <p className="mb-4 font-medium text-movesync-blue">
         Your investment gives you equity in our entire global business across all countries, not just in a single market.
@@ -34,7 +34,7 @@ const InvestmentIntro = () => {
       </p>
       
       <div className="bg-movesync-gray-light p-6 rounded-xl mb-8">
-        <h3 className="font-semibold mb-3">Why Invest in MoveSync?</h3>
+        <h3 className="font-semibold mb-3">Why Invest in Move-Sync?</h3>
         <ul className="list-disc pl-5 space-y-2">
           <li>Growing market for relocation services globally</li>
           <li>Proprietary AI technology creates a competitive advantage</li>

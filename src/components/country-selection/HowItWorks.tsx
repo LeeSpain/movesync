@@ -33,7 +33,7 @@ const HowItWorks = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <h2 className="text-2xl font-bold mb-2">How MoveSync Works</h2>
+          <h2 className="text-2xl font-bold mb-2">How Move-Sync Works</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Our streamlined process makes relocation simple and stress-free
           </p>

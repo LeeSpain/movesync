@@ -12,7 +12,7 @@ const HeroSection = () => {
         transition={{ duration: 0.6 }}
       >            
         <h1 className="heading-xl mb-4 text-foreground">
-          Welcome to <span className="text-gradient">MoveSync</span>
+          Welcome to <span className="text-gradient">Move-Sync</span>
         </h1>
         
         <p className="text-lg md:text-xl text-movesync-gray-dark leading-relaxed mb-6">
@@ -21,7 +21,7 @@ const HeroSection = () => {
         </p>
         
         <div className="bg-accent/50 p-6 rounded-xl mb-6">
-          <h2 className="text-xl font-semibold mb-3">Why Choose MoveSync?</h2>
+          <h2 className="text-xl font-semibold mb-3">Why Choose Move-Sync?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
             <div className="flex items-start gap-2">
               <div className="rounded-full bg-movesync-blue/10 p-2 mt-1">
