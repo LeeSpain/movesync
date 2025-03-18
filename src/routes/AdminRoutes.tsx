@@ -1,6 +1,7 @@
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { RequireAuth } from "./AuthRoutes";
+import AdminLayout from "@/components/admin/AdminLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import UserManagement from "@/pages/admin/UserManagement";
 import CountryManagement from "@/pages/admin/CountryManagement";
@@ -18,7 +19,6 @@ import ServicesManagement from "@/pages/admin/ServicesManagement";
 import AdminSettings from "@/pages/admin/AdminSettings";
 import ServiceSetup from "@/components/admin/ServiceSetup";
 import EmailManager from "@/components/admin/EmailManager";
-import AdminLayout from "@/components/admin/AdminLayout";
 
 const AdminRoutes = () => {
   return (
