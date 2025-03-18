@@ -50,7 +50,6 @@ const AdminRoutes = () => {
         <Route path="/email" element={<EmailManager />} />
         {/* Redirect legacy paths */}
         <Route path="/email-manager" element={<Navigate to="/admin/email" replace />} />
-        <Route path="/investor" element={<Navigate to="/investor" replace />} />
       </Routes>
     </RequireAuth>
   );
