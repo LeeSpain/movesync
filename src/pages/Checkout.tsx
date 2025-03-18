@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
@@ -8,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle, CreditCard, CheckCircle, Lock } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EmailService } from '@/utils/emailService';
+import { StripeService } from '@/utils/stripeService';
 
 export interface EmailConfig {
   to: string;
@@ -50,20 +52,29 @@ const CheckoutPage = () => {
       agreeToTerms
     );
     
-    // In a real application, you would make an API call to your backend
-    // to create a payment intent and get the client secret
-    // For demo purposes, we're simulating this process
-    
-    const simulatePaymentIntent = () => {
-      // Simulate API delay
-      setTimeout(() => {
-        // This is a fake client secret - in a real app this would come from your backend
-        setClientSecret('demo_secret_' + new Date().getTime());
-      }, 1000);
+    // Create a payment intent when the form is valid and the billing cycle changes
+    const createIntent = async () => {
+      if (formValid && stripe) {
+        const amount = billingCycle === 'monthly' ? PRICES.monthly : PRICES.annually;
+        
+        const secret = await StripeService.createPaymentIntent({
+          amount: amount,
+          currency: 'usd',
+          customerEmail: formData.email,
+          customerName: formData.name,
+          description: `MoveSync Premium - ${billingCycle} subscription`
+        });
+        
+        if (secret) {
+          setClientSecret(secret);
+        }
+      }
     };
     
-    simulatePaymentIntent();
-  }, [formData, agreeToTerms, user?.name, user?.email]);
+    if (formValid) {
+      createIntent();
+    }
+  }, [formData, agreeToTerms, billingCycle, stripe, formValid]);
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -88,7 +99,7 @@ const CheckoutPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!stripe || !elements || !formValid) {
+    if (!stripe || !elements || !formValid || !clientSecret) {
       return;
     }
     
@@ -96,42 +107,70 @@ const CheckoutPage = () => {
     setError(null);
     
     try {
-      // Simulate payment processing
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Get the card element
+      const cardElement = elements.getElement(CardElement);
       
-      // Generate a verification token (in a real app, this would be more secure)
-      const verificationToken = Math.random().toString(36).substring(2);
-      const tempUserId = Date.now().toString();
+      if (!cardElement) {
+        throw new Error('Card element not found');
+      }
       
-      // Send payment confirmation email
-      await EmailService.sendPaymentConfirmationEmail(formData.email, billingCycle === 'monthly' ? PRICES.monthly : PRICES.annually);
-      
-      // Send verification email
-      await EmailService.sendVerificationEmail(formData.email, {
-        userId: tempUserId,
-        token: verificationToken
+      // Confirm the payment with Stripe.js
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name: formData.name,
+            email: formData.email,
+          },
+        },
       });
       
-      // Show success message
-      toast({
-        title: "Payment successful!",
-        description: "Please check your email to verify your account.",
-      });
+      if (error) {
+        throw new Error(error.message);
+      }
       
-      // Navigate to verification pending page
-      navigate('/verify-pending', { 
-        state: { 
-          email: formData.email 
-        } 
-      });
-      
-    } catch (err) {
+      if (paymentIntent.status === 'succeeded' || paymentIntent.status === 'processing') {
+        // Generate a verification token (in a real app, this would be more secure)
+        const verificationToken = Math.random().toString(36).substring(2);
+        const tempUserId = Date.now().toString();
+        
+        // Send payment confirmation email
+        await EmailService.sendPaymentConfirmationEmail(
+          formData.email, 
+          billingCycle === 'monthly' ? PRICES.monthly : PRICES.annually
+        );
+        
+        // Send verification email
+        await EmailService.sendVerificationEmail(formData.email, {
+          userId: tempUserId,
+          token: verificationToken
+        });
+        
+        // Upgrade the user to premium in the context
+        upgradeToPremium();
+        
+        // Show success message
+        toast({
+          title: "Payment successful!",
+          description: "Please check your email to verify your account.",
+        });
+        
+        // Navigate to verification pending page
+        navigate('/verify-pending', { 
+          state: { 
+            email: formData.email 
+          } 
+        });
+      } else {
+        throw new Error('Payment failed');
+      }
+    } catch (err: any) {
       console.error('Payment error:', err);
-      setError('An error occurred while processing your payment. Please try again.');
+      setError(err.message || 'An error occurred while processing your payment. Please try again.');
       
       toast({
         title: "Payment failed",
-        description: "There was an issue processing your payment. Please try again.",
+        description: err.message || "There was an issue processing your payment. Please try again.",
         variant: "destructive",
       });
     } finally {

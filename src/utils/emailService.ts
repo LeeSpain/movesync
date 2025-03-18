@@ -1,4 +1,11 @@
+
 import { toast } from "@/components/ui/use-toast";
+import emailjs from 'emailjs-com';
+
+// These would typically be environment variables
+const EMAIL_SERVICE_ID = "your_service_id"; // EmailJS service ID
+const EMAIL_USER_ID = "your_user_id";       // EmailJS user ID
+const EMAIL_TEMPLATE_ID = "your_template_id"; // EmailJS template ID
 
 export interface EmailConfig {
   to: string;
@@ -13,8 +20,7 @@ export interface VerificationLink {
 }
 
 export const EmailService = {
-  // For now, we'll simulate sending emails since we can't directly send emails from the frontend
-  // In a real application, this would call a backend service
+  // Send emails using EmailJS
   sendEmail: async (config: EmailConfig): Promise<boolean> => {
     try {
       console.log("Sending email:", {
@@ -24,15 +30,32 @@ export const EmailService = {
         body: config.body
       });
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Prepare template parameters for EmailJS
+      const templateParams = {
+        to_email: config.to,
+        from_name: "MoveSync AI",
+        to_name: "",
+        subject: config.subject,
+        message: config.body,
+      };
       
-      // In a real application, you would make an API call to your backend
-      // which would use a service like SendGrid, Nodemailer, or AWS SES
+      // Send email using EmailJS
+      const response = await emailjs.send(
+        EMAIL_SERVICE_ID,
+        EMAIL_TEMPLATE_ID,
+        templateParams,
+        EMAIL_USER_ID
+      );
       
+      console.log("Email sent successfully:", response);
       return true;
     } catch (error) {
       console.error("Error sending email:", error);
+      toast({
+        variant: "destructive",
+        title: "Email Error",
+        description: "Failed to send email. Please try again later."
+      });
       return false;
     }
   },
@@ -80,7 +103,8 @@ export const EmailService = {
     
     return EmailService.sendEmail(config);
   },
-  // New method to send verification emails
+  
+  // Method to send verification emails
   sendVerificationEmail: async (userEmail: string, verificationLink: VerificationLink): Promise<boolean> => {
     const config: EmailConfig = {
       to: userEmail,
@@ -123,7 +147,7 @@ export const EmailService = {
     }
   },
 
-  // New method to send payment confirmation emails
+  // Method to send payment confirmation emails
   sendPaymentConfirmationEmail: async (userEmail: string, amount: number): Promise<boolean> => {
     const config: EmailConfig = {
       to: userEmail,
