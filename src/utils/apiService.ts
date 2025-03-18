@@ -132,13 +132,15 @@ export const ApiService = {
         let errorMessage = 'Unknown error occurred';
         
         // Fix for TS2532: Object is possibly 'undefined'
-        // Properly check if responseData exists and has a message property
         if (responseData && 
             typeof responseData === 'object' && 
-            responseData !== null && 
-            'message' in responseData) {
-          // Ensure message is treated as a string
-          errorMessage = String(responseData.message || errorMessage);
+            responseData !== null) {
+          // Safely access the message property with optional chaining
+          const message = responseData.message;
+          if (message !== undefined && message !== null) {
+            // Ensure message is treated as a string
+            errorMessage = String(message);
+          }
         }
         
         console.error(`API error: ${response.status} ${response.statusText}`, responseData);
