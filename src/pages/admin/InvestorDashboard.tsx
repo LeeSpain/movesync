@@ -1,6 +1,6 @@
 
 import React from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
+import InvestorLayout from '@/components/investor/InvestorLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import FinancialOverview from '@/components/admin/FinancialOverview';
 import GrowthAnalytics from '@/components/admin/GrowthAnalytics';
@@ -12,7 +12,7 @@ const InvestorDashboard = () => {
   const growthMetricsData = getGrowthMetricsData();
   
   return (
-    <AdminLayout title="Investor Dashboard">
+    <InvestorLayout title="Investor Dashboard">
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="p-4 bg-white rounded-lg shadow">
@@ -44,7 +44,7 @@ const InvestorDashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </AdminLayout>
+    </InvestorLayout>
   );
 };
 

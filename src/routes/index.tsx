@@ -1,12 +1,13 @@
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { RequireAuth } from "./AuthRoutes"; // Add this import
+import { RequireAuth } from "./AuthRoutes";
 import PublicRoutes from "./PublicRoutes";
 import AuthRoutes from "./AuthRoutes";
 import AdminRoutes from "./AdminRoutes";
 import FreeDashboardRoutes from "./FreeDashboardRoutes";
 import PremiumDashboardRoutes from "./PremiumDashboardRoutes";
+import InvestorRoutes from "./InvestorRoutes";
 import NotFound from "@/pages/NotFound";
 import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
@@ -82,7 +83,7 @@ const AppRoutes = () => {
         {/* Investor Routes */}
         <Route path="/investor/*" element={
           <RequireAuth>
-            <InvestorDashboard />
+            <InvestorRoutes />
           </RequireAuth>
         } />
         
