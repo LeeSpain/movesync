@@ -22,7 +22,10 @@ import StripeWrapper from "@/components/checkout/StripeWrapper";
 import ChoosePlan from "@/pages/ChoosePlan";
 import VerifyPending from "@/pages/VerifyPending";
 import VerifyEmail from "@/pages/VerifyEmail";
-import InvestorDashboard from "@/pages/admin/InvestorDashboard";
+import About from "@/pages/About";
+import Contact from "@/pages/Contact";
+import RelocationGuide from "@/pages/RelocationGuide";
+import CostCalculator from "@/pages/CostCalculator";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -45,6 +48,12 @@ const AppRoutes = () => {
             <Investment />
           </InvestmentProvider>
         } />
+        
+        {/* Additional pages */}
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/relocation-guide" element={<RelocationGuide />} />
+        <Route path="/cost-calculator" element={<CostCalculator />} />
         
         {/* Plan selection page */}
         <Route path="/choose-plan" element={<ChoosePlan />} />

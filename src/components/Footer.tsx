@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -93,49 +94,26 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Footer links */}
+        {/* Footer links - SIMPLIFIED VERSION */}
         <div 
-          className={`grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 transition-all duration-700 delay-300 ${
+          className={`grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 transition-all duration-700 delay-300 ${
             isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           <div>
             <h4 className="text-lg font-semibold mb-4">MoveSync</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Contact</a></li>
+              <li><Link to="/about" className="text-white/70 hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link></li>
               <li><Link to="/investment" className="text-white/70 hover:text-white transition-colors">Investment</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Features</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Home Search</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Visa Support</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Job Assistance</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">AI Concierge</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-lg font-semibold mb-4">Resources</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Relocation Guides</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">City Comparisons</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Cost Calculator</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Documentation</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">Cookie Policy</a></li>
-              <li><a href="#" className="text-white/70 hover:text-white transition-colors">GDPR Compliance</a></li>
+              <li><Link to="/relocation-guide" className="text-white/70 hover:text-white transition-colors">Relocation Guide</Link></li>
+              <li><Link to="/cost-calculator" className="text-white/70 hover:text-white transition-colors">Cost Calculator</Link></li>
             </ul>
           </div>
         </div>
@@ -147,11 +125,11 @@ const Footer = () => {
           }`}
         >
           <div className="mb-4 md:mb-0">
-            <a href="#" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <span className="text-2xl font-bold">
                 Move<span className="text-movesync-blue">Sync</span>
               </span>
-            </a>
+            </Link>
           </div>
           
           <div className="flex space-x-6">
