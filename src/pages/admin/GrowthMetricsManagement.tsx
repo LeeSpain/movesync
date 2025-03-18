@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import AdminLayout from '@/components/admin/AdminLayout';
 import { getMockStats } from '@/utils/adminMetrics';
 import { getGrowthMetricsData } from '@/utils/adminChartData';
 import GrowthKPICards from '@/components/admin/growth-metrics/GrowthKPICards';
@@ -24,7 +23,7 @@ const GrowthMetricsManagement = () => {
   const retentionData = getRetentionData();
 
   return (
-    <AdminLayout title="Growth Metrics">
+    <>
       {/* Top KPI Cards */}
       <GrowthKPICards stats={stats} />
 
@@ -55,7 +54,7 @@ const GrowthMetricsManagement = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </AdminLayout>
+    </>
   );
 };
 

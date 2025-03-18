@@ -24,7 +24,7 @@ const AdminRoutes = () => {
   return (
     <RequireAuth>
       <Routes>
-        <Route element={<AdminLayout title="Admin Dashboard" />}>
+        <Route element={<AdminLayout title="" />}>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/dashboard" element={<Navigate to="/admin" replace />} />
           <Route path="/users" element={<UserManagement />} />
