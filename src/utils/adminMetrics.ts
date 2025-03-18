@@ -1,26 +1,8 @@
-// Types and initial state for admin dashboard metrics
-export interface AdminStats {
-  totalUsers: number;
-  premiumUsers: number;
-  monthlyRevenue: number;
-  annualRevenue: number;
-  growthRate: number;
-  conversionRate: number;
-  customerAcquisitionCost: number;
-  lifetimeValue: number;
-  recentSignups: number;
-  totalInvestment: number;
-  companyValuation: number;
-  equityShare: number;
-  aiMetrics: {
-    queriesHandled: number;
-    satisfactionRate: number;
-    avgResponseTime: number;
-    topQuestionCategories: Record<string, number>;
-    conversationalTurns: number;
-    responseQuality: number;
-  }
-}
+
+import { AdminStats } from '@/types/adminStats';
+import { getInitialAIMetrics, getMockAIMetrics } from './metrics/aiMetrics';
+
+export type { AdminStats } from '@/types/adminStats';
 
 export const getInitialStats = (): AdminStats => ({
   totalUsers: 0,
@@ -35,20 +17,7 @@ export const getInitialStats = (): AdminStats => ({
   totalInvestment: 0,
   companyValuation: 0,
   equityShare: 0,
-  aiMetrics: {
-    queriesHandled: 0,
-    satisfactionRate: 0,
-    avgResponseTime: 0,
-    topQuestionCategories: {
-      'Visa Requirements': 0,
-      'Property Search': 0,
-      'Job Opportunities': 0,
-      'Cost of Living': 0,
-      'Local Services': 0
-    },
-    conversationalTurns: 0,
-    responseQuality: 0
-  }
+  aiMetrics: getInitialAIMetrics()
 });
 
 export const getMockStats = (): AdminStats => ({
@@ -64,18 +33,5 @@ export const getMockStats = (): AdminStats => ({
   totalInvestment: 500000,
   companyValuation: 2500000,
   equityShare: 20,
-  aiMetrics: {
-    queriesHandled: 8427,
-    satisfactionRate: 92,
-    avgResponseTime: 1.4,
-    topQuestionCategories: {
-      'Visa Requirements': 2418,
-      'Property Search': 1975,
-      'Job Opportunities': 1587,
-      'Cost of Living': 1243,
-      'Local Services': 1204
-    },
-    conversationalTurns: 3.7,
-    responseQuality: 87
-  }
+  aiMetrics: getMockAIMetrics()
 });
