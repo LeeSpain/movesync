@@ -21,12 +21,7 @@ import EmailManager from "@/components/admin/EmailManager";
 import AdminLayout from "@/components/admin/AdminLayout";
 
 const AdminRoutes = () => {
-  // Remove the admin check to allow any user to access the admin dashboard
-  // const { isAdmin } = useAuth();
-  // if (!isAdmin) {
-  //   return <Navigate to="/" replace />;
-  // }
-
+  // Allow any user to access the admin dashboard
   return (
     <RequireAuth>
       <AdminLayout title="Admin Dashboard">
