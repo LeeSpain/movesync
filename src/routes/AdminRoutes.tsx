@@ -23,8 +23,8 @@ import EmailManager from "@/components/admin/EmailManager";
 const AdminRoutes = () => {
   return (
     <RequireAuth>
-      <AdminLayout title="Admin Dashboard">
-        <Routes>
+      <Routes>
+        <Route element={<AdminLayout title="Admin Dashboard" />}>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/dashboard" element={<Navigate to="/admin" replace />} />
           <Route path="/users" element={<UserManagement />} />
@@ -44,8 +44,8 @@ const AdminRoutes = () => {
           <Route path="/service-setup" element={<ServiceSetup />} />
           <Route path="/email" element={<EmailManager />} />
           <Route path="/email-manager" element={<Navigate to="/admin/email" replace />} />
-        </Routes>
-      </AdminLayout>
+        </Route>
+      </Routes>
     </RequireAuth>
   );
 };

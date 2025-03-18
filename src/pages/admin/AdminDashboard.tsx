@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import AdminLayout from '@/components/admin/AdminLayout';
 import AdminKPICards from '@/components/admin/AdminKPICards';
 import FinancialOverview from '@/components/admin/FinancialOverview';
 import SubscriptionMetrics from '@/components/admin/SubscriptionMetrics';
@@ -33,7 +32,7 @@ const AdminDashboard = () => {
   const growthMetricsData = getGrowthMetricsData();
 
   return (
-    <AdminLayout title="Executive Dashboard">
+    <>
       <AdminKPICards stats={stats} />
 
       <div className="mt-6">
@@ -58,7 +57,7 @@ const AdminDashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </AdminLayout>
+    </>
   );
 };
 

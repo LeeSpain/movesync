@@ -1,11 +1,12 @@
 
 import { ReactNode, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
 
 export type AdminLayoutProps = {
-  children: ReactNode;
+  children?: ReactNode;
   title: string;
 };
 
@@ -33,7 +34,7 @@ const AdminLayout = ({ children, title }: AdminLayoutProps) => {
 
         {/* Page Content */}
         <div className="p-6">
-          {children}
+          {children || <Outlet />}
         </div>
       </main>
     </div>
