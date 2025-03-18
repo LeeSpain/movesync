@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
@@ -8,6 +7,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { LoaderCircle, CreditCard, CheckCircle, Lock } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { EmailService } from '@/utils/emailService';
+
+export interface EmailConfig {
+  to: string;
+  subject: string;
+  body: string;
+  from?: string;
+}
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -82,7 +89,6 @@ const CheckoutPage = () => {
     e.preventDefault();
     
     if (!stripe || !elements || !formValid) {
-      // Stripe.js has not loaded yet or form is invalid
       return;
     }
     
@@ -90,23 +96,34 @@ const CheckoutPage = () => {
     setError(null);
     
     try {
-      // In a real application, you would use the clientSecret with stripe.confirmCardPayment
-      // Since we're mocking the payment, we'll simulate a successful payment
-      
       // Simulate payment processing
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // Simulate a successful payment
-      toast({
-        title: "Payment successful!",
-        description: "Your account has been upgraded to Premium.",
+      // Generate a verification token (in a real app, this would be more secure)
+      const verificationToken = Math.random().toString(36).substring(2);
+      const tempUserId = Date.now().toString();
+      
+      // Send payment confirmation email
+      await EmailService.sendPaymentConfirmationEmail(formData.email, billingCycle === 'monthly' ? PRICES.monthly : PRICES.annually);
+      
+      // Send verification email
+      await EmailService.sendVerificationEmail(formData.email, {
+        userId: tempUserId,
+        token: verificationToken
       });
       
-      // Update user account to premium
-      upgradeToPremium();
+      // Show success message
+      toast({
+        title: "Payment successful!",
+        description: "Please check your email to verify your account.",
+      });
       
-      // Redirect to success page
-      navigate('/checkout/success');
+      // Navigate to verification pending page
+      navigate('/verify-pending', { 
+        state: { 
+          email: formData.email 
+        } 
+      });
       
     } catch (err) {
       console.error('Payment error:', err);

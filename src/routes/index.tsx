@@ -1,4 +1,3 @@
-
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import PublicRoutes from "./PublicRoutes";
@@ -18,6 +17,8 @@ import CheckoutSuccess from "@/pages/CheckoutSuccess";
 import CheckoutCancel from "@/pages/CheckoutCancel";
 import StripeWrapper from "@/components/checkout/StripeWrapper";
 import ChoosePlan from "@/pages/ChoosePlan";
+import VerifyPending from "@/pages/VerifyPending";
+import VerifyEmail from "@/pages/VerifyEmail";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -70,6 +71,10 @@ const AppRoutes = () => {
         
         {/* Admin Routes */}
         <Route path="/admin/*" element={<AdminRoutes />} />
+        
+        {/* Email Verification Routes */}
+        <Route path="/verify-pending" element={<VerifyPending />} />
+        <Route path="/verify/:userId/:token" element={<VerifyEmail />} />
         
         {/* Catch-all route */}
         <Route path="*" element={<NotFound />} />
