@@ -19,6 +19,7 @@ import StripeWrapper from "@/components/checkout/StripeWrapper";
 import ChoosePlan from "@/pages/ChoosePlan";
 import VerifyPending from "@/pages/VerifyPending";
 import VerifyEmail from "@/pages/VerifyEmail";
+import InvestorDashboard from "@/pages/admin/InvestorDashboard";
 
 const AppRoutes = () => {
   console.log("Rendering AppRoutes");
@@ -75,6 +76,13 @@ const AppRoutes = () => {
         {/* Email Verification Routes */}
         <Route path="/verify-pending" element={<VerifyPending />} />
         <Route path="/verify/:userId/:token" element={<VerifyEmail />} />
+        
+        {/* Investor Routes */}
+        <Route path="/investor/*" element={
+          <RequireAuth>
+            <InvestorDashboard />
+          </RequireAuth>
+        } />
         
         {/* Catch-all route */}
         <Route path="*" element={<NotFound />} />

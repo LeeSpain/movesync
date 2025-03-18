@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Define user types
@@ -12,6 +11,7 @@ export interface User {
   plan: UserPlan;
   progressPercentage: number;
   isAdmin: boolean; // Always include isAdmin flag
+  isInvestor?: boolean; // Added isInvestor flag
 }
 
 interface AuthContextType {
@@ -22,6 +22,7 @@ interface AuthContextType {
   logout: () => void;
   upgradeToPremium: () => void;
   isAdmin: boolean; // Added isAdmin accessor
+  isInvestor: boolean;
 }
 
 // Create the context
@@ -35,7 +36,8 @@ const MOCK_USERS = [
     email: 'alex@example.com',
     plan: 'free' as UserPlan,
     progressPercentage: 30,
-    isAdmin: true // Admin user
+    isAdmin: true,
+    isInvestor: false
   },
   {
     id: '2',
@@ -43,7 +45,17 @@ const MOCK_USERS = [
     email: 'sarah@example.com',
     plan: 'premium' as UserPlan,
     progressPercentage: 65,
-    isAdmin: false
+    isAdmin: false,
+    isInvestor: false
+  },
+  {
+    id: '3',
+    name: 'Michael Chen',
+    email: 'investor@example.com',
+    plan: 'premium' as UserPlan,
+    progressPercentage: 100,
+    isAdmin: false,
+    isInvestor: true
   }
 ];
 
@@ -155,7 +167,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     login,
     logout,
     upgradeToPremium,
-    isAdmin: isAdminValue
+    isAdmin: isAdminValue,
+    isInvestor: Boolean(user?.isInvestor)
   };
 
   return (

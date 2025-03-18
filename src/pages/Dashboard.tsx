@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,7 +7,7 @@ import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, user, loading, isAdmin } = useAuth();
+  const { isAuthenticated, user, loading, isAdmin, isInvestor } = useAuth();
   const { toast } = useToast();
   const [redirecting, setRedirecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +24,9 @@ const Dashboard = () => {
       isAuthenticated, 
       userPlan: user?.plan,
       isAdmin,
-      userIsAdmin: user?.isAdmin
+      isInvestor,
+      userIsAdmin: user?.isAdmin,
+      userIsInvestor: user?.isInvestor
     });
     
     // If not authenticated, go to login
@@ -37,7 +38,16 @@ const Dashboard = () => {
     
     // Try to redirect based on user info
     try {
-      // Check if user is admin first
+      if (isInvestor) {
+        console.log('User is investor, redirecting to investor dashboard');
+        toast({
+          title: "Welcome Investor!",
+          description: "Redirecting to investor dashboard",
+        });
+        navigate('/investor');
+        return;
+      }
+      
       if (isAdmin) {
         console.log('User is admin, redirecting to admin dashboard');
         toast({
@@ -48,7 +58,6 @@ const Dashboard = () => {
         return;
       }
       
-      // Redirect based on user plan
       if (user?.plan === 'premium') {
         console.log('User has premium plan, redirecting to premium dashboard');
         toast({
@@ -69,11 +78,13 @@ const Dashboard = () => {
       setError('Error redirecting to dashboard. Please try again.');
       setRedirecting(false);
     }
-  }, [isAuthenticated, user, loading, navigate, toast, isAdmin]);
+  }, [isAuthenticated, user, loading, navigate, toast, isAdmin, isInvestor]);
 
   const handleManualRedirect = () => {
     if (isAuthenticated) {
-      if (isAdmin) {
+      if (isInvestor) {
+        navigate('/investor');
+      } else if (isAdmin) {
         navigate('/admin');
       } else if (user?.plan === 'premium') {
         navigate('/dashboard/premium');

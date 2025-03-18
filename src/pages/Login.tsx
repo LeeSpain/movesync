@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -77,12 +76,13 @@ const Login = () => {
     }
   };
 
-  // Regular user credentials
+  // Regular user credentials section update
   const regularUserCredentials = (
     <div className="p-4 bg-blue-50 rounded-lg text-sm">
       <p className="font-medium text-movesync-blue mb-1">Demo Credentials:</p>
       <p className="text-movesync-gray-dark">Admin User: alex@example.com</p>
       <p className="text-movesync-gray-dark">Premium User: sarah@example.com</p>
+      <p className="text-movesync-gray-dark">Investor: investor@example.com</p>
       <p className="text-movesync-gray-dark mt-1">(Any password will work for the demo)</p>
     </div>
   );
