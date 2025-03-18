@@ -1,4 +1,7 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import TokenService from '@/utils/tokenService';
+import { toast } from '@/components/ui/use-toast';
 
 // Define user types
 type UserPlan = 'free' | 'premium';
@@ -23,6 +26,7 @@ interface AuthContextType {
   upgradeToPremium: () => void;
   isAdmin: boolean; // Added isAdmin accessor
   isInvestor: boolean;
+  refreshUserData: () => Promise<void>;
 }
 
 // Create the context
@@ -64,10 +68,43 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Function to refresh user data (would connect to API in production)
+  const refreshUserData = async () => {
+    try {
+      // In a real app, this would fetch the latest user data from the API
+      // For now, we'll just use what's stored locally
+      const storedUser = localStorage.getItem('moveSync_user');
+      
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      }
+      
+      return Promise.resolve();
+    } catch (error) {
+      console.error("Error refreshing user data:", error);
+      return Promise.reject(error);
+    }
+  };
+
   // Simulate checking for authenticated user on load
   useEffect(() => {
     const checkStoredUser = () => {
       try {
+        // First check if we have a valid token
+        const isValidToken = TokenService.isTokenValid();
+        console.log("Token valid:", isValidToken);
+        
+        if (!isValidToken) {
+          // If token is invalid, clear any stored user data for security
+          localStorage.removeItem('moveSync_user');
+          TokenService.clearTokens();
+          setUser(null);
+          setLoading(false);
+          return;
+        }
+        
+        // If token is valid, check for stored user data
         const storedUser = localStorage.getItem('moveSync_user');
         console.log("Raw stored user data:", storedUser);
         
@@ -86,6 +123,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           } catch (e) {
             console.error("Error parsing user from localStorage:", e);
             localStorage.removeItem('moveSync_user');
+            TokenService.clearTokens();
           }
         } else {
           console.log("No user found in localStorage");
@@ -113,12 +151,27 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       if (foundUser) {
         console.log("User logged in:", foundUser);
         console.log("User isAdmin value:", foundUser.isAdmin);
+        
+        // In a real app, the server would return tokens
+        // For this demo, we'll create mock tokens with the user information
+        const mockAccessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIke2ZvdW5kVXNlci5pZH0iLCJuYW1lIjoiJHtmb3VuZFVzZXIubmFtZX0iLCJlbWFpbCI6IiR7Zm91bmRVc2VyLmVtYWlsfSIsImlzQWRtaW4iOiR7Zm91bmRVc2VyLmlzQWRtaW59LCJpYXQiOjE2MTYxNTMxMjJ9.fjbFXtKP-Uf6Vyhj0piRD6ZTiEI9z1Rg7wMhPIQOdEQ`;
+        const mockRefreshToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIke2ZvdW5kVXNlci5pZH0iLCJpYXQiOjE2MTYxNTMxMjJ9.VD1wnkYl4-XAkVsMNMCHKQimf0UtbMOWbGJxPuUWrYQ`;
+        
+        // Store tokens
+        TokenService.setAccessToken(mockAccessToken, 3600); // 1 hour expiry
+        TokenService.setRefreshToken(mockRefreshToken);
+        
         setUser(foundUser);
         try {
           localStorage.setItem('moveSync_user', JSON.stringify(foundUser));
           console.log("User saved to localStorage:", foundUser);
         } catch (e) {
           console.error("Error saving user to localStorage:", e);
+          toast({
+            variant: "destructive",
+            title: "Storage Error",
+            description: "Failed to save user data. Some features may not work correctly.",
+          });
         }
       } else {
         throw new Error('Invalid credentials');
@@ -136,6 +189,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     console.log("Logging out user");
     setUser(null);
     localStorage.removeItem('moveSync_user');
+    
+    // Clear tokens
+    TokenService.clearTokens();
   };
 
   // Upgrade to premium function
@@ -168,7 +224,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     logout,
     upgradeToPremium,
     isAdmin: isAdminValue,
-    isInvestor: Boolean(user?.isInvestor)
+    isInvestor: Boolean(user?.isInvestor),
+    refreshUserData
   };
 
   return (

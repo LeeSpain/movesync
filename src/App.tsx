@@ -6,21 +6,60 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes";
 import ScrollToTop from "./components/ScrollToTop";
+import { useEffect } from "react";
+import TokenService from "./utils/tokenService";
 
-// Create a new QueryClient instance
-const queryClient = new QueryClient();
+// Create a new QueryClient instance with better error handling
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+      onError: (error) => {
+        console.error('Query error:', error);
+      }
+    },
+    mutations: {
+      retry: 1,
+      onError: (error) => {
+        console.error('Mutation error:', error);
+      }
+    }
+  }
+});
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <AppRoutes />
-        <Toaster />
-        <Sonner />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Check authentication tokens on app start
+  useEffect(() => {
+    const checkAuthentication = () => {
+      // Check if token is valid and prepare for refresh if needed
+      if (TokenService.getAccessToken() && !TokenService.isTokenValid()) {
+        console.log('Access token expired, attempting refresh...');
+        // This logic could be expanded in a real application
+      }
+    };
+    
+    checkAuthentication();
+    
+    // Set up periodic token validation (every minute)
+    const tokenCheckInterval = setInterval(checkAuthentication, 60 * 1000);
+    
+    return () => clearInterval(tokenCheckInterval);
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <AppRoutes />
+          <Toaster />
+          <Sonner />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

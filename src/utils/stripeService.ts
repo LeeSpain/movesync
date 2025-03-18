@@ -11,9 +11,68 @@ interface PaymentIntentData {
   customerEmail: string;
   customerName: string;
   description: string;
+  metadata?: Record<string, string>;
+}
+
+interface StripeConfig {
+  publishableKey: string;
+  webhookSecret?: string;
+  enabled: boolean;
+  testMode: boolean;
 }
 
 export const StripeService = {
+  // Get the current Stripe configuration
+  getConfig: (): StripeConfig | null => {
+    try {
+      const stripeSettings = localStorage.getItem('moveSync_stripeSettings');
+      if (!stripeSettings) {
+        return null;
+      }
+      
+      return JSON.parse(stripeSettings);
+    } catch (error) {
+      console.error("Error getting Stripe configuration:", error);
+      return null;
+    }
+  },
+  
+  // Save Stripe configuration
+  saveConfig: (config: StripeConfig): boolean => {
+    try {
+      localStorage.setItem('moveSync_stripeSettings', JSON.stringify(config));
+      return true;
+    } catch (error) {
+      console.error("Error saving Stripe configuration:", error);
+      return false;
+    }
+  },
+
+  // Validate Stripe API key format
+  validatePublishableKey: (key: string): boolean => {
+    // Basic validation - Stripe publishable keys start with pk_
+    return key.startsWith('pk_') && key.length > 10;
+  },
+
+  // Test Stripe configuration
+  testConnection: async (publishableKey: string): Promise<boolean> => {
+    try {
+      // In a real implementation, you would verify the key with Stripe's API
+      // For now, we'll just validate the format
+      if (!StripeService.validatePublishableKey(publishableKey)) {
+        throw new Error("Invalid Stripe publishable key format");
+      }
+      
+      // Simulate an API test
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      return true;
+    } catch (error) {
+      console.error("Error testing Stripe connection:", error);
+      throw error;
+    }
+  },
+  
   // Create a payment intent
   createPaymentIntent: async (paymentData: PaymentIntentData): Promise<string | null> => {
     try {
@@ -27,6 +86,18 @@ export const StripeService = {
           variant: "destructive",
           title: "Stripe Configuration Missing",
           description: "Please set up your Stripe account in the admin panel first.",
+        });
+        return null;
+      }
+      
+      // Parse the settings to make sure they're valid
+      const settings = JSON.parse(stripeSettings);
+      if (!settings.enabled) {
+        console.warn("Stripe payments are disabled in settings.");
+        toast({
+          variant: "destructive",
+          title: "Payments Disabled",
+          description: "Payment processing is currently disabled. Please contact the administrator.",
         });
         return null;
       }
@@ -137,5 +208,14 @@ export const StripeService = {
       console.error("Error processing webhook event:", error);
       return false;
     }
+  },
+  
+  // Get test card numbers for development
+  getTestCards: () => {
+    return [
+      { number: '4242 4242 4242 4242', brand: 'Visa', description: 'Succeeds and immediately processes the payment' },
+      { number: '4000 0027 6000 3184', brand: 'Visa', description: 'Requires authentication (3D Secure)' },
+      { number: '4000 0000 0000 9995', brand: 'Visa', description: 'Always fails with a decline code of insufficient_funds' },
+    ];
   }
 };

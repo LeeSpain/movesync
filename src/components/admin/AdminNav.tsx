@@ -1,7 +1,18 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Settings, LogOut, Lock, CreditCard, Mail, UserCog, Server } from 'lucide-react';
+import { 
+  Settings, 
+  LogOut, 
+  Lock, 
+  CreditCard, 
+  Mail, 
+  UserCog, 
+  Server,
+  Bell,
+  ShieldCheck,
+  LineChart
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,6 +22,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+  DropdownMenuPortal,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
@@ -52,6 +67,26 @@ const AdminNav = () => {
     navigate('/admin/email-manager');
     setIsOpen(false);
   };
+  
+  const goToSecuritySettings = () => {
+    navigate('/admin/settings#security');
+    setIsOpen(false);
+  };
+  
+  const goToPaymentSettings = () => {
+    navigate('/admin/service-setup#payment');
+    setIsOpen(false);
+  };
+  
+  const goToNotifications = () => {
+    navigate('/admin/settings#notifications');
+    setIsOpen(false);
+  };
+  
+  const goToAnalytics = () => {
+    navigate('/admin/analytics');
+    setIsOpen(false);
+  };
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -74,6 +109,11 @@ const AdminNav = () => {
             <UserCog className="mr-2 h-4 w-4" />
             <span>User Management</span>
           </DropdownMenuItem>
+          
+          <DropdownMenuItem onClick={goToAnalytics}>
+            <LineChart className="mr-2 h-4 w-4" />
+            <span>Analytics & Reports</span>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
@@ -88,6 +128,26 @@ const AdminNav = () => {
           <DropdownMenuItem onClick={goToEmailManager}>
             <Mail className="mr-2 h-4 w-4" />
             <span>Email Manager</span>
+          </DropdownMenuItem>
+          
+          <DropdownMenuItem onClick={goToPaymentSettings}>
+            <CreditCard className="mr-2 h-4 w-4" />
+            <span>Payment Settings</span>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>System</DropdownMenuLabel>
+        
+        <DropdownMenuGroup>
+          <DropdownMenuItem onClick={goToSecuritySettings}>
+            <ShieldCheck className="mr-2 h-4 w-4" />
+            <span>Security Settings</span>
+          </DropdownMenuItem>
+          
+          <DropdownMenuItem onClick={goToNotifications}>
+            <Bell className="mr-2 h-4 w-4" />
+            <span>System Notifications</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         

@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { Card } from '@/components/ui/card';
-import { Loader2 } from 'lucide-react';
+import { Loader2, AlertTriangle } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 // Initialize the Stripe promise with the stored publishable key
@@ -42,10 +42,21 @@ const StripeWrapper = ({ children }: StripeWrapperProps) => {
   const [loading, setLoading] = useState(true);
   const [stripePromise, setStripePromise] = useState(() => getStripePromise());
   const [stripeError, setStripeError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     const initializeStripe = async () => {
       try {
+        // Check if Stripe configuration exists
+        const stripeSettings = localStorage.getItem('moveSync_stripeSettings');
+        if (!stripeSettings && retryCount === 0) {
+          console.warn("No Stripe configuration found. Using default test key.");
+          toast({
+            title: "Using Test Mode",
+            description: "Stripe is running in test mode. Please configure in Admin settings for production use.",
+          });
+        }
+        
         // Simulate loading Stripe (in a real app, this would be the actual loading time)
         await new Promise(resolve => setTimeout(resolve, 1000));
         setLoading(false);
@@ -57,7 +68,14 @@ const StripeWrapper = ({ children }: StripeWrapperProps) => {
     };
 
     initializeStripe();
-  }, []);
+  }, [retryCount]);
+
+  const handleRetry = () => {
+    setLoading(true);
+    setStripeError(null);
+    setRetryCount(prevCount => prevCount + 1);
+    setStripePromise(getStripePromise());
+  };
 
   if (loading) {
     return (
@@ -73,13 +91,21 @@ const StripeWrapper = ({ children }: StripeWrapperProps) => {
   if (stripeError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Card className="p-8 flex flex-col items-center">
-          <p className="text-red-500 mb-4">{stripeError}</p>
+        <Card className="p-8 flex flex-col items-center max-w-md">
+          <AlertTriangle className="h-12 w-12 text-red-500 mb-4" />
+          <h3 className="text-xl font-bold mb-2">Payment System Error</h3>
+          <p className="text-red-500 mb-4 text-center">{stripeError}</p>
           <button 
-            className="bg-movesync-blue text-white px-4 py-2 rounded"
-            onClick={() => window.location.reload()}
+            className="bg-movesync-blue text-white px-4 py-2 rounded mb-2 w-full"
+            onClick={handleRetry}
           >
             Try Again
+          </button>
+          <button
+            className="text-movesync-blue hover:underline text-sm mt-2"
+            onClick={() => window.location.href = '/'}
+          >
+            Return to Homepage
           </button>
         </Card>
       </div>
