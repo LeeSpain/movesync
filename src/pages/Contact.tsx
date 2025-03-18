@@ -8,7 +8,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { Mail, Send } from 'lucide-react';
-import ApiService from '@/utils/apiService';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -32,9 +31,6 @@ const Contact = () => {
     try {
       // Simulating API call with a delay
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // In a real application, you would use the API service
-      // const response = await ApiService.post('/contact', formData, false);
       
       toast({
         title: "Message sent!",
@@ -62,24 +58,25 @@ const Contact = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       
-      <main className="container mx-auto px-4 pt-16 pb-20 max-w-7xl">
+      <main className="container mx-auto px-4 py-20 max-w-6xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-3 text-gradient">Contact Us</h1>
+          <h1 className="text-4xl font-bold mb-4 text-gradient">Contact Us</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             We're here to help with any questions you may have about relocating to Australia.
             Our team is ready to assist you.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-10 mb-16 max-w-6xl mx-auto">
-          <Card className="shadow-lg border border-gray-100 md:col-span-2 overflow-hidden transition-all duration-300 hover:shadow-xl">
+        <div className="grid md:grid-cols-12 gap-8 max-w-5xl mx-auto">
+          {/* Contact Form */}
+          <Card className="md:col-span-8 shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
             <div className="bg-gradient-to-r from-movesync-blue to-movesync-blue-light h-2 w-full"></div>
             <CardContent className="p-8">
               <h2 className="text-2xl font-semibold mb-6">Get in Touch</h2>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
                     <Input
                       id="name"
                       name="name"
@@ -92,7 +89,7 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
                     <Input
                       id="email"
                       name="email"
@@ -107,7 +104,7 @@ const Contact = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium mb-1">Subject</label>
+                  <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
                   <Input
                     id="subject"
                     name="subject"
@@ -120,7 +117,7 @@ const Contact = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
                   <Textarea
                     id="message"
                     name="message"
@@ -148,7 +145,8 @@ const Contact = () => {
             </CardContent>
           </Card>
           
-          <Card className="shadow-lg border border-gray-100 md:col-span-1 overflow-hidden transition-all duration-300 hover:shadow-xl">
+          {/* Contact Information */}
+          <Card className="md:col-span-4 shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl h-fit">
             <div className="bg-gradient-to-r from-movesync-blue to-movesync-blue-light h-2 w-full"></div>
             <CardContent className="p-8">
               <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
