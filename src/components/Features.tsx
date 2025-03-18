@@ -39,7 +39,7 @@ const Features = () => {
   return (
     <section 
       id="features" 
-      className="section-spacing bg-movesync-gray-light py-24 sm:py-32 relative overflow-hidden"
+      className="section-spacing bg-movesync-gray-light relative overflow-hidden"
       ref={sectionRef}
     >
       {/* Australian-themed background elements */}
