@@ -32,6 +32,7 @@ const AdminRoutes = () => {
     <RequireAuth>
       <Routes>
         <Route path="/" element={<AdminDashboard />} />
+        <Route path="/dashboard" element={<Navigate to="/admin" replace />} />
         <Route path="/users" element={<UserManagement />} />
         <Route path="/countries" element={<CountryManagement />} />
         <Route path="/properties" element={<PropertyManagement />} />
@@ -47,7 +48,7 @@ const AdminRoutes = () => {
         <Route path="/services" element={<ServicesManagement />} />
         <Route path="/settings" element={<AdminSettings />} />
         <Route path="/service-setup" element={<ServiceSetup />} />
-        <Route path="/email-manager" element={<EmailManager />} />
+        <Route path="/email-manager" element={<Navigate to="/admin/email" replace />} />
         <Route path="/email" element={<EmailManager />} />
       </Routes>
     </RequireAuth>

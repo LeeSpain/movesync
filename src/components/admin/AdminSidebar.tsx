@@ -22,7 +22,7 @@ const AdminSidebar = ({ isSidebarOpen, toggleSidebar }: AdminSidebarProps) => {
     logout();
     toast({
       title: "Logged out successfully",
-      description: "You've been logged out of your MoveSync admin account.",
+      description: "You've been logged out of your Move-Sync admin account.",
     });
     navigate('/login');
   };
@@ -37,7 +37,9 @@ const AdminSidebar = ({ isSidebarOpen, toggleSidebar }: AdminSidebarProps) => {
       <SidebarHeader isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <AdminUserInfo user={user} isSidebarOpen={isSidebarOpen} />
       <AdminSidebarNav isSidebarOpen={isSidebarOpen} />
-      <SidebarFooter isSidebarOpen={isSidebarOpen} onLogout={handleLogout} />
+      <div className="mt-auto">
+        <SidebarFooter isSidebarOpen={isSidebarOpen} onLogout={handleLogout} />
+      </div>
     </aside>
   );
 };

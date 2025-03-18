@@ -1,6 +1,7 @@
 
-import { Home, Users, Mail, Settings, FileText, LineChart, DollarSign } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Home, Users, Mail, FileText, LineChart, DollarSign, Settings } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 type NavItem = {
   title: string;
@@ -12,7 +13,7 @@ type NavItem = {
 export const adminNavItems: NavItem[] = [
   {
     title: "Dashboard",
-    href: "/admin/dashboard",
+    href: "/admin",
     icon: Home,
     variant: "ghost",
   },
@@ -37,13 +38,13 @@ export const adminNavItems: NavItem[] = [
   {
     title: "Revenue Management",
     href: "/admin/revenue",
-    icon: FileText,
+    icon: DollarSign,
     variant: "ghost",
   },
   {
     title: "Growth Metrics",
     href: "/admin/growth-metrics",
-    icon: FileText,
+    icon: LineChart,
     variant: "ghost",
   },
   {
@@ -61,21 +62,32 @@ export const adminNavItems: NavItem[] = [
 ];
 
 const AdminSidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  const location = useLocation();
+  
   return (
-    <nav className="space-y-2 px-2">
-      {adminNavItems.map((item) => (
-        <Link
-          key={item.href}
-          to={item.href}
-          className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
-        >
-          <item.icon className="h-5 w-5 mr-3" />
-          {isSidebarOpen && <span>{item.title}</span>}
-        </Link>
-      ))}
+    <nav className="space-y-2 px-2 py-4 flex-1 overflow-auto">
+      {adminNavItems.map((item) => {
+        const isActive = location.pathname === item.href || 
+                        (item.href !== "/admin" && location.pathname.startsWith(item.href));
+        
+        return (
+          <Link
+            key={item.href}
+            to={item.href}
+            className={cn(
+              "flex items-center px-3 py-2 rounded-md transition-colors",
+              isActive 
+                ? "bg-gray-100 text-gray-900" 
+                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            )}
+          >
+            <item.icon className="h-5 w-5 mr-3" />
+            {isSidebarOpen && <span>{item.title}</span>}
+          </Link>
+        );
+      })}
     </nav>
   );
 };
 
 export default AdminSidebarNav;
-
