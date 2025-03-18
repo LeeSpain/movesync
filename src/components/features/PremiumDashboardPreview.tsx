@@ -20,7 +20,7 @@ const PremiumDashboardPreview = ({ isIntersecting }: { isIntersecting: boolean }
       <FeatureCards />
       
       <Card className="bg-gradient-to-br from-gray-50 to-white shadow-lg border-0 overflow-hidden">
-        <div className="bg-gradient-to-r from-movesync-blue/10 to-purple-500/10 p-4 border-b border-movesync-blue/10">
+        <div className="bg-gradient-to-r from-movesync-blue/10 to-movesync-blue-light/10 p-4 border-b border-movesync-blue/10">
           <div className="flex justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold">Premium Dashboard Preview</h3>

@@ -1,3 +1,4 @@
+
 import { Home, Globe, Briefcase, CreditCard, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
