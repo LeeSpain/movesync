@@ -7,7 +7,7 @@ import {
   Lock, 
   CreditCard, 
   Mail, 
-  UserCog, 
+  UserCog,
   Server,
   Bell,
   ShieldCheck,
@@ -22,10 +22,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuGroup,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-  DropdownMenuPortal,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
