@@ -1,5 +1,6 @@
 
-import { Home, Users, Mail, Settings, FileText, LineChart } from 'lucide-react';
+import { Home, Users, Mail, Settings, FileText, LineChart, DollarSign } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 type NavItem = {
   title: string;
@@ -54,7 +55,7 @@ export const adminNavItems: NavItem[] = [
   {
     title: "Investor Dashboard",
     href: "/admin/investor",
-    icon: LineChart,
+    icon: DollarSign,
     variant: "ghost",
   },
 ];
@@ -63,14 +64,14 @@ const AdminSidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
     <nav className="space-y-2 px-2">
       {adminNavItems.map((item) => (
-        <a
+        <Link
           key={item.href}
-          href={item.href}
+          to={item.href}
           className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
         >
           <item.icon className="h-5 w-5 mr-3" />
           {isSidebarOpen && <span>{item.title}</span>}
-        </a>
+        </Link>
       ))}
     </nav>
   );
