@@ -129,10 +129,12 @@ export const ApiService = {
           statusCode: response.status,
         };
       } else {
+        // Fixed: Added null check for responseData
+        const errorMessage = responseData && responseData.message ? responseData.message : 'Unknown error occurred';
         console.error(`API error: ${response.status} ${response.statusText}`, responseData);
         return {
           success: false,
-          error: responseData.message || 'Unknown error occurred',
+          error: errorMessage,
           statusCode: response.status,
         };
       }
