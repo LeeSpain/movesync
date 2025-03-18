@@ -1,5 +1,6 @@
 
 import { Bot, CheckCircle, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const features = [
   {
@@ -23,15 +24,21 @@ const FeatureCards = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 px-4">
       {features.map((feature, index) => (
-        <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 shadow-md border border-gray-100">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+          className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+        >
           <div className="h-12 w-12 rounded-full bg-movesync-blue/10 flex items-center justify-center mb-4">
             {feature.icon}
           </div>
-          <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-          <p className="text-movesync-gray-dark">
+          <h3 className="font-semibold text-lg mb-3 text-gray-900">{feature.title}</h3>
+          <p className="text-movesync-gray-dark leading-relaxed">
             {feature.desc}
           </p>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
