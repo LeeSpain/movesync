@@ -1,43 +1,15 @@
-
 import React, { useState } from 'react';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from '@/components/ui/table';
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardHeader, 
-  CardTitle 
-} from '@/components/ui/card';
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuLabel, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
-} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { 
-  UserCog, 
-  MoreHorizontal, 
-  Search, 
-  UserPlus, 
-  Mail, 
-  Shield, 
-  UserX 
-} from 'lucide-react';
-import { AdminUser, getUsers } from '@/utils/adminUtils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { UserPlus } from 'lucide-react';
+import { AdminUser, getUsers } from '@/utils/adminUtils';
 import { toast } from '@/components/ui/use-toast';
+
+// Import the new components
+import AllUsersTab from '@/components/admin/user-management/tabs/AllUsersTab';
+import PremiumUsersTab from '@/components/admin/user-management/tabs/PremiumUsersTab';
+import FreeUsersTab from '@/components/admin/user-management/tabs/FreeUsersTab';
+import InactiveUsersTab from '@/components/admin/user-management/tabs/InactiveUsersTab';
 
 const UserManagement = () => {
   const [users, setUsers] = useState<AdminUser[]>(getUsers() || getMockUsers());
@@ -102,224 +74,41 @@ const UserManagement = () => {
           </TabsList>
           
           <TabsContent value="all-users" className="space-y-4">
-            <Card>
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <CardTitle>User Accounts ({filteredUsers.length})</CardTitle>
-                  <div className="relative w-64">
-                    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Search users..."
-                      className="pl-8"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <CardDescription>
-                  View and manage all registered user accounts.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Plan</TableHead>
-                      <TableHead>Country</TableHead>
-                      <TableHead>Joined</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredUsers.map((user) => (
-                      <TableRow key={user.id}>
-                        <TableCell className="font-medium">{user.name}</TableCell>
-                        <TableCell>{user.email}</TableCell>
-                        <TableCell>
-                          <Badge variant={user.plan === 'premium' ? 'default' : 'outline'}>
-                            {user.plan === 'premium' ? 'Premium' : 'Free'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{user.country}</TableCell>
-                        <TableCell>{user.joinDate}</TableCell>
-                        <TableCell>
-                          <Badge variant={user.status === 'active' ? 'default' : 'destructive'}>
-                            {user.status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="icon">
-                                <MoreHorizontal className="h-4 w-4" />
-                                <span className="sr-only">Actions</span>
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem onClick={() => handleSendEmail(user.email)}>
-                                <Mail className="mr-2 h-4 w-4" />
-                                <span>Send Email</span>
-                              </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleResetPassword(user.id)}>
-                                <Shield className="mr-2 h-4 w-4" />
-                                <span>Reset Password</span>
-                              </DropdownMenuItem>
-                              <DropdownMenuItem 
-                                onClick={() => handleToggleAccess(user.id, user.status)}
-                                className={user.status === 'active' ? "text-destructive" : "text-green-600"}
-                              >
-                                {user.status === 'active' ? (
-                                  <>
-                                    <UserX className="mr-2 h-4 w-4" />
-                                    <span>Deactivate User</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <UserCog className="mr-2 h-4 w-4" />
-                                    <span>Activate User</span>
-                                  </>
-                                )}
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <AllUsersTab 
+              users={filteredUsers}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              handleSendEmail={handleSendEmail}
+              handleResetPassword={handleResetPassword}
+              handleToggleAccess={handleToggleAccess}
+            />
           </TabsContent>
           
           <TabsContent value="premium" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Premium Users</CardTitle>
-                <CardDescription>
-                  Manage users on premium subscription plans.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Country</TableHead>
-                      <TableHead>Joined</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredUsers
-                      .filter(user => user.plan === 'premium')
-                      .map((user) => (
-                        <TableRow key={user.id}>
-                          <TableCell className="font-medium">{user.name}</TableCell>
-                          <TableCell>{user.email}</TableCell>
-                          <TableCell>{user.country}</TableCell>
-                          <TableCell>{user.joinDate}</TableCell>
-                          <TableCell className="text-right">
-                            <Button variant="ghost" size="sm" onClick={() => handleSendEmail(user.email)}>
-                              <Mail className="mr-2 h-4 w-4" />
-                              Contact
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <PremiumUsersTab 
+              users={filteredUsers}
+              handleSendEmail={handleSendEmail}
+              handleResetPassword={handleResetPassword}
+              handleToggleAccess={handleToggleAccess}
+            />
           </TabsContent>
           
           <TabsContent value="free" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Free Tier Users</CardTitle>
-                <CardDescription>
-                  View and manage users on the free plan.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Country</TableHead>
-                      <TableHead>Joined</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredUsers
-                      .filter(user => user.plan === 'free')
-                      .map((user) => (
-                        <TableRow key={user.id}>
-                          <TableCell className="font-medium">{user.name}</TableCell>
-                          <TableCell>{user.email}</TableCell>
-                          <TableCell>{user.country}</TableCell>
-                          <TableCell>{user.joinDate}</TableCell>
-                          <TableCell className="text-right">
-                            <Button variant="ghost" size="sm" onClick={() => handleSendEmail(user.email)}>
-                              <Mail className="mr-2 h-4 w-4" />
-                              Contact
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <FreeUsersTab 
+              users={filteredUsers}
+              handleSendEmail={handleSendEmail}
+              handleResetPassword={handleResetPassword}
+              handleToggleAccess={handleToggleAccess}
+            />
           </TabsContent>
           
           <TabsContent value="inactive" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Inactive Users</CardTitle>
-                <CardDescription>
-                  View and manage inactive or suspended accounts.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Plan</TableHead>
-                      <TableHead>Last Active</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredUsers
-                      .filter(user => user.status === 'inactive')
-                      .map((user) => (
-                        <TableRow key={user.id}>
-                          <TableCell className="font-medium">{user.name}</TableCell>
-                          <TableCell>{user.email}</TableCell>
-                          <TableCell>{user.plan}</TableCell>
-                          <TableCell>{user.lastActive}</TableCell>
-                          <TableCell className="text-right">
-                            <Button variant="outline" size="sm" onClick={() => handleToggleAccess(user.id, user.status)}>
-                              <UserCog className="mr-2 h-4 w-4" />
-                              Reactivate
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <InactiveUsersTab 
+              users={filteredUsers}
+              handleSendEmail={handleSendEmail}
+              handleResetPassword={handleResetPassword}
+              handleToggleAccess={handleToggleAccess}
+            />
           </TabsContent>
         </Tabs>
       </div>
