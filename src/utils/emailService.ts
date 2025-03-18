@@ -9,6 +9,18 @@ export interface EmailConfig {
   from?: string;
 }
 
+export interface IncomingEmail {
+  id: string;
+  from: string;
+  to: string;
+  subject: string;
+  body: string;
+  timestamp: number;
+  read: boolean;
+  important: boolean;
+  category: 'inbox' | 'archived' | 'spam' | 'trash';
+}
+
 export interface VerificationLink {
   userId: string;
   token: string;
@@ -88,6 +100,9 @@ export const EmailService = {
       // Simulate successful email sending for demo
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      // Store sent email in outbox
+      EmailService.storeSentEmail(config);
+      
       toast({
         title: "Email Sent",
         description: `Email to ${config.to} has been sent successfully.`,
@@ -101,6 +116,124 @@ export const EmailService = {
         title: "Email Error",
         description: "Failed to send email. Please check your configuration and try again."
       });
+      return false;
+    }
+  },
+  
+  // Store sent email in local storage
+  storeSentEmail: (config: EmailConfig): void => {
+    try {
+      const sentEmails = localStorage.getItem('moveSync_sentEmails');
+      const emailsArray = sentEmails ? JSON.parse(sentEmails) : [];
+      
+      const newEmail = {
+        id: Date.now().toString(),
+        to: config.to,
+        from: config.from || "movesyncai@gmail.com",
+        subject: config.subject,
+        body: config.body,
+        timestamp: Date.now(),
+      };
+      
+      emailsArray.unshift(newEmail);
+      localStorage.setItem('moveSync_sentEmails', JSON.stringify(emailsArray));
+    } catch (error) {
+      console.error("Error storing sent email:", error);
+    }
+  },
+  
+  // Get all incoming emails
+  getIncomingEmails: (): IncomingEmail[] => {
+    try {
+      const incomingEmails = localStorage.getItem('moveSync_incomingEmails');
+      return incomingEmails ? JSON.parse(incomingEmails) : [];
+    } catch (error) {
+      console.error("Error getting incoming emails:", error);
+      return [];
+    }
+  },
+  
+  // Store a new incoming email
+  storeIncomingEmail: (email: Omit<IncomingEmail, 'id' | 'timestamp' | 'read' | 'important' | 'category'>): IncomingEmail => {
+    try {
+      const incomingEmails = EmailService.getIncomingEmails();
+      
+      const newEmail: IncomingEmail = {
+        id: Date.now().toString(),
+        ...email,
+        timestamp: Date.now(),
+        read: false,
+        important: false,
+        category: 'inbox',
+      };
+      
+      incomingEmails.unshift(newEmail);
+      localStorage.setItem('moveSync_incomingEmails', JSON.stringify(incomingEmails));
+      
+      // Show notification for new email
+      toast({
+        title: "New Email Received",
+        description: `From: ${email.from}\nSubject: ${email.subject}`,
+      });
+      
+      return newEmail;
+    } catch (error) {
+      console.error("Error storing incoming email:", error);
+      throw error;
+    }
+  },
+  
+  // Update email status (read, important, category)
+  updateEmailStatus: (emailId: string, updates: Partial<IncomingEmail>): IncomingEmail | null => {
+    try {
+      const incomingEmails = EmailService.getIncomingEmails();
+      const emailIndex = incomingEmails.findIndex(email => email.id === emailId);
+      
+      if (emailIndex === -1) {
+        console.error("Email not found:", emailId);
+        return null;
+      }
+      
+      const updatedEmail = {
+        ...incomingEmails[emailIndex],
+        ...updates,
+      };
+      
+      incomingEmails[emailIndex] = updatedEmail;
+      localStorage.setItem('moveSync_incomingEmails', JSON.stringify(incomingEmails));
+      
+      return updatedEmail;
+    } catch (error) {
+      console.error("Error updating email status:", error);
+      return null;
+    }
+  },
+  
+  // Delete email (move to trash)
+  deleteEmail: (emailId: string): boolean => {
+    try {
+      return !!EmailService.updateEmailStatus(emailId, { category: 'trash' });
+    } catch (error) {
+      console.error("Error deleting email:", error);
+      return false;
+    }
+  },
+  
+  // Permanently delete email
+  permanentlyDeleteEmail: (emailId: string): boolean => {
+    try {
+      const incomingEmails = EmailService.getIncomingEmails();
+      const filteredEmails = incomingEmails.filter(email => email.id !== emailId);
+      
+      if (filteredEmails.length === incomingEmails.length) {
+        // Email not found
+        return false;
+      }
+      
+      localStorage.setItem('moveSync_incomingEmails', JSON.stringify(filteredEmails));
+      return true;
+    } catch (error) {
+      console.error("Error permanently deleting email:", error);
       return false;
     }
   },
