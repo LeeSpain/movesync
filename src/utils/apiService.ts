@@ -131,14 +131,12 @@ export const ApiService = {
       } else {
         let errorMessage = 'Unknown error occurred';
         
-        // Fix for TypeScript error - ensure responseData is an object with a message property
+        // Properly check if responseData has a message property
         if (responseData && 
             typeof responseData === 'object' && 
-            responseData !== null &&
-            'message' in responseData &&
-            responseData.message !== null && 
-            responseData.message !== undefined) {
-          errorMessage = String(responseData.message);
+            responseData !== null) {
+          // Access message safely with optional chaining
+          errorMessage = String(responseData.message ?? errorMessage);
         }
         
         console.error(`API error: ${response.status} ${response.statusText}`, responseData);
