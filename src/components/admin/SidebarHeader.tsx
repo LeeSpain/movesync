@@ -1,6 +1,6 @@
 
-import { ReactNode } from 'react';
-import { Lock, ChevronLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { X, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -10,18 +10,28 @@ type SidebarHeaderProps = {
 };
 
 const SidebarHeader = ({ isSidebarOpen, toggleSidebar }: SidebarHeaderProps) => {
+  const navigate = useNavigate();
+  
   return (
-    <div className="h-16 border-b border-gray-200 flex items-center justify-between px-4">
-      {isSidebarOpen ? (
-        <div className="flex items-center gap-2">
-          <Lock className="h-5 w-5 text-blue-600" />
-          <span className="font-bold text-lg">MoveSync Admin</span>
-        </div>
-      ) : (
-        <Lock className="h-5 w-5 text-blue-600 mx-auto" />
-      )}
-      <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-        <ChevronLeft className={cn("h-5 w-5 transition-transform", !isSidebarOpen && "rotate-180")} />
+    <div className="h-16 flex items-center justify-between px-4 border-b border-gray-200">
+      <div 
+        className={cn("flex items-center gap-2 cursor-pointer", !isSidebarOpen && "justify-center")}
+        onClick={() => navigate('/admin')}
+      >
+        {isSidebarOpen ? (
+          <span className="text-xl font-bold">
+            Move-<span className="text-movesync-blue">Sync</span> Admin
+          </span>
+        ) : (
+          <span className="text-xl font-bold text-movesync-blue">M</span>
+        )}
+      </div>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </Button>
     </div>
   );

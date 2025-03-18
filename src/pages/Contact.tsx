@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -58,7 +57,7 @@ const Contact = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-20 max-w-6xl">
+      <main className="container mx-auto px-4 pt-32 pb-12 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4 text-gradient">Contact Us</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
