@@ -60,6 +60,7 @@ const AdminRoutes = () => {
           <Route path="settings" element={<AdminSettings />} />
           <Route path="service-setup" element={<ServiceSetup />} />
           <Route path="email-manager" element={<EmailManager />} />
+          <Route path="email" element={<EmailManager />} />
         </Route>
       </Routes>
     </RequireAuth>
