@@ -1,5 +1,7 @@
+
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { RequireAuth } from "./AuthRoutes"; // Add this import
 import PublicRoutes from "./PublicRoutes";
 import AuthRoutes from "./AuthRoutes";
 import AdminRoutes from "./AdminRoutes";
