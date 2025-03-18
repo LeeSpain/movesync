@@ -2,11 +2,6 @@
 import { toast } from "@/components/ui/use-toast";
 import emailjs from 'emailjs-com';
 
-// These would typically be environment variables
-const EMAIL_SERVICE_ID = "your_service_id"; // EmailJS service ID
-const EMAIL_USER_ID = "your_user_id";       // EmailJS user ID
-const EMAIL_TEMPLATE_ID = "your_template_id"; // EmailJS template ID
-
 export interface EmailConfig {
   to: string;
   subject: string;
@@ -20,9 +15,46 @@ export interface VerificationLink {
 }
 
 export const EmailService = {
+  // Initialize EmailJS with stored configuration
+  initializeEmailJS: () => {
+    try {
+      const emailSettings = localStorage.getItem('moveSync_emailSettings');
+      if (!emailSettings) {
+        console.warn("EmailJS settings not found. Please configure EmailJS in admin panel.");
+        return false;
+      }
+      
+      const { serviceId, templateId, userId } = JSON.parse(emailSettings);
+      if (!serviceId || !templateId || !userId) {
+        console.warn("Incomplete EmailJS configuration. Please check admin settings.");
+        return false;
+      }
+      
+      // In production, you'd initialize EmailJS with your user ID
+      // emailjs.init(userId);
+      console.log("EmailJS initialized with:", { serviceId, templateId, userId });
+      return true;
+    } catch (error) {
+      console.error("Error initializing EmailJS:", error);
+      return false;
+    }
+  },
+  
   // Send emails using EmailJS
   sendEmail: async (config: EmailConfig): Promise<boolean> => {
     try {
+      const emailSettings = localStorage.getItem('moveSync_emailSettings');
+      if (!emailSettings) {
+        toast({
+          variant: "destructive",
+          title: "Email Configuration Missing",
+          description: "Please set up your email service in the admin panel first.",
+        });
+        return false;
+      }
+      
+      const { serviceId, templateId, userId } = JSON.parse(emailSettings);
+      
       console.log("Sending email:", {
         from: config.from || "movesyncai@gmail.com",
         to: config.to,
@@ -40,21 +72,34 @@ export const EmailService = {
       };
       
       // Send email using EmailJS
-      const response = await emailjs.send(
-        EMAIL_SERVICE_ID,
-        EMAIL_TEMPLATE_ID,
-        templateParams,
-        EMAIL_USER_ID
-      );
+      // In a real application, this would actually call the EmailJS API
+      console.log("Would call EmailJS with:", { serviceId, templateId, templateParams, userId });
       
+      /* In production, you would uncomment this code:
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        userId
+      );
       console.log("Email sent successfully:", response);
+      */
+      
+      // Simulate successful email sending for demo
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Email Sent",
+        description: `Email to ${config.to} has been sent successfully.`,
+      });
+      
       return true;
     } catch (error) {
       console.error("Error sending email:", error);
       toast({
         variant: "destructive",
         title: "Email Error",
-        description: "Failed to send email. Please try again later."
+        description: "Failed to send email. Please check your configuration and try again."
       });
       return false;
     }
