@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/ui/navbar';
+import Footer from '@/components/ui/footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { Mail, Send } from 'lucide-react';
 
 const Contact = () => {
@@ -67,105 +67,98 @@ const Contact = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-12 gap-8 max-w-5xl mx-auto">
-          {/* Contact Form */}
-          <Card className="md:col-span-8 shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
-            <div className="bg-gradient-to-r from-movesync-blue to-movesync-blue-light h-2 w-full"></div>
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-semibold mb-6">Get in Touch</h2>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your name"
-                      className="h-12"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Your email address"
-                      className="h-12"
-                      required
-                    />
+        <Card className="shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-movesync-blue to-movesync-blue-light h-2 w-full"></div>
+          <CardContent className="p-8">
+            <div className="flex flex-col md:flex-row justify-between mb-8">
+              <div>
+                <h2 className="text-2xl font-semibold">Get in Touch</h2>
+              </div>
+              <div className="mt-4 md:mt-0 flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  <div className="bg-movesync-blue p-2 rounded-full text-white">
+                    <Mail size={18} />
                   </div>
                 </div>
-                
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
+                  <h3 className="text-sm font-medium text-gray-700">Email Us</h3>
+                  <p className="text-sm text-gray-600 mt-1">support@movesync.com</p>
+                  <p className="text-sm text-gray-600">info@movesync.com</p>
+                </div>
+              </div>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
                   <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
-                    placeholder="Subject of your message"
+                    placeholder="Your name"
                     className="h-12"
                     required
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
                     onChange={handleChange}
-                    placeholder="Your message"
-                    rows={6}
-                    className="resize-none"
+                    placeholder="Your email address"
+                    className="h-12"
                     required
                   />
                 </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full h-12 bg-movesync-blue hover:bg-movesync-blue-dark transition-all duration-300"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : (
-                    <>
-                      <Send className="mr-2 h-4 w-4" /> Send Message
-                    </>
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-          
-          {/* Contact Information */}
-          <Card className="md:col-span-4 shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl h-fit">
-            <div className="bg-gradient-to-r from-movesync-blue to-movesync-blue-light h-2 w-full"></div>
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-movesync-blue p-3 rounded-full text-white shadow-md">
-                    <Mail size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium">Email</h3>
-                    <p className="text-gray-600 mt-1">support@movesync.com</p>
-                    <p className="text-gray-600">info@movesync.com</p>
-                  </div>
-                </div>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+              
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Subject of your message"
+                  className="h-12"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Your message"
+                  rows={6}
+                  className="resize-none"
+                  required
+                />
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="w-full h-12 bg-movesync-blue hover:bg-movesync-blue-dark transition-all duration-300"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : (
+                  <>
+                    <Send className="mr-2 h-4 w-4" /> Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
       </main>
       
       <Footer />
