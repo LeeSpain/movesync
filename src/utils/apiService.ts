@@ -1,4 +1,3 @@
-
 import TokenService from './tokenService';
 import { toast } from '@/components/ui/use-toast';
 
@@ -131,11 +130,10 @@ export const ApiService = {
       } else {
         let errorMessage = 'Unknown error occurred';
         
-        // Fix for TypeScript error - ensure responseData and message property exist
-        if (responseData && typeof responseData === 'object') {
-          if (responseData.message !== undefined) {
-            errorMessage = String(responseData.message);
-          }
+        // Fix for TypeScript error - safely check for message property
+        if (responseData && typeof responseData === 'object' && responseData.message !== undefined) {
+          // Convert to string to ensure type safety
+          errorMessage = String(responseData.message);
         }
         
         console.error(`API error: ${response.status} ${response.statusText}`, responseData);
