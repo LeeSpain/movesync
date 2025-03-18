@@ -133,11 +133,12 @@ export const ApiService = {
         // Ensure responseData exists and safely extract error message
         let errorMessage = 'Unknown error occurred';
         
-        if (responseData !== null && 
+        // Check if responseData exists, is an object, and has a message property
+        if (responseData && 
             typeof responseData === 'object' && 
-            responseData && 
+            responseData !== null && 
             'message' in responseData && 
-            responseData.message) {
+            responseData.message !== undefined) {
           errorMessage = String(responseData.message);
         }
         
