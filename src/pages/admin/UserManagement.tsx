@@ -146,7 +146,7 @@ const UserManagement = () => {
                         <TableCell>{user.country}</TableCell>
                         <TableCell>{user.joinDate}</TableCell>
                         <TableCell>
-                          <Badge variant={user.status === 'active' ? 'success' : 'destructive'}>
+                          <Badge variant={user.status === 'active' ? 'default' : 'destructive'}>
                             {user.status}
                           </Badge>
                         </TableCell>
