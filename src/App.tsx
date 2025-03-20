@@ -1,4 +1,5 @@
 
+import { BrowserRouter } from 'react-router-dom';
 import { CurrencyProvider } from './contexts/CurrencyContext';
 import { AuthProvider } from './contexts/AuthContext';
 import AppRoutes from './routes';
@@ -8,13 +9,15 @@ import ScrollToTop from '@/components/ScrollToTop';
 
 function App() {
   return (
-    <AuthProvider>
-      <CurrencyProvider>
-        <ScrollToTop />
-        <AppRoutes />
-        <Toaster />
-      </CurrencyProvider>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <CurrencyProvider>
+          <ScrollToTop />
+          <AppRoutes />
+          <Toaster />
+        </CurrencyProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
