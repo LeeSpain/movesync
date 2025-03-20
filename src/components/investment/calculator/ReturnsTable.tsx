@@ -28,10 +28,7 @@ const ReturnsTable: React.FC<ReturnsTableProps> = ({
   return (
     <div className="border-t border-gray-200 pt-6">
       <h3 className="font-semibold mb-4">
-        {viewMode === 'global' 
-          ? `Potential Returns (${(growthRate * 100).toFixed(0)}% Annual Growth)`
-          : `Potential Returns (${(growthRate * 100).toFixed(0)}% Annual Growth)`
-        }
+        Potential Returns ({(growthRate * 100).toFixed(0)}% Annual Growth)
       </h3>
       <div className="space-y-3">
         {potentialReturns.map((value, index) => (

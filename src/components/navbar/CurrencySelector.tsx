@@ -21,8 +21,8 @@ export const CurrencySelector = () => {
         onValueChange={(value) => setCurrency(value as Currency)}
       >
         <SelectTrigger className="w-[90px] h-8 bg-transparent border-none shadow-none hover:bg-accent/50 focus:ring-0">
-          <div className="flex items-center gap-1.5">
-            <DollarSign className="h-3.5 w-3.5" />
+          <div className="flex items-center gap-2">
+            <DollarSign className="h-4 w-4" />
             <SelectValue placeholder="Currency" />
           </div>
         </SelectTrigger>
