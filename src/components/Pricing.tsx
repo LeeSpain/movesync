@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 import PricingHeader from './pricing/PricingHeader';
 import PricingCard from './pricing/PricingCard';
@@ -13,6 +14,7 @@ const Pricing = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { convertCurrency } = useCurrency();
   
   // Handle intersection observer for entrance animation
   useEffect(() => {
@@ -49,6 +51,12 @@ const Pricing = () => {
     }
   };
 
+  // Convert pricing plans to current currency
+  const convertedPlans = pricingPlans.map(plan => ({
+    ...plan,
+    price: String(convertCurrency(Number(plan.price)))
+  }));
+
   return (
     <section 
       id="pricing" 
@@ -65,7 +73,7 @@ const Pricing = () => {
             isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {pricingPlans.map((plan) => (
+          {convertedPlans.map((plan) => (
             <PricingCard 
               key={plan.name}
               plan={plan}

@@ -5,6 +5,7 @@ import { calculateEquity, calculateROI, calculateGlobalROI } from './InvestmentU
 import { Slider } from '@/components/ui/slider';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 const InvestmentCalculator = () => {
   const { 
@@ -16,21 +17,15 @@ const InvestmentCalculator = () => {
     selectedCountry,
     countryGrowthRates,
     globalGrowthRate,
-    financialParams,
-    currency,
-    currencySymbol,
-    exchangeRates
+    financialParams
   } = useInvestment();
-
-  // Convert value to selected currency
-  const convertCurrency = (value: number): number => {
-    return Math.round(value * exchangeRates[currency]);
-  };
-
-  // Format number with commas
-  const formatNumber = (num: number): string => {
-    return num.toLocaleString();
-  };
+  
+  const { 
+    currency, 
+    currencySymbol, 
+    convertCurrency, 
+    formatCurrency 
+  } = useCurrency();
 
   const { equityPercentage, equityValue } = calculateEquity(investmentAmount, financialParams);
 
@@ -56,6 +51,11 @@ const InvestmentCalculator = () => {
     setInvestmentAmount(value[0]);
   };
 
+  // Format number with commas
+  const formatNumber = (num: number): string => {
+    return num.toLocaleString();
+  };
+
   return (
     <div className="rounded-xl">
       <h2 className="text-xl font-bold mb-6 text-center">
@@ -75,9 +75,9 @@ const InvestmentCalculator = () => {
           className="w-full"
         />
         <div className="flex justify-between mt-2">
-          <span className="text-sm">{currencySymbol}10,000</span>
-          <span className="font-semibold">{currencySymbol}{formatNumber(convertCurrency(investmentAmount))}</span>
-          <span className="text-sm">{currencySymbol}{formatNumber(convertCurrency(2000000))}</span>
+          <span className="text-sm">{formatCurrency(convertCurrency(10000))}</span>
+          <span className="font-semibold">{formatCurrency(convertCurrency(investmentAmount))}</span>
+          <span className="text-sm">{formatCurrency(convertCurrency(2000000))}</span>
         </div>
       </div>
       
@@ -111,7 +111,7 @@ const InvestmentCalculator = () => {
           </div>
           <div>
             <p className="text-sm text-movesync-gray">Equity Value</p>
-            <p className="text-2xl font-bold">{currencySymbol}{formatNumber(convertCurrency(equityValue))}</p>
+            <p className="text-2xl font-bold">{formatCurrency(convertCurrency(equityValue))}</p>
             <p className="text-xs text-movesync-gray">initial investment</p>
           </div>
         </div>
@@ -148,7 +148,7 @@ const InvestmentCalculator = () => {
                         <div className="bg-white p-2 border border-gray-200 rounded shadow-sm">
                           <p className="text-sm font-medium">{payload[0].payload.year}</p>
                           <p className="text-sm text-blue-600">
-                            {currencySymbol}{Number(payload[0].value).toLocaleString()}
+                            {formatCurrency(Number(payload[0].value))}
                           </p>
                           <p className="text-xs text-green-600">
                             +{Math.round((Number(payload[0].value) / convertCurrency(equityValue) - 1) * 100)}%
@@ -184,7 +184,7 @@ const InvestmentCalculator = () => {
           {potentialReturns.map((value, index) => (
             <div key={index} className="flex justify-between items-center">
               <span>Year {index + 1}</span>
-              <span className="font-semibold">{currencySymbol}{formatNumber(convertCurrency(value))}</span>
+              <span className="font-semibold">{formatCurrency(convertCurrency(value))}</span>
               <span className="text-green-600 text-sm">
                 +{Math.round((value / equityValue - 1) * 100)}%
               </span>
@@ -193,7 +193,7 @@ const InvestmentCalculator = () => {
           <div className="border-t border-gray-200 pt-3 mt-3">
             <div className="flex justify-between items-center font-bold">
               <span>Total Over {years} {years === 1 ? 'Year' : 'Years'}</span>
-              <span className="text-emerald-600">{currencySymbol}{formatNumber(convertCurrency(cumulativeReturn))}</span>
+              <span className="text-emerald-600">{formatCurrency(convertCurrency(cumulativeReturn))}</span>
               <span className="text-emerald-600 text-sm">
                 +{totalReturnPercentage}%
               </span>

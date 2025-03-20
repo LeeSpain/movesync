@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useCurrency } from '@/contexts/CurrencyContext';
 import { pricingPlans } from '@/components/pricing/pricingData';
 import PricingCard from '@/components/pricing/PricingCard';
 import PricingHeader from '@/components/pricing/PricingHeader';
@@ -12,6 +13,7 @@ import Navbar from '@/components/Navbar';
 const ChoosePlan = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { convertCurrency } = useCurrency();
   const [isIntersecting, setIsIntersecting] = useState(true);
   
   const handleFreeClick = () => {
@@ -29,6 +31,12 @@ const ChoosePlan = () => {
     navigate('/checkout');
   };
   
+  // Convert pricing plans to current currency
+  const convertedPlans = pricingPlans.map(plan => ({
+    ...plan,
+    price: String(convertCurrency(Number(plan.price)))
+  }));
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
@@ -40,7 +48,7 @@ const ChoosePlan = () => {
           
           {/* Pricing cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {pricingPlans.map((plan) => (
+            {convertedPlans.map((plan) => (
               <PricingCard 
                 key={plan.name}
                 plan={plan}

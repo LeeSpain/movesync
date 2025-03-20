@@ -2,8 +2,9 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Link, useNavigate } from 'react-router-dom';
-import { Globe, LayoutDashboard } from 'lucide-react';
+import { Globe, LayoutDashboard, DollarSign } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import CurrencySelector from './CurrencySelector';
 
 interface NavbarMobileMenuProps {
   isMenuOpen: boolean;
@@ -76,6 +77,14 @@ export const NavbarMobileMenu = ({
           <Globe size={20} />
           {selectedCountry ? `Countries ${countryFlags[selectedCountry] || ''}` : 'Select Country'}
         </Link>
+        
+        {/* Currency Selector */}
+        <div className="py-2 border-b border-gray-100 flex items-center gap-2">
+          <DollarSign size={20} />
+          <span className="text-xl text-movesync-black mr-2">Currency</span>
+          <CurrencySelector />
+        </div>
+        
         <div
           className="text-xl text-movesync-black py-2 border-b border-gray-100 cursor-pointer"
           onClick={() => handleNavigate('/dashboard')}

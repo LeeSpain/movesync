@@ -6,6 +6,7 @@ import NavbarLogo from './navbar/NavbarLogo';
 import NavbarDesktopMenu from './navbar/NavbarDesktopMenu';
 import NavbarMobileMenu from './navbar/NavbarMobileMenu';
 import MobileMenuButton from './navbar/MobileMenuButton';
+import CurrencySelector from './navbar/CurrencySelector';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -68,6 +69,11 @@ export const Navbar = () => {
             countryFlags={countryFlags}
             isAdmin={isAdmin}
           />
+
+          {/* Currency Selector */}
+          <div className="hidden md:flex items-center mr-4">
+            <CurrencySelector />
+          </div>
 
           {/* Mobile Menu Button */}
           <MobileMenuButton 

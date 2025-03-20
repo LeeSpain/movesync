@@ -5,6 +5,7 @@ import { calculateEquity, generateComparisonData } from './InvestmentUtils';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 const CountryComparison = () => {
   const { 
@@ -14,21 +15,15 @@ const CountryComparison = () => {
     selectedCountry,
     countryGrowthRates,
     globalGrowthRate,
-    financialParams,
-    currency,
-    currencySymbol,
-    exchangeRates
+    financialParams
   } = useInvestment();
   
-  // Convert value to selected currency
-  const convertCurrency = (value: number): number => {
-    return Math.round(value * exchangeRates[currency]);
-  };
-
-  // Format number with commas
-  const formatNumber = (num: number): string => {
-    return num.toLocaleString();
-  };
+  const { 
+    currency, 
+    currencySymbol, 
+    convertCurrency, 
+    formatCurrency 
+  } = useCurrency();
   
   const { equityValue } = calculateEquity(investmentAmount, financialParams);
   
@@ -55,7 +50,7 @@ const CountryComparison = () => {
       <CardHeader className="pb-0">
         <CardTitle className="text-center text-2xl">Investment Comparison</CardTitle>
         <CardDescription className="text-center pt-2 pb-4">
-          See how your {currencySymbol}{formatNumber(convertCurrency(investmentAmount))} investment in our global company would grow over {years} years.
+          See how your {formatCurrency(convertCurrency(investmentAmount))} investment in our global company would grow over {years} years.
         </CardDescription>
       </CardHeader>
       
@@ -90,7 +85,7 @@ const CountryComparison = () => {
                         <div className="bg-white p-3 border border-gray-200 rounded shadow-sm">
                           <p className="text-sm font-medium">{payload[0].payload.country}</p>
                           <p className="text-sm text-movesync-blue">
-                            {currencySymbol}{Number(payload[0].value).toLocaleString()}
+                            {formatCurrency(Number(payload[0].value))}
                           </p>
                           <p className="text-xs text-green-600">
                             +{payload[0].payload.growthPercentage}% growth
@@ -122,7 +117,7 @@ const CountryComparison = () => {
                   : 'bg-gray-50 border-gray-100'
             }`}>
               <h3 className="font-semibold text-center text-sm mb-2">{item.country}</h3>
-              <p className="text-center text-base font-bold">{currencySymbol}{formatNumber(convertCurrency(item.finalReturn))}</p>
+              <p className="text-center text-base font-bold">{formatCurrency(convertCurrency(item.finalReturn))}</p>
               <p className="text-center text-green-600 text-xs mt-1">+{item.growthPercentage}% growth</p>
             </div>
           ))}
