@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useInvestment } from '../InvestmentContext';
 import {
   Table,
   TableHeader,
@@ -27,6 +28,24 @@ const ExitStrategyTable: React.FC<ExitStrategyTableProps> = ({
   moderateExit,
   optimisticExit
 }) => {
+  const { currency, currencySymbol, exchangeRates } = useInvestment();
+  
+  // Convert value to selected currency
+  const convertCurrency = (value: number): number => {
+    return Math.round(value * exchangeRates[currency]);
+  };
+
+  // Format number with commas
+  const formatNumber = (num: number): string => {
+    return num.toLocaleString();
+  };
+
+  const convertedInvestmentAmount = convertCurrency(investmentAmount);
+  const convertedFinalReturn = convertCurrency(finalReturn);
+  const convertedConservativeExit = convertCurrency(conservativeExit);
+  const convertedModerateExit = convertCurrency(moderateExit);
+  const convertedOptimisticExit = convertCurrency(optimisticExit);
+
   return (
     <div className="bg-white p-5 rounded-xl border border-amber-100 shadow-sm mb-6">
       <h4 className="font-bold text-lg mb-3 text-center">Your Investment Return Breakdown</h4>
@@ -35,7 +54,7 @@ const ExitStrategyTable: React.FC<ExitStrategyTableProps> = ({
           <thead>
             <tr className="bg-amber-50">
               <th className="p-2 text-left">Exit Scenario</th>
-              <th className="p-2 text-right">Your Initial ${investmentAmount.toLocaleString()}</th>
+              <th className="p-2 text-right">Your Initial {currencySymbol}{formatNumber(convertedInvestmentAmount)}</th>
               <th className="p-2 text-right">Year {years} Value</th>
               <th className="p-2 text-right">Exit Multiplier</th>
               <th className="p-2 text-right">Potential Exit Value</th>
@@ -45,34 +64,34 @@ const ExitStrategyTable: React.FC<ExitStrategyTableProps> = ({
           <tbody>
             <tr className="border-b border-amber-100">
               <td className="p-2 font-medium">Conservative</td>
-              <td className="p-2 text-right">${investmentAmount.toLocaleString()}</td>
-              <td className="p-2 text-right">${finalReturn.toLocaleString()}</td>
+              <td className="p-2 text-right">{currencySymbol}{formatNumber(convertedInvestmentAmount)}</td>
+              <td className="p-2 text-right">{currencySymbol}{formatNumber(convertedFinalReturn)}</td>
               <td className="p-2 text-right">5x</td>
-              <td className="p-2 text-right text-green-600">${conservativeExit.toLocaleString()}</td>
+              <td className="p-2 text-right text-green-600">{currencySymbol}{formatNumber(convertedConservativeExit)}</td>
               <td className="p-2 text-right text-green-600">{Math.round((conservativeExit/investmentAmount - 1) * 100)}%</td>
             </tr>
             <tr className="border-b border-amber-100">
               <td className="p-2 font-medium">Moderate</td>
-              <td className="p-2 text-right">${investmentAmount.toLocaleString()}</td>
-              <td className="p-2 text-right">${finalReturn.toLocaleString()}</td>
+              <td className="p-2 text-right">{currencySymbol}{formatNumber(convertedInvestmentAmount)}</td>
+              <td className="p-2 text-right">{currencySymbol}{formatNumber(convertedFinalReturn)}</td>
               <td className="p-2 text-right">7x</td>
-              <td className="p-2 text-right text-green-600">${moderateExit.toLocaleString()}</td>
+              <td className="p-2 text-right text-green-600">{currencySymbol}{formatNumber(convertedModerateExit)}</td>
               <td className="p-2 text-right text-green-600">{Math.round((moderateExit/investmentAmount - 1) * 100)}%</td>
             </tr>
             <tr>
               <td className="p-2 font-medium">Optimistic</td>
-              <td className="p-2 text-right">${investmentAmount.toLocaleString()}</td>
-              <td className="p-2 text-right">${finalReturn.toLocaleString()}</td>
+              <td className="p-2 text-right">{currencySymbol}{formatNumber(convertedInvestmentAmount)}</td>
+              <td className="p-2 text-right">{currencySymbol}{formatNumber(convertedFinalReturn)}</td>
               <td className="p-2 text-right">10x</td>
-              <td className="p-2 text-right text-green-600">${optimisticExit.toLocaleString()}</td>
+              <td className="p-2 text-right text-green-600">{currencySymbol}{formatNumber(convertedOptimisticExit)}</td>
               <td className="p-2 text-right text-green-600">{Math.round((optimisticExit/investmentAmount - 1) * 100)}%</td>
             </tr>
           </tbody>
         </table>
       </div>
       <p className="text-sm text-gray-600 italic">
-        This projection shows how your ${investmentAmount.toLocaleString()} investment could grow to ${finalReturn.toLocaleString()} in {years} years, 
-        and then to ${optimisticExit.toLocaleString()} in our optimistic exit scenario.
+        This projection shows how your {currencySymbol}{formatNumber(convertedInvestmentAmount)} investment could grow to {currencySymbol}{formatNumber(convertedFinalReturn)} in {years} years, 
+        and then to {currencySymbol}{formatNumber(convertedOptimisticExit)} in our optimistic exit scenario.
       </p>
     </div>
   );

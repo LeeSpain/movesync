@@ -1,6 +1,6 @@
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { CountryGrowthRates, InvestmentParams } from './InvestmentTypes';
+import { CountryGrowthRates, InvestmentParams, Currency } from './InvestmentTypes';
 
 interface InvestmentContextType {
   investmentAmount: number;
@@ -14,6 +14,10 @@ interface InvestmentContextType {
   countryGrowthRates: CountryGrowthRates;
   financialParams: InvestmentParams;
   globalGrowthRate: number;
+  currency: Currency;
+  setCurrency: (currency: Currency) => void;
+  currencySymbol: string;
+  exchangeRates: Record<Currency, number>;
 }
 
 const defaultContext: InvestmentContextType = {
@@ -32,7 +36,16 @@ const defaultContext: InvestmentContextType = {
     postmoneyValuation: 14000000,
     totalEquityOffered: 20 // Updated from 14.29 to 20 percent
   },
-  globalGrowthRate: 0
+  globalGrowthRate: 0,
+  currency: 'USD',
+  setCurrency: () => {},
+  currencySymbol: '$',
+  exchangeRates: {
+    USD: 1,
+    GBP: 0.78,
+    EUR: 0.91,
+    AUD: 1.52
+  }
 };
 
 const InvestmentContext = createContext<InvestmentContextType>(defaultContext);
@@ -48,6 +61,7 @@ export const InvestmentProvider: React.FC<InvestmentProviderProps> = ({ children
   const [years, setYears] = useState(3);
   const [viewMode, setViewMode] = useState<'global' | 'country'>('global');
   const [selectedCountry, setSelectedCountry] = useState('Australia');
+  const [currency, setCurrency] = useState<Currency>('USD');
   
   // Financial parameters
   const financialParams: InvestmentParams = {
@@ -65,6 +79,27 @@ export const InvestmentProvider: React.FC<InvestmentProviderProps> = ({ children
     'United Kingdom': 0.25, // 25% annual growth
     'Singapore': 0.35, // 35% annual growth
   };
+  
+  // Exchange rates relative to USD
+  const exchangeRates = {
+    USD: 1,
+    GBP: 0.78,
+    EUR: 0.91,
+    AUD: 1.52
+  };
+
+  // Get currency symbol based on selected currency
+  const getCurrencySymbol = (curr: Currency): string => {
+    switch(curr) {
+      case 'USD': return '$';
+      case 'GBP': return '£';
+      case 'EUR': return '€';
+      case 'AUD': return 'A$';
+      default: return '$';
+    }
+  };
+  
+  const currencySymbol = getCurrencySymbol(currency);
   
   // Calculate global growth rate (weighted average of all countries)
   const calculateGlobalGrowthRate = () => {
@@ -87,7 +122,11 @@ export const InvestmentProvider: React.FC<InvestmentProviderProps> = ({ children
         setSelectedCountry,
         countryGrowthRates,
         financialParams,
-        globalGrowthRate
+        globalGrowthRate,
+        currency,
+        setCurrency,
+        currencySymbol,
+        exchangeRates
       }}
     >
       {children}

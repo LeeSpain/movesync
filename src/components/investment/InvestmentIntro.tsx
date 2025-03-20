@@ -1,6 +1,14 @@
 
 import React from 'react';
 import { useInvestment } from './InvestmentContext';
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from '@/components/ui/select';
+import { Currency } from './InvestmentTypes';
 
 const InvestmentIntro = () => {
   const { 
@@ -10,16 +18,49 @@ const InvestmentIntro = () => {
     setSelectedCountry,
     countryGrowthRates,
     financialParams, 
-    globalGrowthRate
+    globalGrowthRate,
+    currency,
+    setCurrency,
+    currencySymbol,
+    exchangeRates
   } = useInvestment();
   
   const { premoneyValuation, targetRaise, postmoneyValuation, totalEquityOffered } = financialParams;
 
+  // Convert value to selected currency
+  const convertCurrency = (value: number): number => {
+    return Math.round(value * exchangeRates[currency]);
+  };
+
+  // Format number with commas
+  const formatNumber = (num: number): string => {
+    return num.toLocaleString();
+  };
+
   return (
     <div>
-      <h2 className="heading-md mb-6">
-        Become Part of Our Global Growth
-      </h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="heading-md">
+          Become Part of Our Global Growth
+        </h2>
+        <div className="w-32">
+          <Select
+            value={currency}
+            onValueChange={(value) => setCurrency(value as Currency)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Currency" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="USD">USD ($)</SelectItem>
+              <SelectItem value="GBP">GBP (£)</SelectItem>
+              <SelectItem value="EUR">EUR (€)</SelectItem>
+              <SelectItem value="AUD">AUD (A$)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
       <p className="mb-4">
         We're offering an exclusive opportunity to invest in Move-Sync - the leading AI-powered relocation platform expanding across multiple countries.
       </p>
@@ -27,7 +68,7 @@ const InvestmentIntro = () => {
         Your investment gives you equity in our entire global business across all countries, not just in a single market.
       </p>
       <p className="mb-4">
-        Based on a company valuation of ${premoneyValuation.toLocaleString()} pre-money, we're raising ${targetRaise.toLocaleString()} for a post-money valuation of ${postmoneyValuation.toLocaleString()}, with investors receiving {totalEquityOffered.toFixed(0)}% equity.
+        Based on a company valuation of {currencySymbol}{formatNumber(convertCurrency(premoneyValuation))} pre-money, we're raising {currencySymbol}{formatNumber(convertCurrency(targetRaise))} for a post-money valuation of {currencySymbol}{formatNumber(convertCurrency(postmoneyValuation))}, with investors receiving {totalEquityOffered.toFixed(0)}% equity.
       </p>
       <p className="mb-6">
         Use our calculator to see how your investment could grow over time as we expand our connections across different countries.
